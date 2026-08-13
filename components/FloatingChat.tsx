@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 
@@ -73,30 +73,56 @@ export default function FloatingChat({
   const [isVisible, setIsVisible] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const sentinelRef = useRef<HTMLDivElement>(null);
 
+  // Mount guard to prevent hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Scroll-based trigger: show bubble when user scrolls past 65% of page
   useEffect(() => {
-    const sentinel = sentinelRef.current;
-    if (!sentinel) return;
+    let ticking = false;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(!entry.isIntersecting);
-      },
-      { root: null, rootMargin: "0px", threshold: 0 }
-    );
+    const checkScroll = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const viewportHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+      
+      // Calculate how much of the page has been scrolled through
+      // 0 = top, 1 = bottom
+      const scrollProgress = (scrollTop + viewportHeight) / docHeight;
+      
+      // Show bubble when user has scrolled past 65% of the page
+      // This means it appears when they're in the bottom 35% of content
+      setIsVisible(scrollProgress > 0.65);
+      
+      ticking = false;
+    };
 
-    observer.observe(sentinel);
-    return () => observer.disconnect();
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(checkScroll);
+        ticking = true;
+      }
+    };
+
+    // Check immediately on mount (in case page loads already scrolled)
+    checkScroll();
+    
+    window.addEventListener("scroll", onScroll, { passive: true });
+    // Also check on resize since viewport/doc heights change
+    window.addEventListener("resize", checkScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", checkScroll);
+    };
   }, []);
 
   const openSheet = useCallback(() => setIsSheetOpen(true), []);
   const closeSheet = useCallback(() => setIsSheetOpen(false), []);
 
+  // Escape key to close
   useEffect(() => {
     if (!isSheetOpen) return;
     const handleKey = (e: KeyboardEvent) => {
@@ -106,6 +132,7 @@ export default function FloatingChat({
     return () => window.removeEventListener("keydown", handleKey);
   }, [isSheetOpen, closeSheet]);
 
+  // Lock body scroll when sheet is open
   useEffect(() => {
     if (isSheetOpen) {
       document.body.style.overflow = "hidden";
@@ -117,15 +144,7 @@ export default function FloatingChat({
     };
   }, [isSheetOpen]);
 
-  if (!mounted) {
-    return (
-      <div
-        ref={sentinelRef}
-        style={{ height: "1px", width: "100%", pointerEvents: "none", opacity: 0 }}
-        aria-hidden="true"
-      />
-    );
-  }
+  if (!mounted) return null;
 
   const overlay = (
     <>
@@ -209,16 +228,5 @@ export default function FloatingChat({
     </>
   );
 
-  return (
-    <>
-      {/* Sentinel stays in normal flow */}
-      <div
-        ref={sentinelRef}
-        style={{ height: "1px", width: "100%", pointerEvents: "none", opacity: 0 }}
-        aria-hidden="true"
-      />
-      {/* Button + Sheet rendered via Portal to document.body */}
-      {createPortal(overlay, document.body)}
-    </>
-  );
+  return createPortal(overlay, document.body);
 }
