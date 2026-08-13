@@ -35,10 +35,10 @@ async function getLinks() {
     };
   } catch {
     return {
-      whatsapp: "https://wa.link/b21m33",
-      telegram: "https://t.me/KatieMTC",
-      whatsappNumber: "+1 (929) 607-2719",
-      telegramUsername: "@KatieMTC",
+      whatsapp: "https://",
+      telegram: "https://",
+      whatsappNumber: "+1",
+      telegramUsername: "@",
     };
   }
 }
@@ -496,8 +496,8 @@ export default async function Home() {
               width: auto;
               min-width: 220px;
               max-width: 300px;
-              padding: 14px 28px;
-              border-radius: 16px;
+              padding: 8px 38px;
+              border-radius: 19px;
               text-decoration: none;
               transition: all 0.25s ease;
               border: none;
