@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { neon } from "@neondatabase/serverless";
@@ -85,6 +88,198 @@ function TelegramIcon({ size = 16 }: { size?: number }) {
     >
       <path d="M21.9 3.2 18.5 20c-.26 1.19-.97 1.48-1.97.92l-5.43-4-2.62 2.52c-.29.29-.53.53-1.09.53l.39-5.52 10.05-9.08c.44-.39-.1-.61-.68-.22L4.73 12.2l-5.38-1.68c-1.17-.37-1.19-1.17.24-1.73L20.62.81c.98-.36 1.84.24 1.28 2.39Z" />
     </svg>
+  );
+}
+
+function ChatBubbleIcon({ size = 24 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </svg>
+  );
+}
+
+function CloseIcon({ size = 20 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  );
+}
+
+// ─── Floating Chat Button + Sheet Component ───
+function FloatingChat({
+  whatsappUrl,
+  telegramUrl,
+}: {
+  whatsappUrl: string;
+  telegramUrl: string;
+}) {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // When sentinel is NOT intersecting, user has scrolled past the buttons
+        setIsVisible(!entry.isIntersecting);
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0,
+      }
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, []);
+
+  const openSheet = useCallback(() => setIsSheetOpen(true), []);
+  const closeSheet = useCallback(() => setIsSheetOpen(false), []);
+
+  // Close on Escape key
+  useEffect(() => {
+    if (!isSheetOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeSheet();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [isSheetOpen, closeSheet]);
+
+  // Lock body scroll when sheet is open
+  useEffect(() => {
+    if (isSheetOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isSheetOpen]);
+
+  return (
+    <>
+      {/* Sentinel element — placed right after the contact pills */}
+      <div
+        ref={sentinelRef}
+        style={{
+          position: "absolute",
+          height: "1px",
+          width: "1px",
+          pointerEvents: "none",
+          opacity: 0,
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Floating Chat Button */}
+      <button
+        onClick={openSheet}
+        className={`floating-chat-btn ${isVisible ? "floating-chat-visible" : ""}`}
+        aria-label="Open chat options"
+        aria-haspopup="dialog"
+        aria-expanded={isSheetOpen}
+      >
+        <ChatBubbleIcon size={22} />
+      </button>
+
+      {/* Sheet Backdrop */}
+      <div
+        className={`sheet-backdrop ${isSheetOpen ? "sheet-backdrop-open" : ""}`}
+        onClick={closeSheet}
+        aria-hidden="true"
+      />
+
+      {/* Bottom Sheet */}
+      <div
+        className={`chat-sheet ${isSheetOpen ? "chat-sheet-open" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Chat options"
+      >
+        {/* Sheet Handle */}
+        <div className="sheet-handle-bar" />
+
+        {/* Sheet Header */}
+        <div className="sheet-header">
+          <span className="sheet-title">Connect With Us</span>
+          <button
+            onClick={closeSheet}
+            className="sheet-close-btn"
+            aria-label="Close chat options"
+          >
+            <CloseIcon size={18} />
+          </button>
+        </div>
+
+        {/* Sheet Content */}
+        <div className="sheet-content">
+          <p className="sheet-description">
+            Reach out to the TMB Team for guidance and trade support.
+          </p>
+
+          <div className="sheet-actions">
+            <Link
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sheet-action-btn sheet-action-whatsapp"
+              onClick={closeSheet}
+            >
+              <span className="sheet-action-icon">
+                <WhatsAppIcon size={22} />
+              </span>
+              <span className="sheet-action-text">
+                <span className="sheet-action-label">WhatsApp</span>
+                <span className="sheet-action-sublabel">Chat on WhatsApp</span>
+              </span>
+            </Link>
+
+            <Link
+              href={telegramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sheet-action-btn sheet-action-telegram"
+              onClick={closeSheet}
+            >
+              <span className="sheet-action-icon">
+                <TelegramIcon size={22} />
+              </span>
+              <span className="sheet-action-text">
+                <span className="sheet-action-label">Telegram</span>
+                <span className="sheet-action-sublabel">Message on Telegram</span>
+              </span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -240,6 +435,7 @@ export default async function Home() {
             }
 
             .intro {
+              position: relative;
               padding: 56px 22px 64px;
               background: ${theme.bg};
               text-align: center;
@@ -326,6 +522,219 @@ export default async function Home() {
 
             .contact-pill .pill-label {
               white-space: nowrap;
+            }
+
+            /* ═══ FLOATING CHAT BUTTON ═══ */
+            .floating-chat-btn {
+              position: fixed;
+              bottom: 24px;
+              right: 24px;
+              z-index: 100;
+              width: 56px;
+              height: 56px;
+              border-radius: 50%;
+              border: none;
+              background: ${theme.gold};
+              color: ${theme.bg};
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              box-shadow:
+                0 4px 20px rgba(45, 212, 191, 0.35),
+                0 0 0 1px rgba(45, 212, 191, 0.15);
+              transform: translateY(100px) scale(0.8);
+              opacity: 0;
+              transition:
+                transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.3s ease,
+                box-shadow 0.2s ease;
+              pointer-events: none;
+            }
+
+            .floating-chat-btn.floating-chat-visible {
+              transform: translateY(0) scale(1);
+              opacity: 1;
+              pointer-events: auto;
+            }
+
+            .floating-chat-btn:hover {
+              transform: translateY(-3px) scale(1.05);
+              box-shadow:
+                0 8px 30px rgba(45, 212, 191, 0.45),
+                0 0 0 1px rgba(45, 212, 191, 0.2);
+            }
+
+            .floating-chat-btn:active {
+              transform: translateY(-1px) scale(0.97);
+            }
+
+            /* ═══ SHEET BACKDROP ═══ */
+            .sheet-backdrop {
+              position: fixed;
+              inset: 0;
+              z-index: 200;
+              background: rgba(10, 21, 46, 0.7);
+              backdrop-filter: blur(4px);
+              -webkit-backdrop-filter: blur(4px);
+              opacity: 0;
+              visibility: hidden;
+              transition: opacity 0.35s ease, visibility 0.35s ease;
+            }
+
+            .sheet-backdrop.sheet-backdrop-open {
+              opacity: 1;
+              visibility: visible;
+            }
+
+            /* ═══ BOTTOM SHEET ═══ */
+            .chat-sheet {
+              position: fixed;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              z-index: 210;
+              background: linear-gradient(180deg, #0f1f3d 0%, #0A152E 100%);
+              border-top-left-radius: 24px;
+              border-top-right-radius: 24px;
+              box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.4);
+              transform: translateY(100%);
+              transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+              max-height: 85vh;
+              overflow-y: auto;
+            }
+
+            .chat-sheet.chat-sheet-open {
+              transform: translateY(0);
+            }
+
+            .sheet-handle-bar {
+              width: 36px;
+              height: 4px;
+              border-radius: 2px;
+              background: rgba(255, 255, 255, 0.15);
+              margin: 12px auto 0;
+              flex-shrink: 0;
+            }
+
+            .sheet-header {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding: 16px 24px 8px;
+            }
+
+            .sheet-title {
+              font-family: var(--font-display), serif;
+              font-size: 22px;
+              font-weight: 600;
+              color: white;
+            }
+
+            .sheet-close-btn {
+              width: 36px;
+              height: 36px;
+              border-radius: 50%;
+              border: 1px solid rgba(255, 255, 255, 0.1);
+              background: rgba(255, 255, 255, 0.05);
+              color: ${theme.textMuted};
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: all 0.2s ease;
+            }
+
+            .sheet-close-btn:hover {
+              background: rgba(255, 255, 255, 0.1);
+              color: white;
+            }
+
+            .sheet-content {
+              padding: 0 24px 32px;
+            }
+
+            .sheet-description {
+              margin: 0 0 24px;
+              color: ${theme.textMuted};
+              font-size: 13px;
+              line-height: 1.7;
+            }
+
+            .sheet-actions {
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+            }
+
+            .sheet-action-btn {
+              display: flex;
+              align-items: center;
+              gap: 16px;
+              padding: 18px 20px;
+              border-radius: 16px;
+              text-decoration: none;
+              transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .sheet-action-btn:hover {
+              transform: translateY(-2px);
+            }
+
+            .sheet-action-icon {
+              width: 48px;
+              height: 48px;
+              border-radius: 14px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-shrink: 0;
+            }
+
+            .sheet-action-whatsapp {
+              background: rgba(37, 211, 102, 0.1);
+              border: 1px solid rgba(37, 211, 102, 0.2);
+            }
+
+            .sheet-action-whatsapp .sheet-action-icon {
+              background: ${theme.whatsapp};
+              color: white;
+            }
+
+            .sheet-action-whatsapp:hover {
+              box-shadow: 0 6px 20px rgba(37, 211, 102, 0.2);
+            }
+
+            .sheet-action-telegram {
+              background: rgba(34, 158, 217, 0.1);
+              border: 1px solid rgba(34, 158, 217, 0.2);
+            }
+
+            .sheet-action-telegram .sheet-action-icon {
+              background: ${theme.telegram};
+              color: white;
+            }
+
+            .sheet-action-telegram:hover {
+              box-shadow: 0 6px 20px rgba(34, 158, 217, 0.2);
+            }
+
+            .sheet-action-text {
+              display: flex;
+              flex-direction: column;
+              gap: 2px;
+            }
+
+            .sheet-action-label {
+              color: white;
+              font-size: 15px;
+              font-weight: 700;
+            }
+
+            .sheet-action-sublabel {
+              color: ${theme.textMuted};
+              font-size: 12px;
+              font-weight: 500;
             }
 
             .pillars {
@@ -519,6 +928,26 @@ export default async function Home() {
                 font-size: 14px;
               }
 
+              .floating-chat-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 52px;
+                height: 52px;
+              }
+
+              .chat-sheet {
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+              }
+
+              .sheet-header {
+                padding: 14px 20px 6px;
+              }
+
+              .sheet-content {
+                padding: 0 20px 28px;
+              }
+
               .pillars {
                 padding: 64px 20px;
               }
@@ -641,6 +1070,9 @@ export default async function Home() {
                 <span className="pill-label">Telegram</span>
               </Link>
             </div>
+
+            {/* Floating Chat Component — sentinel placed right after pills */}
+            <FloatingChat whatsappUrl={WHATSAPP_URL} telegramUrl={TELEGRAM_URL} />
 
           </div>
         </section>
