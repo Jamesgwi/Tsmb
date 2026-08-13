@@ -1,11 +1,9 @@
-"use client";
-
-import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { neon } from "@neondatabase/serverless";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import Logo from "../components/Logo";
+import FloatingChat from "./components/FloatingChat";
 
 const display = Cormorant_Garamond({
   subsets: ["latin"],
@@ -88,198 +86,6 @@ function TelegramIcon({ size = 16 }: { size?: number }) {
     >
       <path d="M21.9 3.2 18.5 20c-.26 1.19-.97 1.48-1.97.92l-5.43-4-2.62 2.52c-.29.29-.53.53-1.09.53l.39-5.52 10.05-9.08c.44-.39-.1-.61-.68-.22L4.73 12.2l-5.38-1.68c-1.17-.37-1.19-1.17.24-1.73L20.62.81c.98-.36 1.84.24 1.28 2.39Z" />
     </svg>
-  );
-}
-
-function ChatBubbleIcon({ size = 24 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-    </svg>
-  );
-}
-
-function CloseIcon({ size = 20 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="18" y1="6" x2="6" y2="18" />
-      <line x1="6" y1="6" x2="18" y2="18" />
-    </svg>
-  );
-}
-
-// ─── Floating Chat Button + Sheet Component ───
-function FloatingChat({
-  whatsappUrl,
-  telegramUrl,
-}: {
-  whatsappUrl: string;
-  telegramUrl: string;
-}) {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const sentinelRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const sentinel = sentinelRef.current;
-    if (!sentinel) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // When sentinel is NOT intersecting, user has scrolled past the buttons
-        setIsVisible(!entry.isIntersecting);
-      },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0,
-      }
-    );
-
-    observer.observe(sentinel);
-    return () => observer.disconnect();
-  }, []);
-
-  const openSheet = useCallback(() => setIsSheetOpen(true), []);
-  const closeSheet = useCallback(() => setIsSheetOpen(false), []);
-
-  // Close on Escape key
-  useEffect(() => {
-    if (!isSheetOpen) return;
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeSheet();
-    };
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  }, [isSheetOpen, closeSheet]);
-
-  // Lock body scroll when sheet is open
-  useEffect(() => {
-    if (isSheetOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isSheetOpen]);
-
-  return (
-    <>
-      {/* Sentinel element — placed right after the contact pills */}
-      <div
-        ref={sentinelRef}
-        style={{
-          position: "absolute",
-          height: "1px",
-          width: "1px",
-          pointerEvents: "none",
-          opacity: 0,
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Floating Chat Button */}
-      <button
-        onClick={openSheet}
-        className={`floating-chat-btn ${isVisible ? "floating-chat-visible" : ""}`}
-        aria-label="Open chat options"
-        aria-haspopup="dialog"
-        aria-expanded={isSheetOpen}
-      >
-        <ChatBubbleIcon size={22} />
-      </button>
-
-      {/* Sheet Backdrop */}
-      <div
-        className={`sheet-backdrop ${isSheetOpen ? "sheet-backdrop-open" : ""}`}
-        onClick={closeSheet}
-        aria-hidden="true"
-      />
-
-      {/* Bottom Sheet */}
-      <div
-        className={`chat-sheet ${isSheetOpen ? "chat-sheet-open" : ""}`}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Chat options"
-      >
-        {/* Sheet Handle */}
-        <div className="sheet-handle-bar" />
-
-        {/* Sheet Header */}
-        <div className="sheet-header">
-          <span className="sheet-title">Connect With Us</span>
-          <button
-            onClick={closeSheet}
-            className="sheet-close-btn"
-            aria-label="Close chat options"
-          >
-            <CloseIcon size={18} />
-          </button>
-        </div>
-
-        {/* Sheet Content */}
-        <div className="sheet-content">
-          <p className="sheet-description">
-            Reach out to the TMB Team for guidance and trade support.
-          </p>
-
-          <div className="sheet-actions">
-            <Link
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="sheet-action-btn sheet-action-whatsapp"
-              onClick={closeSheet}
-            >
-              <span className="sheet-action-icon">
-                <WhatsAppIcon size={22} />
-              </span>
-              <span className="sheet-action-text">
-                <span className="sheet-action-label">WhatsApp</span>
-                <span className="sheet-action-sublabel">Chat on WhatsApp</span>
-              </span>
-            </Link>
-
-            <Link
-              href={telegramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="sheet-action-btn sheet-action-telegram"
-              onClick={closeSheet}
-            >
-              <span className="sheet-action-icon">
-                <TelegramIcon size={22} />
-              </span>
-              <span className="sheet-action-text">
-                <span className="sheet-action-label">Telegram</span>
-                <span className="sheet-action-sublabel">Message on Telegram</span>
-              </span>
-            </Link>
-          </div>
-        </div>
-      </div>
-    </>
   );
 }
 
@@ -1071,7 +877,7 @@ export default async function Home() {
               </Link>
             </div>
 
-            {/* Floating Chat Component — sentinel placed right after pills */}
+            {/* Floating Chat — Client Component */}
             <FloatingChat whatsappUrl={WHATSAPP_URL} telegramUrl={TELEGRAM_URL} />
 
           </div>
