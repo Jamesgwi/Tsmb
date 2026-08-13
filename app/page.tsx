@@ -28,10 +28,10 @@ async function getLinks() {
     const row = rows[0];
 
     return {
-      whatsapp: row?.whatsapp_url || "https://wa.link/b21m33",
-      telegram: row?.telegram_url || "https://t.me/KatieMTC",
-      whatsappNumber: row?.whatsapp_number || "+1 (929) 607-2719",
-      telegramUsername: row?.telegram_username || "@KatieMTC",
+      whatsapp: row?.whatsapp_url || "https://wa.link",
+      telegram: row?.telegram_url || "https://t.me/",
+      whatsappNumber: row?.whatsapp_number || "+1 2345",
+      telegramUsername: row?.telegram_username || "@username",
     };
   } catch {
     return {
