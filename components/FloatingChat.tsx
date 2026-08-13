@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 
 const theme = {
@@ -71,12 +72,11 @@ export default function FloatingChat({
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
-  // Prevent hydration mismatch — only show after mount
   useEffect(() => {
-    setIsMounted(true);
+    setMounted(true);
   }, []);
 
   useEffect(() => {
@@ -85,7 +85,6 @@ export default function FloatingChat({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // When sentinel is NOT intersecting, buttons are scrolled out of view
         setIsVisible(!entry.isIntersecting);
       },
       { root: null, rootMargin: "0px", threshold: 0 }
@@ -118,22 +117,18 @@ export default function FloatingChat({
     };
   }, [isSheetOpen]);
 
-  if (!isMounted) return null;
-
-  return (
-    <>
-      {/* Sentinel — invisible marker that sits right after the intro section */}
+  if (!mounted) {
+    return (
       <div
         ref={sentinelRef}
-        style={{
-          height: "1px",
-          width: "100%",
-          pointerEvents: "none",
-          opacity: 0,
-        }}
+        style={{ height: "1px", width: "100%", pointerEvents: "none", opacity: 0 }}
         aria-hidden="true"
       />
+    );
+  }
 
+  const overlay = (
+    <>
       {/* Floating Chat Button */}
       <button
         type="button"
@@ -153,7 +148,7 @@ export default function FloatingChat({
         aria-hidden="true"
       />
 
-      {/* Bottom Sheet — rendered at document root level via fixed positioning */}
+      {/* Bottom Sheet */}
       <div
         className={`chat-sheet ${isSheetOpen ? "chat-sheet-open" : ""}`}
         role="dialog"
@@ -211,6 +206,19 @@ export default function FloatingChat({
           </div>
         </div>
       </div>
+    </>
+  );
+
+  return (
+    <>
+      {/* Sentinel stays in normal flow */}
+      <div
+        ref={sentinelRef}
+        style={{ height: "1px", width: "100%", pointerEvents: "none", opacity: 0 }}
+        aria-hidden="true"
+      />
+      {/* Button + Sheet rendered via Portal to document.body */}
+      {createPortal(overlay, document.body)}
     </>
   );
 }
