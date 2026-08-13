@@ -28,7 +28,7 @@ function ChatBubbleIcon({ size = 24 }: { size?: number }) {
   );
 }
 
-function CloseIcon({ size = 16 }: { size?: number }) {
+function CloseIcon({ size = 20 }: { size?: number }) {
   return (
     <svg
       width={size}
@@ -46,24 +46,7 @@ function CloseIcon({ size = 16 }: { size?: number }) {
   );
 }
 
-function ChevronRightIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M9 18l6-6-6-6" />
-    </svg>
-  );
-}
-
-function WhatsAppIcon({ size = 24 }: { size?: number }) {
+function WhatsAppIcon({ size = 22 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M20.5 3.5A11.9 11.9 0 0 0 12.04 0C5.47 0 .13 5.34.13 11.91c0 2.1.55 4.15 1.6 5.96L.04 24l6.28-1.65a11.88 11.88 0 0 0 5.71 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.18-3.44-8.41ZM12.04 21.8h-.01a9.88 9.88 0 0 1-5.04-1.38l-.36-.21-3.73.98 1-3.64-.24-.37a9.88 9.88 0 0 1-1.52-5.28C2.14 6.43 6.57 2 12.04 2c2.65 0 5.14 1.03 7.01 2.9a9.86 9.86 0 0 1 2.9 7c0 5.47-4.44 9.9-9.91 9.9Z" />
@@ -72,7 +55,7 @@ function WhatsAppIcon({ size = 24 }: { size?: number }) {
   );
 }
 
-function TelegramIcon({ size = 24 }: { size?: number }) {
+function TelegramIcon({ size = 22 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M21.9 3.2 18.5 20c-.26 1.19-.97 1.48-1.97.92l-5.43-4-2.62 2.52c-.29.29-.53.53-1.09.53l.39-5.52 10.05-9.08c.44-.39-.1-.61-.68-.22L4.73 12.2l-5.38-1.68c-1.17-.37-1.19-1.17.24-1.73L20.62.81c.98-.36 1.84.24 1.28 2.39Z" />
@@ -91,10 +74,12 @@ export default function FloatingChat({
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
+  // Mount guard to prevent hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Scroll-based trigger: show bubble when user scrolls past 65% of page
   useEffect(() => {
     let ticking = false;
 
@@ -102,8 +87,15 @@ export default function FloatingChat({
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const viewportHeight = window.innerHeight;
       const docHeight = document.documentElement.scrollHeight;
+      
+      // Calculate how much of the page has been scrolled through
+      // 0 = top, 1 = bottom
       const scrollProgress = (scrollTop + viewportHeight) / docHeight;
+      
+      // Show bubble when user has scrolled past 65% of the page
+      // This means it appears when they're in the bottom 35% of content
       setIsVisible(scrollProgress > 0.65);
+      
       ticking = false;
     };
 
@@ -114,8 +106,11 @@ export default function FloatingChat({
       }
     };
 
+    // Check immediately on mount (in case page loads already scrolled)
     checkScroll();
+    
     window.addEventListener("scroll", onScroll, { passive: true });
+    // Also check on resize since viewport/doc heights change
     window.addEventListener("resize", checkScroll, { passive: true });
 
     return () => {
@@ -127,6 +122,7 @@ export default function FloatingChat({
   const openSheet = useCallback(() => setIsSheetOpen(true), []);
   const closeSheet = useCallback(() => setIsSheetOpen(false), []);
 
+  // Escape key to close
   useEffect(() => {
     if (!isSheetOpen) return;
     const handleKey = (e: KeyboardEvent) => {
@@ -136,6 +132,7 @@ export default function FloatingChat({
     return () => window.removeEventListener("keydown", handleKey);
   }, [isSheetOpen, closeSheet]);
 
+  // Lock body scroll when sheet is open
   useEffect(() => {
     if (isSheetOpen) {
       document.body.style.overflow = "hidden";
@@ -163,14 +160,14 @@ export default function FloatingChat({
         <ChatBubbleIcon size={22} />
       </button>
 
-      {/* Sheet Backdrop — enhanced glassmorphism */}
+      {/* Sheet Backdrop */}
       <div
         className={`sheet-backdrop ${isSheetOpen ? "sheet-backdrop-open" : ""}`}
         onClick={closeSheet}
         aria-hidden="true"
       />
 
-      {/* Bottom Sheet — glassmorphism, softer, more premium */}
+      {/* Bottom Sheet */}
       <div
         className={`chat-sheet ${isSheetOpen ? "chat-sheet-open" : ""}`}
         role="dialog"
@@ -178,62 +175,54 @@ export default function FloatingChat({
         aria-label="Chat options"
       >
         <div className="sheet-handle-bar" />
-
         <div className="sheet-header">
-          <div className="sheet-header-text">
-            <span className="sheet-title">Connect With Us</span>
-            <span className="sheet-subtitle">
-              Reach out to the TMB Team for guidance and trade support.
-            </span>
-          </div>
+          <span className="sheet-title">Connect With Us</span>
           <button
             type="button"
             onClick={closeSheet}
             className="sheet-close-btn"
             aria-label="Close chat options"
           >
-            <CloseIcon size={16} />
+            <CloseIcon size={18} />
           </button>
         </div>
-
         <div className="sheet-content">
-          <Link
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="sheet-action-btn sheet-action-whatsapp"
-            onClick={closeSheet}
-          >
-            <span className="sheet-action-icon">
-              <WhatsAppIcon size={24} />
-            </span>
-            <span className="sheet-action-text">
-              <span className="sheet-action-label">WhatsApp</span>
-              <span className="sheet-action-sublabel">Chat on WhatsApp</span>
-            </span>
-            <span className="sheet-action-chevron">
-              <ChevronRightIcon size={18} />
-            </span>
-          </Link>
+          <p className="sheet-description">
+            Reach out to the TMB Team for guidance and trade support.
+          </p>
+          <div className="sheet-actions">
+            <Link
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sheet-action-btn sheet-action-whatsapp"
+              onClick={closeSheet}
+            >
+              <span className="sheet-action-icon">
+                <WhatsAppIcon size={22} />
+              </span>
+              <span className="sheet-action-text">
+                <span className="sheet-action-label">WhatsApp</span>
+                <span className="sheet-action-sublabel">Chat on WhatsApp</span>
+              </span>
+            </Link>
 
-          <Link
-            href={telegramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="sheet-action-btn sheet-action-telegram"
-            onClick={closeSheet}
-          >
-            <span className="sheet-action-icon">
-              <TelegramIcon size={24} />
-            </span>
-            <span className="sheet-action-text">
-              <span className="sheet-action-label">Telegram</span>
-              <span className="sheet-action-sublabel">Message on Telegram</span>
-            </span>
-            <span className="sheet-action-chevron">
-              <ChevronRightIcon size={18} />
-            </span>
-          </Link>
+            <Link
+              href={telegramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sheet-action-btn sheet-action-telegram"
+              onClick={closeSheet}
+            >
+              <span className="sheet-action-icon">
+                <TelegramIcon size={22} />
+              </span>
+              <span className="sheet-action-text">
+                <span className="sheet-action-label">Telegram</span>
+                <span className="sheet-action-sublabel">Message on Telegram</span>
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
     </>
