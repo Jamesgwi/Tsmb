@@ -74,12 +74,10 @@ export default function FloatingChat({
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // Mount guard to prevent hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Scroll-based trigger: show bubble when user scrolls past 65% of page
   useEffect(() => {
     let ticking = false;
 
@@ -87,15 +85,8 @@ export default function FloatingChat({
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const viewportHeight = window.innerHeight;
       const docHeight = document.documentElement.scrollHeight;
-      
-      // Calculate how much of the page has been scrolled through
-      // 0 = top, 1 = bottom
       const scrollProgress = (scrollTop + viewportHeight) / docHeight;
-      
-      // Show bubble when user has scrolled past 65% of the page
-      // This means it appears when they're in the bottom 35% of content
       setIsVisible(scrollProgress > 0.65);
-      
       ticking = false;
     };
 
@@ -106,11 +97,8 @@ export default function FloatingChat({
       }
     };
 
-    // Check immediately on mount (in case page loads already scrolled)
     checkScroll();
-    
     window.addEventListener("scroll", onScroll, { passive: true });
-    // Also check on resize since viewport/doc heights change
     window.addEventListener("resize", checkScroll, { passive: true });
 
     return () => {
@@ -122,7 +110,6 @@ export default function FloatingChat({
   const openSheet = useCallback(() => setIsSheetOpen(true), []);
   const closeSheet = useCallback(() => setIsSheetOpen(false), []);
 
-  // Escape key to close
   useEffect(() => {
     if (!isSheetOpen) return;
     const handleKey = (e: KeyboardEvent) => {
@@ -132,7 +119,6 @@ export default function FloatingChat({
     return () => window.removeEventListener("keydown", handleKey);
   }, [isSheetOpen, closeSheet]);
 
-  // Lock body scroll when sheet is open
   useEffect(() => {
     if (isSheetOpen) {
       document.body.style.overflow = "hidden";
@@ -148,6 +134,221 @@ export default function FloatingChat({
 
   const overlay = (
     <>
+      <style>{`
+        .floating-chat-btn {
+          position: fixed;
+          bottom: 24px;
+          right: 24px;
+          z-index: 100;
+          width: 56px;
+          height: 56px;
+          border-radius: 50%;
+          border: none;
+          background: ${theme.gold};
+          color: #0A152E;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 20px rgba(45, 212, 191, 0.35), 0 0 0 1px rgba(45, 212, 191, 0.15);
+          transform: translateY(100px) scale(0.8);
+          opacity: 0;
+          transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, box-shadow 0.2s ease;
+          pointer-events: none;
+        }
+        .floating-chat-btn.floating-chat-visible {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+          pointer-events: auto;
+        }
+        .floating-chat-btn:hover {
+          transform: translateY(-3px) scale(1.05);
+          box-shadow: 0 8px 30px rgba(45, 212, 191, 0.45), 0 0 0 1px rgba(45, 212, 191, 0.2);
+        }
+        .sheet-backdrop {
+          position: fixed;
+          inset: 0;
+          z-index: 200;
+          background: rgba(10, 21, 46, 0.6);
+          backdrop-filter: blur(12px) saturate(1.2);
+          -webkit-backdrop-filter: blur(12px) saturate(1.2);
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .sheet-backdrop.sheet-backdrop-open {
+          opacity: 1;
+          visibility: visible;
+        }
+        .chat-sheet {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: 210;
+          background: linear-gradient(180deg, rgba(20, 40, 80, 0.95) 0%, rgba(10, 21, 46, 0.98) 100%);
+          border-top: 1px solid rgba(45, 212, 191, 0.15);
+          border-top-left-radius: 28px;
+          border-top-right-radius: 28px;
+          box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+          transform: translateY(100%);
+          transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+          max-height: 85vh;
+          overflow-y: auto;
+          padding: 0 20px 32px;
+        }
+        .chat-sheet.chat-sheet-open {
+          transform: translateY(0);
+        }
+        .sheet-handle-bar {
+          width: 40px;
+          height: 5px;
+          border-radius: 3px;
+          background: rgba(255, 255, 255, 0.12);
+          margin: 14px auto 20px;
+          flex-shrink: 0;
+        }
+        .sheet-header {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          margin-bottom: 20px;
+          gap: 12px;
+        }
+        .sheet-title {
+          font-family: var(--font-display, 'Cormorant Garamond', serif);
+          font-size: 24px;
+          font-weight: 600;
+          color: white;
+          letter-spacing: -0.3px;
+          line-height: 1.2;
+        }
+        .sheet-close-btn {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(255, 255, 255, 0.04);
+          color: #A2C2BF;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s ease;
+          flex-shrink: 0;
+        }
+        .sheet-close-btn:hover {
+          background: rgba(255, 255, 255, 0.1);
+          color: white;
+        }
+        .sheet-content {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .sheet-description {
+          color: #A2C2BF;
+          font-size: 14px;
+          line-height: 1.6;
+          margin: 0 0 16px 0;
+        }
+
+        /* ═══ SHEET ACTIONS — CENTERED, FILLED, ROUNDED ═══ */
+        .sheet-actions {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+          padding: 8px 0;
+        }
+        .sheet-action-btn {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          width: auto;
+          min-width: 260px;
+          max-width: 360px;
+          padding: 14px 36px;
+          border-radius: 20px;
+          text-decoration: none;
+          transition: all 0.25s ease;
+          border: none;
+        }
+        .sheet-action-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+        .sheet-action-whatsapp {
+          background: #25D366;
+          color: white;
+          box-shadow: 0 4px 20px rgba(37, 211, 102, 0.25);
+        }
+        .sheet-action-whatsapp:hover {
+          background: #22c55e;
+          box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+        }
+        .sheet-action-telegram {
+          background: #229ED9;
+          color: white;
+          box-shadow: 0 4px 20px rgba(34, 158, 217, 0.25);
+        }
+        .sheet-action-telegram:hover {
+          background: #1d8bc0;
+          box-shadow: 0 8px 30px rgba(34, 158, 217, 0.4);
+        }
+        .sheet-action-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          color: white;
+        }
+        .sheet-action-text {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+        .sheet-action-label {
+          color: white;
+          font-size: 15px;
+          font-weight: 700;
+          letter-spacing: -0.2px;
+        }
+        .sheet-action-sublabel {
+          color: rgba(255, 255, 255, 0.85);
+          font-size: 12px;
+          font-weight: 500;
+        }
+
+        @media (max-width: 650px) {
+          .floating-chat-btn {
+            bottom: 20px;
+            right: 20px;
+            width: 52px;
+            height: 52px;
+          }
+          .chat-sheet {
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+            padding: 0 16px 28px;
+          }
+          .sheet-title {
+            font-size: 22px;
+          }
+          .sheet-action-btn {
+            min-width: 240px;
+            padding: 12px 32px;
+            border-radius: 18px;
+          }
+          .sheet-action-label {
+            font-size: 14px;
+          }
+          .sheet-action-sublabel {
+            font-size: 11px;
+          }
+        }
+      `}</style>
+
       {/* Floating Chat Button */}
       <button
         type="button"
