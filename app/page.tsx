@@ -3,7 +3,7 @@ import Link from "next/link";
 import { neon } from "@neondatabase/serverless";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import Logo from "../components/Logo";
-import FloatingChat from "../components/FloatingChat";
+import FloatingChat from "./components/FloatingChat";
 
 const display = Cormorant_Garamond({
   subsets: ["latin"],
@@ -241,7 +241,6 @@ export default async function Home() {
             }
 
             .intro {
-              position: relative;
               padding: 56px 22px 64px;
               background: ${theme.bg};
               text-align: center;
@@ -877,11 +876,11 @@ export default async function Home() {
               </Link>
             </div>
 
-            {/* Floating Chat — Client Component */}
-            <FloatingChat whatsappUrl={WHATSAPP_URL} telegramUrl={TELEGRAM_URL} />
-
           </div>
         </section>
+
+        {/* ═══ KEY FIX: FloatingChat moved OUTSIDE .intro section ═══ */}
+        <FloatingChat whatsappUrl={WHATSAPP_URL} telegramUrl={TELEGRAM_URL} />
 
         <section className="pillars">
           <div className="section-width">
