@@ -480,84 +480,62 @@ export default async function Home() {
               color: white;
             }
 
-            .sheet-content {
+            /* ═══ SHEET ACTIONS — CENTERED, FILLED, ROUNDED ═══ */
+            .sheet-actions {
               display: flex;
               flex-direction: column;
+              align-items: center;
               gap: 12px;
+              padding: 8px 0;
             }
 
             .sheet-action-btn {
               display: flex;
               align-items: center;
-              gap: 16px;
-              padding: 18px 20px;
-              border-radius: 20px;
+              gap: 14px;
+              width: auto;
+              min-width: 220px;
+              max-width: 300px;
+              padding: 14px 28px;
+              border-radius: 16px;
               text-decoration: none;
               transition: all 0.25s ease;
+              border: none;
             }
 
             .sheet-action-btn:hover {
               transform: translateY(-2px);
+              box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
             }
 
             .sheet-action-whatsapp {
-              background: linear-gradient(
-                135deg,
-                rgba(37, 211, 102, 0.08) 0%,
-                rgba(37, 211, 102, 0.03) 100%
-              );
-              border: 1px solid rgba(37, 211, 102, 0.18);
-              box-shadow:
-                0 4px 20px rgba(37, 211, 102, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+              background: #25D366;
+              color: white;
+              box-shadow: 0 4px 20px rgba(37, 211, 102, 0.25);
             }
 
             .sheet-action-whatsapp:hover {
-              box-shadow:
-                0 8px 30px rgba(37, 211, 102, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.06);
-              border-color: rgba(37, 211, 102, 0.3);
+              background: #22c55e;
+              box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
             }
 
             .sheet-action-telegram {
-              background: linear-gradient(
-                135deg,
-                rgba(34, 158, 217, 0.08) 0%,
-                rgba(34, 158, 217, 0.03) 100%
-              );
-              border: 1px solid rgba(34, 158, 217, 0.18);
-              box-shadow:
-                0 4px 20px rgba(34, 158, 217, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+              background: #229ED9;
+              color: white;
+              box-shadow: 0 4px 20px rgba(34, 158, 217, 0.25);
             }
 
             .sheet-action-telegram:hover {
-              box-shadow:
-                0 8px 30px rgba(34, 158, 217, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.06);
-              border-color: rgba(34, 158, 217, 0.3);
+              background: #1d8bc0;
+              box-shadow: 0 8px 30px rgba(34, 158, 217, 0.4);
             }
 
             .sheet-action-icon {
-              width: 50px;
-              height: 50px;
-              border-radius: 16px;
               display: flex;
               align-items: center;
               justify-content: center;
               flex-shrink: 0;
-            }
-
-            .sheet-action-whatsapp .sheet-action-icon {
-              background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
               color: white;
-              box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-            }
-
-            .sheet-action-telegram .sheet-action-icon {
-              background: linear-gradient(135deg, #229ED9 0%, #1769aa 100%);
-              color: white;
-              box-shadow: 0 4px 15px rgba(34, 158, 217, 0.3);
             }
 
             .sheet-action-text {
@@ -568,27 +546,19 @@ export default async function Home() {
 
             .sheet-action-label {
               color: white;
-              font-size: 16px;
+              font-size: 15px;
               font-weight: 700;
               letter-spacing: -0.2px;
             }
 
             .sheet-action-sublabel {
-              color: rgba(162, 194, 191, 0.7);
-              font-size: 13px;
+              color: rgba(255, 255, 255, 0.85);
+              font-size: 12px;
               font-weight: 500;
             }
 
             .sheet-action-chevron {
-              margin-left: auto;
-              color: rgba(255, 255, 255, 0.25);
-              flex-shrink: 0;
-              transition: color 0.2s ease, transform 0.2s ease;
-            }
-
-            .sheet-action-btn:hover .sheet-action-chevron {
-              color: rgba(255, 255, 255, 0.5);
-              transform: translateX(2px);
+              display: none;
             }
 
             .pillars {
@@ -800,13 +770,17 @@ export default async function Home() {
               }
 
               .sheet-action-btn {
-                padding: 16px 18px;
+                min-width: 200px;
+                padding: 12px 24px;
+                border-radius: 14px;
               }
 
-              .sheet-action-icon {
-                width: 46px;
-                height: 46px;
-                border-radius: 14px;
+              .sheet-action-label {
+                font-size: 14px;
+              }
+
+              .sheet-action-sublabel {
+                font-size: 11px;
               }
 
               .pillars {
@@ -1056,7 +1030,7 @@ export default async function Home() {
           </div>
 
           <p className="footer-copy">
-            © {new Date().getFullYear()} TheSmartMoneyBlueprint.
+            © ${new Date().getFullYear()} TheSmartMoneyBlueprint.
             All rights reserved.
             <br />
             Financial decisions should be considered in light of your individual position.
