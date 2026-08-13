@@ -28,10 +28,10 @@ async function getLinks() {
     const row = rows[0];
 
     return {
-      whatsapp: row?.whatsapp_url || "https://wa.link",
-      telegram: row?.telegram_url || "https://t.me/",
-      whatsappNumber: row?.whatsapp_number || "+1 2345",
-      telegramUsername: row?.telegram_username || "@username",
+      whatsapp: row?.whatsapp_url || "https://wa.link/b21m33",
+      telegram: row?.telegram_url || "https://t.me/KatieMTC",
+      whatsappNumber: row?.whatsapp_number || "+1 (929) 607-2719",
+      telegramUsername: row?.telegram_username || "@KatieMTC",
     };
   } catch {
     return {
@@ -379,12 +379,12 @@ export default async function Home() {
               position: fixed;
               inset: 0;
               z-index: 200;
-              background: rgba(10, 21, 46, 0.7);
-              backdrop-filter: blur(4px);
-              -webkit-backdrop-filter: blur(4px);
+              background: rgba(10, 21, 46, 0.6);
+              backdrop-filter: blur(12px) saturate(1.2);
+              -webkit-backdrop-filter: blur(12px) saturate(1.2);
               opacity: 0;
               visibility: hidden;
-              transition: opacity 0.35s ease, visibility 0.35s ease;
+              transition: opacity 0.4s ease, visibility 0.4s ease;
             }
 
             .sheet-backdrop.sheet-backdrop-open {
@@ -399,14 +399,22 @@ export default async function Home() {
               left: 0;
               right: 0;
               z-index: 210;
-              background: linear-gradient(180deg, #0f1f3d 0%, #0A152E 100%);
-              border-top-left-radius: 24px;
-              border-top-right-radius: 24px;
-              box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.4);
+              background: linear-gradient(
+                180deg,
+                rgba(20, 40, 80, 0.95) 0%,
+                rgba(10, 21, 46, 0.98) 100%
+              );
+              border-top: 1px solid rgba(45, 212, 191, 0.15);
+              border-top-left-radius: 28px;
+              border-top-right-radius: 28px;
+              box-shadow:
+                0 -20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
               transform: translateY(100%);
-              transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+              transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
               max-height: 85vh;
               overflow-y: auto;
+              padding: 0 20px 32px;
             }
 
             .chat-sheet.chat-sheet-open {
@@ -414,40 +422,57 @@ export default async function Home() {
             }
 
             .sheet-handle-bar {
-              width: 36px;
-              height: 4px;
-              border-radius: 2px;
-              background: rgba(255, 255, 255, 0.15);
-              margin: 12px auto 0;
+              width: 40px;
+              height: 5px;
+              border-radius: 3px;
+              background: rgba(255, 255, 255, 0.12);
+              margin: 14px auto 20px;
               flex-shrink: 0;
             }
 
             .sheet-header {
               display: flex;
-              align-items: center;
+              align-items: flex-start;
               justify-content: space-between;
-              padding: 16px 24px 8px;
+              margin-bottom: 20px;
+              gap: 12px;
+            }
+
+            .sheet-header-text {
+              display: flex;
+              flex-direction: column;
+              gap: 4px;
             }
 
             .sheet-title {
               font-family: var(--font-display), serif;
-              font-size: 22px;
+              font-size: 24px;
               font-weight: 600;
               color: white;
+              letter-spacing: -0.3px;
+              line-height: 1.2;
+            }
+
+            .sheet-subtitle {
+              color: #A2C2BF;
+              font-size: 12.5px;
+              line-height: 1.5;
+              opacity: 0.8;
             }
 
             .sheet-close-btn {
               width: 36px;
               height: 36px;
               border-radius: 50%;
-              border: 1px solid rgba(255, 255, 255, 0.1);
-              background: rgba(255, 255, 255, 0.05);
-              color: ${theme.textMuted};
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              background: rgba(255, 255, 255, 0.04);
+              color: #A2C2BF;
               cursor: pointer;
               display: flex;
               align-items: center;
               justify-content: center;
               transition: all 0.2s ease;
+              flex-shrink: 0;
             }
 
             .sheet-close-btn:hover {
@@ -456,303 +481,115 @@ export default async function Home() {
             }
 
             .sheet-content {
-              padding: 0 24px 32px;
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
             }
 
-            .sheet-description {
-              margin: 0 0 24px;
-              color: ${theme.textMuted};
-/* ═══ FLOATING CHAT BUTTON ═══ */
-.floating-chat-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 100;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: none;
-  background: #2dd4bf;
-  color: #0A152E;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow:
-    0 4px 20px rgba(45, 212, 191, 0.35),
-    0 0 0 1px rgba(45, 212, 191, 0.15);
-  transform: translateY(100px) scale(0.8);
-  opacity: 0;
-  transition:
-    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-    opacity 0.3s ease,
-    box-shadow 0.2s ease;
-  pointer-events: none;
-}
+            .sheet-action-btn {
+              display: flex;
+              align-items: center;
+              gap: 16px;
+              padding: 18px 20px;
+              border-radius: 20px;
+              text-decoration: none;
+              transition: all 0.25s ease;
+            }
 
-.floating-chat-btn.floating-chat-visible {
-  transform: translateY(0) scale(1);
-  opacity: 1;
-  pointer-events: auto;
-}
+            .sheet-action-btn:hover {
+              transform: translateY(-2px);
+            }
 
-.floating-chat-btn:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow:
-    0 8px 30px rgba(45, 212, 191, 0.45),
-    0 0 0 1px rgba(45, 212, 191, 0.2);
-}
+            .sheet-action-whatsapp {
+              background: linear-gradient(
+                135deg,
+                rgba(37, 211, 102, 0.08) 0%,
+                rgba(37, 211, 102, 0.03) 100%
+              );
+              border: 1px solid rgba(37, 211, 102, 0.18);
+              box-shadow:
+                0 4px 20px rgba(37, 211, 102, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            }
 
-.floating-chat-btn:active {
-  transform: translateY(-1px) scale(0.97);
-}
+            .sheet-action-whatsapp:hover {
+              box-shadow:
+                0 8px 30px rgba(37, 211, 102, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+              border-color: rgba(37, 211, 102, 0.3);
+            }
 
-/* ═══ SHEET BACKDROP ═══ */
-.sheet-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  background: rgba(10, 21, 46, 0.6);
-  backdrop-filter: blur(12px) saturate(1.2);
-  -webkit-backdrop-filter: blur(12px) saturate(1.2);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-}
+            .sheet-action-telegram {
+              background: linear-gradient(
+                135deg,
+                rgba(34, 158, 217, 0.08) 0%,
+                rgba(34, 158, 217, 0.03) 100%
+              );
+              border: 1px solid rgba(34, 158, 217, 0.18);
+              box-shadow:
+                0 4px 20px rgba(34, 158, 217, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            }
 
-.sheet-backdrop.sheet-backdrop-open {
-  opacity: 1;
-  visibility: visible;
-}
+            .sheet-action-telegram:hover {
+              box-shadow:
+                0 8px 30px rgba(34, 158, 217, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+              border-color: rgba(34, 158, 217, 0.3);
+            }
 
-/* ═══ BOTTOM SHEET ═══ */
-.chat-sheet {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 210;
-  background: linear-gradient(
-    180deg,
-    rgba(20, 40, 80, 0.95) 0%,
-    rgba(10, 21, 46, 0.98) 100%
-  );
-  border-top: 1px solid rgba(45, 212, 191, 0.15);
-  border-top-left-radius: 28px;
-  border-top-right-radius: 28px;
-  box-shadow:
-    0 -20px 60px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  transform: translateY(100%);
-  transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
-  max-height: 85vh;
-  overflow-y: auto;
-  padding: 0 20px 32px;
-}
+            .sheet-action-icon {
+              width: 50px;
+              height: 50px;
+              border-radius: 16px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-shrink: 0;
+            }
 
-.chat-sheet.chat-sheet-open {
-  transform: translateY(0);
-}
+            .sheet-action-whatsapp .sheet-action-icon {
+              background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+              color: white;
+              box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            }
 
-.sheet-handle-bar {
-  width: 40px;
-  height: 5px;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.12);
-  margin: 14px auto 20px;
-  flex-shrink: 0;
-}
+            .sheet-action-telegram .sheet-action-icon {
+              background: linear-gradient(135deg, #229ED9 0%, #1769aa 100%);
+              color: white;
+              box-shadow: 0 4px 15px rgba(34, 158, 217, 0.3);
+            }
 
-.sheet-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  gap: 12px;
-}
+            .sheet-action-text {
+              display: flex;
+              flex-direction: column;
+              gap: 2px;
+            }
 
-.sheet-header-text {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+            .sheet-action-label {
+              color: white;
+              font-size: 16px;
+              font-weight: 700;
+              letter-spacing: -0.2px;
+            }
 
-.sheet-title {
-  font-family: var(--font-display), serif;
-  font-size: 24px;
-  font-weight: 600;
-  color: white;
-  letter-spacing: -0.3px;
-  line-height: 1.2;
-}
+            .sheet-action-sublabel {
+              color: rgba(162, 194, 191, 0.7);
+              font-size: 13px;
+              font-weight: 500;
+            }
 
-.sheet-subtitle {
-  color: #A2C2BF;
-  font-size: 12.5px;
-  line-height: 1.5;
-  opacity: 0.8;
-}
+            .sheet-action-chevron {
+              margin-left: auto;
+              color: rgba(255, 255, 255, 0.25);
+              flex-shrink: 0;
+              transition: color 0.2s ease, transform 0.2s ease;
+            }
 
-.sheet-close-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.04);
-  color: #A2C2BF;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-}
-
-.sheet-close-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-}
-
-.sheet-content {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.sheet-action-btn {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 18px 20px;
-  border-radius: 20px;
-  text-decoration: none;
-  transition: all 0.25s ease;
-}
-
-.sheet-action-btn:hover {
-  transform: translateY(-2px);
-}
-
-.sheet-action-whatsapp {
-  background: linear-gradient(
-    135deg,
-    rgba(37, 211, 102, 0.08) 0%,
-    rgba(37, 211, 102, 0.03) 100%
-  );
-  border: 1px solid rgba(37, 211, 102, 0.18);
-  box-shadow:
-    0 4px 20px rgba(37, 211, 102, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
-}
-
-.sheet-action-whatsapp:hover {
-  box-shadow:
-    0 8px 30px rgba(37, 211, 102, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  border-color: rgba(37, 211, 102, 0.3);
-}
-
-.sheet-action-telegram {
-  background: linear-gradient(
-    135deg,
-    rgba(34, 158, 217, 0.08) 0%,
-    rgba(34, 158, 217, 0.03) 100%
-  );
-  border: 1px solid rgba(34, 158, 217, 0.18);
-  box-shadow:
-    0 4px 20px rgba(34, 158, 217, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
-}
-
-.sheet-action-telegram:hover {
-  box-shadow:
-    0 8px 30px rgba(34, 158, 217, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  border-color: rgba(34, 158, 217, 0.3);
-}
-
-.sheet-action-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.sheet-action-whatsapp .sheet-action-icon {
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-}
-
-.sheet-action-telegram .sheet-action-icon {
-  background: linear-gradient(135deg, #229ED9 0%, #1769aa 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(34, 158, 217, 0.3);
-}
-
-.sheet-action-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.sheet-action-label {
-  color: white;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
-}
-
-.sheet-action-sublabel {
-  color: rgba(162, 194, 191, 0.7);
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.sheet-action-chevron {
-  margin-left: auto;
-  color: rgba(255, 255, 255, 0.25);
-  flex-shrink: 0;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.sheet-action-btn:hover .sheet-action-chevron {
-  color: rgba(255, 255, 255, 0.5);
-  transform: translateX(2px);
-}
-
-@media (max-width: 650px) {
-  .floating-chat-btn {
-    bottom: 20px;
-    right: 20px;
-    width: 52px;
-    height: 52px;
-  }
-
-  .chat-sheet {
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
-    padding: 0 16px 28px;
-  }
-
-  .sheet-title {
-    font-size: 22px;
-  }
-
-  .sheet-action-btn {
-    padding: 16px 18px;
-  }
-
-  .sheet-action-icon {
-    width: 46px;
-    height: 46px;
-    border-radius: 14px;
-  }
-}
-
+            .sheet-action-btn:hover .sheet-action-chevron {
+              color: rgba(255, 255, 255, 0.5);
+              transform: translateX(2px);
+            }
 
             .pillars {
               background: ${theme.bgLight};
@@ -953,16 +790,23 @@ export default async function Home() {
               }
 
               .chat-sheet {
-                border-top-left-radius: 20px;
-                border-top-right-radius: 20px;
+                border-top-left-radius: 24px;
+                border-top-right-radius: 24px;
+                padding: 0 16px 28px;
               }
 
-              .sheet-header {
-                padding: 14px 20px 6px;
+              .sheet-title {
+                font-size: 22px;
               }
 
-              .sheet-content {
-                padding: 0 20px 28px;
+              .sheet-action-btn {
+                padding: 16px 18px;
+              }
+
+              .sheet-action-icon {
+                width: 46px;
+                height: 46px;
+                border-radius: 14px;
               }
 
               .pillars {
@@ -1091,7 +935,6 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ═══ KEY FIX: FloatingChat moved OUTSIDE .intro section ═══ */}
         <FloatingChat whatsappUrl={WHATSAPP_URL} telegramUrl={TELEGRAM_URL} />
 
         <section className="pillars">
