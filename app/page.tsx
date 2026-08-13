@@ -494,8 +494,8 @@ export default async function Home() {
               align-items: center;
               gap: 14px;
               width: auto;
-              min-width: 220px;
-              max-width: 300px;
+              min-width: 260px;
+              max-width: 360px;
               padding: 8px 38px;
               border-radius: 19px;
               text-decoration: none;
