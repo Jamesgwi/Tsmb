@@ -4,9 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 
 const theme = {
-  bg: "#0A152E",
   gold: "#2dd4bf",
-  goldLight: "#5eead4",
   textMuted: "#A2C2BF",
   whatsapp: "#25D366",
   telegram: "#229ED9",
@@ -47,30 +45,18 @@ function CloseIcon({ size = 20 }: { size?: number }) {
   );
 }
 
-function WhatsAppIcon({ size = 16 }: { size?: number }) {
+function WhatsAppIcon({ size = 22 }: { size?: number }) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M20.5 3.5A11.9 11.9 0 0 0 12.04 0C5.47 0 .13 5.34.13 11.91c0 2.1.55 4.15 1.6 5.96L.04 24l6.28-1.65a11.88 11.88 0 0 0 5.71 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.18-3.44-8.41ZM12.04 21.8h-.01a9.88 9.88 0 0 1-5.04-1.38l-.36-.21-3.73.98 1-3.64-.24-.37a9.88 9.88 0 0 1-1.52-5.28C2.14 6.43 6.57 2 12.04 2c2.65 0 5.14 1.03 7.01 2.9a9.86 9.86 0 0 1 2.9 7c0 5.47-4.44 9.9-9.91 9.9Z" />
       <path d="M17.55 14.52c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.74-1.64-2.04-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.21 5.09 4.5.71.31 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z" />
     </svg>
   );
 }
 
-function TelegramIcon({ size = 16 }: { size?: number }) {
+function TelegramIcon({ size = 22 }: { size?: number }) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M21.9 3.2 18.5 20c-.26 1.19-.97 1.48-1.97.92l-5.43-4-2.62 2.52c-.29.29-.53.53-1.09.53l.39-5.52 10.05-9.08c.44-.39-.1-.61-.68-.22L4.73 12.2l-5.38-1.68c-1.17-.37-1.19-1.17.24-1.73L20.62.81c.98-.36 1.84.24 1.28 2.39Z" />
     </svg>
   );
@@ -85,7 +71,13 @@ export default function FloatingChat({
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
+
+  // Prevent hydration mismatch — only show after mount
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -93,6 +85,7 @@ export default function FloatingChat({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        // When sentinel is NOT intersecting, buttons are scrolled out of view
         setIsVisible(!entry.isIntersecting);
       },
       { root: null, rootMargin: "0px", threshold: 0 }
@@ -125,21 +118,25 @@ export default function FloatingChat({
     };
   }, [isSheetOpen]);
 
+  if (!isMounted) return null;
+
   return (
     <>
+      {/* Sentinel — invisible marker that sits right after the intro section */}
       <div
         ref={sentinelRef}
         style={{
-          position: "absolute",
           height: "1px",
-          width: "1px",
+          width: "100%",
           pointerEvents: "none",
           opacity: 0,
         }}
         aria-hidden="true"
       />
 
+      {/* Floating Chat Button */}
       <button
+        type="button"
         onClick={openSheet}
         className={`floating-chat-btn ${isVisible ? "floating-chat-visible" : ""}`}
         aria-label="Open chat options"
@@ -149,12 +146,14 @@ export default function FloatingChat({
         <ChatBubbleIcon size={22} />
       </button>
 
+      {/* Sheet Backdrop */}
       <div
         className={`sheet-backdrop ${isSheetOpen ? "sheet-backdrop-open" : ""}`}
         onClick={closeSheet}
         aria-hidden="true"
       />
 
+      {/* Bottom Sheet — rendered at document root level via fixed positioning */}
       <div
         className={`chat-sheet ${isSheetOpen ? "chat-sheet-open" : ""}`}
         role="dialog"
@@ -165,6 +164,7 @@ export default function FloatingChat({
         <div className="sheet-header">
           <span className="sheet-title">Connect With Us</span>
           <button
+            type="button"
             onClick={closeSheet}
             className="sheet-close-btn"
             aria-label="Close chat options"
@@ -192,6 +192,7 @@ export default function FloatingChat({
                 <span className="sheet-action-sublabel">Chat on WhatsApp</span>
               </span>
             </Link>
+
             <Link
               href={telegramUrl}
               target="_blank"
