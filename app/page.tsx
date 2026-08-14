@@ -489,19 +489,7 @@ export default async function Home() {
               padding: 8px 0;
             }
 
-            .sheet-action-btn {
-              display: flex;
-              align-items: center;
-              gap: 14px;
-              width: auto;
-              min-width: 260px;
-              max-width: 360px;
-              padding: 8px 38px;
-              border-radius: 19px;
-              text-decoration: none;
-              transition: all 0.25s ease;
-              border: none;
-            }
+            
 
             .sheet-action-btn:hover {
               transform: translateY(-2px);
