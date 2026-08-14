@@ -264,6 +264,7 @@ export default function FloatingChat({
         .sheet-action-btn {
           display: flex;
           align-items: center;
+          justify-content: center;
           gap: 14px;
           width: 100%;
           min-width: 210px;
