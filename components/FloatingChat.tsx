@@ -267,8 +267,8 @@ export default function FloatingChat({
           justify-content: center;
           gap: 14px;
           width: 100%;
-          min-width: 210px;
-          max-width: 310px;
+          min-width: 195px;
+          max-width: 280px;
           padding: 12px 36px;
           border-radius: 22px;
           text-decoration: none;
