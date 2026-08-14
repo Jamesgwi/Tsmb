@@ -420,7 +420,7 @@ export default function FloatingChat({
                 <TelegramIcon size={22} />
               </span>
               <span className="sheet-action-text">
-                <span className="sheet-action-label">Telegram        >    </span>
+                <span className="sheet-action-label">Telegram       	>   </span>
                 <span className="sheet-action-sublabel">Message on Telegram</span>
               </span>
             </Link>
