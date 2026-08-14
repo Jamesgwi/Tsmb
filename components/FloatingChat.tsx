@@ -334,14 +334,20 @@ export default function FloatingChat({
           letter-spacing: -0.2px;
           font-family: system-ui, -apple-system, sans-serif;
         }
+        
+        /* Updated Chevron Styles */
         .sheet-action-chevron {
-          color: rgba(255, 255, 255, 0.3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #A2C2BF; /* Brighter, matches your muted text */
           flex-shrink: 0;
+          margin-left: auto; /* Forces it to the far right edge */
           transition: all 0.25s ease;
         }
         .sheet-action-btn:hover .sheet-action-chevron {
-          color: rgba(255, 255, 255, 0.6);
-          transform: translateX(3px);
+          color: white;
+          transform: translateX(4px);
         }
 
         @media (max-width: 650px) {
