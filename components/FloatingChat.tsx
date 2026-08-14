@@ -250,75 +250,68 @@ export default function FloatingChat({
           color: #A2C2BF;
           font-size: 14px;
           line-height: 1.6;
-          margin: 0 0 16px 0;
+          margin: 0 0 24px 0;
+          font-family: system-ui, -apple-system, sans-serif;
         }
 
-        /* ═══ SHEET ACTIONS — CENTERED, FILLED, ROUNDED ═══ */
+        /* ═══ SHEET ACTIONS — REFINED & PREMIUM ═══ */
         .sheet-actions {
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 12px;
-          padding: 8px 0;
+          padding: 0 4px;
         }
         .sheet-action-btn {
           display: flex;
           align-items: center;
-          justify-content: center;
-          gap: 14px;
+          justify-content: flex-start;
+          gap: 16px;
           width: 100%;
-          min-width: 195px;
-          max-width: 280px;
-          padding: 12px 36px;
-          border-radius: 22px;
+          max-width: 320px;
+          padding: 14px 20px;
+          border-radius: 16px;
           text-decoration: none;
-          transition: all 0.25s ease;
-          border: none;
+          transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          background: rgba(255, 255, 255, 0.03);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
         }
         .sheet-action-btn:hover {
           transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-        }
-        .sheet-action-whatsapp {
-          background: #25D366;
-          color: white;
-          box-shadow: 0 4px 20px rgba(37, 211, 102, 0.25);
-        }
-        .sheet-action-whatsapp:hover {
-          background: #22c55e;
-          box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
-        }
-        .sheet-action-telegram {
-          background: #229ED9;
-          color: white;
-          box-shadow: 0 4px 20px rgba(34, 158, 217, 0.25);
-        }
-        .sheet-action-telegram:hover {
-          background: #1d8bc0;
-          box-shadow: 0 8px 30px rgba(34, 158, 217, 0.4);
+          background: rgba(255, 255, 255, 0.07);
+          border-color: rgba(255, 255, 255, 0.15);
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
         }
         .sheet-action-icon {
           display: flex;
           align-items: center;
           justify-content: center;
+          width: 42px;
+          height: 42px;
+          border-radius: 12px;
           flex-shrink: 0;
           color: white;
+          transition: transform 0.25s ease;
         }
-        .sheet-action-text {
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
+        .sheet-action-btn:hover .sheet-action-icon {
+          transform: scale(1.05);
+        }
+        .sheet-action-whatsapp .sheet-action-icon {
+          background: #25D366;
+          box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+        }
+        .sheet-action-telegram .sheet-action-icon {
+          background: #229ED9;
+          box-shadow: 0 4px 16px rgba(34, 158, 217, 0.35);
         }
         .sheet-action-label {
           color: white;
           font-size: 15px;
-          font-weight: 700;
+          font-weight: 600;
           letter-spacing: -0.2px;
-        }
-        .sheet-action-sublabel {
-          color: rgba(255, 255, 255, 0.85);
-          font-size: 12px;
-          font-weight: 500;
+          font-family: system-ui, -apple-system, sans-serif;
         }
 
         @media (max-width: 650px) {
@@ -337,15 +330,8 @@ export default function FloatingChat({
             font-size: 22px;
           }
           .sheet-action-btn {
-            min-width: 210px;
-            padding: 12px 36px;
-            border-radius: 22px;
-          }
-          .sheet-action-label {
-            font-size: 14px;
-          }
-          .sheet-action-sublabel {
-            font-size: 11px;
+            max-width: 100%;
+            padding: 14px 18px;
           }
         }
       `}</style>
@@ -403,10 +389,7 @@ export default function FloatingChat({
               <span className="sheet-action-icon">
                 <WhatsAppIcon size={22} />
               </span>
-              <span className="sheet-action-text">
-                <span className="sheet-action-label">WhatsApp</span>
-                <span className="sheet-action-sublabel">Chat on WhatsApp</span>
-              </span>
+              <span className="sheet-action-label">Chat on WhatsApp</span>
             </Link>
 
             <Link
@@ -419,10 +402,7 @@ export default function FloatingChat({
               <span className="sheet-action-icon">
                 <TelegramIcon size={22} />
               </span>
-              <span className="sheet-action-text">
-                <span className="sheet-action-label">Telegram         </span>
-                <span className="sheet-action-sublabel">Message on Telegram</span>
-              </span>
+              <span className="sheet-action-label">Message on Telegram</span>
             </Link>
           </div>
         </div>
