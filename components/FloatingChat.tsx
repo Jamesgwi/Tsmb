@@ -266,9 +266,9 @@ export default function FloatingChat({
           align-items: center;
           gap: 14px;
           width: 100%;
-          min-width: 299px;
-          max-width: 399px;
-          padding: 10px 40px;
+          min-width: 260px;
+          max-width: 360px;
+          padding: 10px 36px;
           border-radius: 20px;
           text-decoration: none;
           transition: all 0.25s ease;
