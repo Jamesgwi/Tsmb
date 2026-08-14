@@ -63,6 +63,23 @@ function TelegramIcon({ size = 22 }: { size?: number }) {
   );
 }
 
+function ChevronRightIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <polyline points="9 18 15 12 9 6" />
+    </svg>
+  );
+}
+
 export default function FloatingChat({
   whatsappUrl,
   telegramUrl,
@@ -254,7 +271,7 @@ export default function FloatingChat({
           font-family: system-ui, -apple-system, sans-serif;
         }
 
-        /* ═══ SHEET ACTIONS — REFINED & PREMIUM ═══ */
+        /* ═══ SHEET ACTIONS — BALANCED WITH CHEVRON ═══ */
         .sheet-actions {
           display: flex;
           flex-direction: column;
@@ -265,11 +282,10 @@ export default function FloatingChat({
         .sheet-action-btn {
           display: flex;
           align-items: center;
-          justify-content: flex-start;
-          gap: 16px;
+          justify-content: space-between;
           width: 100%;
           max-width: 320px;
-          padding: 14px 20px;
+          padding: 14px 18px;
           border-radius: 16px;
           text-decoration: none;
           transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -283,6 +299,11 @@ export default function FloatingChat({
           background: rgba(255, 255, 255, 0.07);
           border-color: rgba(255, 255, 255, 0.15);
           box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+        }
+        .sheet-action-left {
+          display: flex;
+          align-items: center;
+          gap: 16px;
         }
         .sheet-action-icon {
           display: flex;
@@ -313,6 +334,15 @@ export default function FloatingChat({
           letter-spacing: -0.2px;
           font-family: system-ui, -apple-system, sans-serif;
         }
+        .sheet-action-chevron {
+          color: rgba(255, 255, 255, 0.3);
+          flex-shrink: 0;
+          transition: all 0.25s ease;
+        }
+        .sheet-action-btn:hover .sheet-action-chevron {
+          color: rgba(255, 255, 255, 0.6);
+          transform: translateX(3px);
+        }
 
         @media (max-width: 650px) {
           .floating-chat-btn {
@@ -331,7 +361,7 @@ export default function FloatingChat({
           }
           .sheet-action-btn {
             max-width: 100%;
-            padding: 14px 18px;
+            padding: 14px 16px;
           }
         }
       `}</style>
@@ -386,10 +416,15 @@ export default function FloatingChat({
               className="sheet-action-btn sheet-action-whatsapp"
               onClick={closeSheet}
             >
-              <span className="sheet-action-icon">
-                <WhatsAppIcon size={22} />
+              <span className="sheet-action-left">
+                <span className="sheet-action-icon">
+                  <WhatsAppIcon size={22} />
+                </span>
+                <span className="sheet-action-label">Chat on WhatsApp</span>
               </span>
-              <span className="sheet-action-label">Chat on WhatsApp</span>
+              <span className="sheet-action-chevron">
+                <ChevronRightIcon size={18} />
+              </span>
             </Link>
 
             <Link
@@ -399,10 +434,15 @@ export default function FloatingChat({
               className="sheet-action-btn sheet-action-telegram"
               onClick={closeSheet}
             >
-              <span className="sheet-action-icon">
-                <TelegramIcon size={22} />
+              <span className="sheet-action-left">
+                <span className="sheet-action-icon">
+                  <TelegramIcon size={22} />
+                </span>
+                <span className="sheet-action-label">Message on Telegram</span>
               </span>
-              <span className="sheet-action-label">Message on Telegram</span>
+              <span className="sheet-action-chevron">
+                <ChevronRightIcon size={18} />
+              </span>
             </Link>
           </div>
         </div>
