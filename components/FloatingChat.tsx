@@ -265,7 +265,7 @@ export default function FloatingChat({
           display: flex;
           align-items: center;
           gap: 14px;
-          width: auto;
+          width: 100%;
           min-width: 299px;
           max-width: 399px;
           padding: 10px 40px;
