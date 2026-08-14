@@ -269,7 +269,7 @@ export default function FloatingChat({
           min-width: 210px;
           max-width: 310px;
           padding: 12px 36px;
-          border-radius: 20px;
+          border-radius: 22px;
           text-decoration: none;
           transition: all 0.25s ease;
           border: none;
@@ -338,7 +338,7 @@ export default function FloatingChat({
           .sheet-action-btn {
             min-width: 210px;
             padding: 12px 36px;
-            border-radius: 18px;
+            border-radius: 22px;
           }
           .sheet-action-label {
             font-size: 14px;
