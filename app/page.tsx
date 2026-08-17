@@ -37,8 +37,8 @@ async function getLinks() {
     return {
       whatsapp: "https://",
       telegram: "https://",
-      whatsappNumber: "+1",
-      telegramUsername: "@",
+      whatsappNumber: "",
+      telegramUsername: "",
     };
   }
 }
