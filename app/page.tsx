@@ -1209,10 +1209,7 @@ export default async function Home() {
           />
           <div className="hero-fade-bottom" aria-hidden="true" />
 
-          <div className="hero-overlay">
-            <div className="hero-overlay-content fade-in">
-              <div className="hero-logo">
-                <LogoMark size={72} />
+          
               </div>
               
               <h1>
