@@ -218,28 +218,30 @@ export default function FloatingChat({
         }
 
         .chat-sheet {
-          position: fixed;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          z-index: 210;
-          background: linear-gradient(
-            180deg,
-            rgba(20, 20, 20, 0.95) 0%,
-            rgba(10, 10, 10, 0.98) 100%
-          );
-          border-top: 1px solid ${theme.line};
-          border-top-left-radius: 28px;
-          border-top-right-radius: 28px;
-          box-shadow:
-            0 -20px 60px rgba(0, 0, 0, 0.6),
-            inset 0 1px 0 rgba(255, 255, 255, 0.04);
-          transform: translateY(100%);
-          transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
-          max-height: 85vh;
-          overflow-y: auto;
-          padding: 0 20px 32px;
-        }
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 210;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 20, 20, 0.95) 0%,
+    rgba(10, 10, 10, 0.98) 100%
+  );
+  border-top: 1px solid ${theme.line};
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  box-shadow:
+    0 -20px 60px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transform: translateY(100%);
+  transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+  max-height: 92vh;        /* ↑ more vertical space */
+  min-height: 320px;       /* ↑ never too small */
+  overflow-y: auto;
+  padding: 24px 20px 48px; /* ↑ more breathing room */
+}
+
         .chat-sheet.chat-sheet-open {
           transform: translateY(0);
         }
@@ -369,13 +371,15 @@ export default function FloatingChat({
           letter-spacing: -0.2px;
         }
 
-        @media (max-width: 768px) {
-          .floating-chat-btn {
-            bottom: 20px;
-            right: 20px;
-            width: 52px;
-            height: 52px;
-          }
+        @@media (max-width: 768px) {
+  .chat-sheet {
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    padding: 20px 16px 40px;
+    min-height: 280px;
+  }
+
+
           .chat-sheet {
             border-top-left-radius: 24px;
             border-top-right-radius: 24px;
