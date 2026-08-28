@@ -1208,7 +1208,7 @@ export default async function Home() {
             className="hero-image"
           />
           <div className="hero-fade-bottom" aria-hidden="true" />
-        </section>
+        
 
           
               
