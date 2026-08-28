@@ -186,7 +186,7 @@ export default async function Home() {
               background: rgba(0, 0, 0, 0.9);
               backdrop-filter: blur(20px) saturate(1.4);
               -webkit-backdrop-filter: blur(20px) saturate(1.4);
-              border-bottom: 1px solid ${theme.line};
+              border-bottom: 1px solid ${theme.bg};
               color: white;
               padding: 16px 24px;
               position: sticky;
