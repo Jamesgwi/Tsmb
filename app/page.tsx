@@ -1195,7 +1195,7 @@ export default async function Home() {
           </div>
         </header>
 
-                {/* ═══ HERO WITH BANNER IMAGE ═══ */}
+                        {/* ═══ HERO WITH BANNER IMAGE ═══ */}
         <section className="hero">
           <div className="hero-fade-top" aria-hidden="true" />
           <Image
@@ -1208,26 +1208,8 @@ export default async function Home() {
             className="hero-image"
           />
           <div className="hero-fade-bottom" aria-hidden="true" />
-        
-
-          
-              
-              
-              <h1>
-                <span className="hero-title-accent"> </span>
-                <span className="hero-title-main">
-                  
-                  
-                
-                </span>
-              </h1>
-              <div className="hero-divider" />
-              <div className="hero-tagline">
-                
-              </div>
-            </div>
-          </div>
         </section>
+
 
         {/* ═══ INTRO / CONTACT ═══ */}
         <section className="intro" id="contact">
