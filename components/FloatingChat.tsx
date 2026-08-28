@@ -203,11 +203,11 @@ export default function FloatingChat({
           left: 0;
           right: 0;
           z-index: 210;
-          background: linear-gradient(180deg, rgba(5, 5, 5, 0.95) 0%, rgba(10, 21, 46, 0.98) 100%);
+          background: linear-gradient(180deg, rgba(5, 5, 5, 0.95) 0%, rgba(0, 0, 0, 0.98) 100%);
           border-top: 1px solid rgba(45, 212, 191, 0.15);
           border-top-left-radius: 28px;
           border-top-right-radius: 28px;
-          box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+          box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(5, 5, 5, 0.05);
           transform: translateY(100%);
           transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
           max-height: 85vh;
@@ -221,7 +221,7 @@ export default function FloatingChat({
           width: 40px;
           height: 5px;
           border-radius: 3px;
-          background: rgba(255, 255, 255, 0.12);
+          background: rgba( 5, 5, 5, 0.12);
           margin: 14px auto 20px;
           flex-shrink: 0;
         }
@@ -244,7 +244,7 @@ export default function FloatingChat({
           width: 36px;
           height: 36px;
           border-radius: 50%;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(5, 5, 5, 0.08);
           background: rgba(255, 255, 255, 0.04);
           color: #A2C2BF;
           cursor: pointer;
@@ -290,7 +290,7 @@ export default function FloatingChat({
           text-decoration: none;
           transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
           border: 1px solid rgba(255, 255, 255, 0.06);
-          background: rgba(255, 255, 255, 0.03);
+          background: rgba(5, 5, 5, 0.03);
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
         }
