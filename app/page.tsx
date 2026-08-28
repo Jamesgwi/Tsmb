@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { neon } from "@neondatabase/serverless";
 import { Outfit, Inter } from "next/font/google";
+import Logo from "../components/Logo";
 import FloatingChat from "../components/FloatingChat";
 
 const display = Outfit({
@@ -64,42 +65,8 @@ const theme = {
   telegram: "#229ED9",
 };
 
-function LogoMark({ size = 44 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 100 100"
-      fill="none"
-      className="logo-mark"
-    >
-      <circle
-        cx="50"
-        cy="50"
-        r="44"
-        stroke="white"
-        strokeWidth="3"
-        opacity="0.9"
-      />
-      <path
-        d="M30 52 C30 38, 40 28, 52 28 C64 28, 74 38, 74 52"
-        stroke="white"
-        strokeWidth="7"
-        strokeLinecap="round"
-        fill="none"
-      />
-      <path
-        d="M74 52 C74 66, 64 76, 52 76"
-        stroke="white"
-        strokeWidth="7"
-        strokeLinecap="round"
-        fill="none"
-        opacity="0.5"
-      />
-      <circle cx="52" cy="52" r="6" fill="white" opacity="0.9" />
-    </svg>
-  );
-}
+
+
 
 function WhatsAppIcon({ size = 16 }: { size?: number }) {
   return (
@@ -1110,7 +1077,7 @@ export default async function Home() {
         <header className="brand-bar">
           <div className="brand-bar-inner">
             <Link href="/" className="brand">
-              <LogoMark size={36} />
+              <Logo iconOnly size={36} />
               <div className="brand-name">
                 <span className="brand-name-primary">The Compounding Hub</span>
                 <span className="brand-name-sub">Retirement Mastermind</span>
@@ -1356,7 +1323,7 @@ export default async function Home() {
         {/* ═══ FOOTER ═══ */}
         <footer>
           <div className="footer-logo">
-            <LogoMark size={28} />
+            <Logo iconOnly size={28} />
             <div className="footer-name">The Compounding Hub</div>
           </div>
           <div className="footer-tagline">Retirement Mastermind</div>
