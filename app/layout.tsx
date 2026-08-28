@@ -1,54 +1,56 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "700", "900"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-inter",
 });
 
-const playfair = Playfair_Display({
+const outfit = Outfit({
   subsets: ["latin"],
-  weight: ["700", "900"],
-  variable: "--font-playfair",
+  weight: ["600", "700", "800", "900"],
+  variable: "--font-outfit",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.thesmartmoneyblueprint.vip"),
-  title: "TheSmartMoneyBlueprint.vip | Invest, Save, and Retire",
+  metadataBase: new URL("https://www.Connectteamchrm.com"),
+  title: "The Compounding Hub | Retirement Mastermind — Build Wealth. Retire Strong. Gain Freedom.",
   description:
-    "Personalized retirement planning and strategic investment guidance. Build lasting wealth through our proven framework.",
+    "A private community of serious wealth-builders focused on compound growth, disciplined investing, and a retirement built on strength and clarity. Join the mastermind.",
   keywords: [
-    "TheSmartMoneyBlueprint",
-    "retirement planning",
-    "investment guidance",
+    "The Compounding Hub",
+    "Retirement Mastermind",
     "wealth building",
-    "financial planning",
-    "smart money",
+    "compound growth",
+    "retirement planning",
+    "investment strategies",
+    "financial freedom",
+    "trading community",
   ],
-  authors: [{ name: "TheSmartMoneyBlueprint.vip" }],
+  authors: [{ name: "The Compounding Hub" }],
   openGraph: {
-    title: "TheSmartMoneyBlueprint.vip | Invest, Save, and Retire",
+    title: "The Compounding Hub | Retirement Mastermind",
     description:
-      "Personalized retirement planning and strategic investment guidance. Build lasting wealth through our proven framework.",
-    url: "https://www.thesmartmoneyblueprint.vip",
-    siteName: "TheSmartMoneyBlueprint.vip",
+      "A private community of serious wealth-builders focused on compound growth, disciplined investing, and a retirement built on strength and clarity.",
+    url: "https://www.Connectteamchrm.com",
+    siteName: "The Compounding Hub",
     type: "website",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "TheSmartMoneyBlueprint.vip Banner",
+        alt: "The Compounding Hub — Retirement Mastermind",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "TheSmartMoneyBlueprint.vip | Invest, Save, and Retire",
+    title: "The Compounding Hub | Retirement Mastermind",
     description:
-      "Personalized retirement planning and strategic investment guidance. Build lasting wealth through our proven framework.",
+      "A private community of serious wealth-builders focused on compound growth, disciplined investing, and a retirement built on strength and clarity.",
     images: ["/og-image.png"],
   },
 };
@@ -58,7 +60,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: "#0c1622",
+  themeColor: "#080c14",
 };
 
 export default function RootLayout({
@@ -67,9 +69,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-[#0c1622] overflow-x-hidden">
+    <html lang="en" className="bg-[#080c14] overflow-x-hidden">
       <body
-        className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-[#0c1622] text-gray-100 min-h-screen m-0 p-0 overflow-x-hidden`}
+        className={`${inter.variable} ${outfit.variable} font-sans antialiased bg-[#080c14] text-gray-100 min-h-screen m-0 p-0 overflow-x-hidden`}
       >
         {children}
       </body>
