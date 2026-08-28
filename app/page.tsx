@@ -48,7 +48,7 @@ const theme = {
   bgDark: "#050505",
   bgLight: "#0f0f0f",
   bgLighter: "#141414",
-  bgCard: "rgba(15, 15, 15, 0.7)",
+  bgCard:    "#050505",
   accent: "#2dd4bf",
   accentLight: "#5eead4",
   accentDark: "#14b8a6",
