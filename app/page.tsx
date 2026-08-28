@@ -1215,14 +1215,7 @@ export default async function Home() {
                 <LogoMark size={72} />
               </div>
               <div className="hero-eyebrow">The Compounding Hub</div>
-              <h1>
-                <span className="hero-title-accent">Retirement Mastermind</span>
-                <span className="hero-title-main">
-                  Build Wealth.<br />
-                  Retire Strong.<br />
-                  Gain Freedom.
-                </span>
-              </h1>
+              
               <div className="hero-divider" />
               <div className="hero-tagline">
                 — Build Wealth — Retire Strong — Gain Freedom —
