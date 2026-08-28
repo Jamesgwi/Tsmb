@@ -5,8 +5,14 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 
 const theme = {
-  gold: "#2dd4bf",
-  textMuted: "#A2C2BF",
+  accent: "#2dd4bf",
+  accentGlow: "rgba(45, 212, 191, 0.3)",
+  accentGlowHover: "rgba(45, 212, 191, 0.45)",
+  text: "#f0f0f0",
+  textMuted: "#D5E6E4",
+  bgDark: "#050505",
+  bgCard: "#0a0a0a",
+  line: "#1a1a1a",
   whatsapp: "#25D366",
   telegram: "#229ED9",
 };
@@ -161,16 +167,22 @@ export default function FloatingChat({
           height: 56px;
           border-radius: 50%;
           border: none;
-          background: ${theme.gold};
-          color: #0A152E;
+          background: ${theme.accent};
+          color: ${theme.bgDark};
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 4px 20px rgba(45, 212, 191, 0.35), 0 0 0 1px rgba(45, 212, 191, 0.15);
+          box-shadow:
+            0 4px 24px ${theme.accentGlow},
+            0 0 0 1px rgba(45, 212, 191, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
           transform: translateY(100px) scale(0.8);
           opacity: 0;
-          transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, box-shadow 0.2s ease;
+          transition:
+            transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+            opacity 0.3s ease,
+            box-shadow 0.2s ease;
           pointer-events: none;
         }
         .floating-chat-btn.floating-chat-visible {
@@ -180,15 +192,22 @@ export default function FloatingChat({
         }
         .floating-chat-btn:hover {
           transform: translateY(-3px) scale(1.05);
-          box-shadow: 0 8px 30px rgba(45, 212, 191, 0.45), 0 0 0 1px rgba(45, 212, 191, 0.2);
+          box-shadow:
+            0 8px 32px ${theme.accentGlowHover},
+            0 0 0 1px rgba(45, 212, 191, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
+        .floating-chat-btn:active {
+          transform: translateY(-1px) scale(0.97);
+        }
+
         .sheet-backdrop {
           position: fixed;
           inset: 0;
           z-index: 200;
-          background: rgba(5, 5, 5, 0.6);
-          backdrop-filter: blur(12px) saturate(1.2);
-          -webkit-backdrop-filter: blur(12px) saturate(1.2);
+          background: rgba(5, 5, 5, 0.7);
+          backdrop-filter: blur(16px) saturate(1.2);
+          -webkit-backdrop-filter: blur(16px) saturate(1.2);
           opacity: 0;
           visibility: hidden;
           transition: opacity 0.4s ease, visibility 0.4s ease;
@@ -197,17 +216,24 @@ export default function FloatingChat({
           opacity: 1;
           visibility: visible;
         }
+
         .chat-sheet {
           position: fixed;
           bottom: 0;
           left: 0;
           right: 0;
           z-index: 210;
-          background: linear-gradient(180deg, rgba(5, 5, 5, 0.95) 0%, rgba(0, 0, 0, 0.98) 100%);
-          border-top: 1px solid rgba(45, 212, 191, 0.15);
+          background: linear-gradient(
+            180deg,
+            rgba(20, 20, 20, 0.95) 0%,
+            rgba(10, 10, 10, 0.98) 100%
+          );
+          border-top: 1px solid ${theme.line};
           border-top-left-radius: 28px;
           border-top-right-radius: 28px;
-          box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(5, 5, 5, 0.05);
+          box-shadow:
+            0 -20px 60px rgba(0, 0, 0, 0.6),
+            inset 0 1px 0 rgba(255, 255, 255, 0.04);
           transform: translateY(100%);
           transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
           max-height: 85vh;
@@ -217,14 +243,16 @@ export default function FloatingChat({
         .chat-sheet.chat-sheet-open {
           transform: translateY(0);
         }
+
         .sheet-handle-bar {
           width: 40px;
           height: 5px;
           border-radius: 3px;
-          background: rgba( 5, 5, 5, 0.12);
+          background: rgba(255, 255, 255, 0.1);
           margin: 14px auto 20px;
           flex-shrink: 0;
         }
+
         .sheet-header {
           display: flex;
           align-items: flex-start;
@@ -232,21 +260,36 @@ export default function FloatingChat({
           margin-bottom: 20px;
           gap: 12px;
         }
+
+        .sheet-header-text {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+
         .sheet-title {
-          font-family: var(--font-display, 'Cormorant Garamond', serif);
+          font-family: var(--font-display), sans-serif;
           font-size: 24px;
-          font-weight: 600;
+          font-weight: 700;
           color: white;
           letter-spacing: -0.3px;
           line-height: 1.2;
         }
+
+        .sheet-subtitle {
+          color: ${theme.textMuted};
+          font-size: 12.5px;
+          line-height: 1.5;
+          opacity: 0.8;
+        }
+
         .sheet-close-btn {
           width: 36px;
           height: 36px;
           border-radius: 50%;
-          border: 1px solid rgba(5, 5, 5, 0.08);
-          background: rgba(255, 255, 255, 0.04);
-          color: #A2C2BF;
+          border: 1px solid ${theme.line};
+          background: rgba(255, 255, 255, 0.03);
+          color: ${theme.textMuted};
           cursor: pointer;
           display: flex;
           align-items: center;
@@ -255,102 +298,78 @@ export default function FloatingChat({
           flex-shrink: 0;
         }
         .sheet-close-btn:hover {
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.08);
           color: white;
-        }
-        .sheet-content {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-        }
-        .sheet-description {
-          color: #A2C2BF;
-          font-size: 14px;
-          line-height: 1.6;
-          margin: 0 0 24px 0;
-          font-family: system-ui, -apple-system, sans-serif;
+          border-color: ${theme.accent};
         }
 
-        /* ═══ SHEET ACTIONS — BALANCED WITH CHEVRON ═══ */
+        .sheet-description {
+          color: ${theme.textMuted};
+          font-size: 13.5px;
+          line-height: 1.7;
+          margin: 0 0 24px 0;
+        }
+
+        /* ═══ SHEET ACTIONS ═══ */
         .sheet-actions {
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 12px;
-          padding: 0 4px;
+          padding: 8px 0;
         }
+
         .sheet-action-btn {
-          display: flex;
+          display: inline-flex;
           align-items: center;
-          justify-content: space-between;
-          width: 100%;
-          max-width: 320px;
-          padding: 14px 18px;
+          gap: 14px;
+          padding: 16px 28px;
           border-radius: 16px;
           text-decoration: none;
-          transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-          border: 1px solid rgba(255, 255, 255, 0.06);
-          background: rgba(5, 5, 5, 0.03);
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
+          font-weight: 700;
+          transition: all 0.25s ease;
+          width: 100%;
+          max-width: 320px;
+          justify-content: center;
         }
         .sheet-action-btn:hover {
           transform: translateY(-2px);
-          background: rgba(255, 255, 255, 0.07);
-          border-color: rgba(255, 255, 255, 0.15);
-          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
         }
-        .sheet-action-left {
-          display: flex;
-          align-items: center;
-          gap: 16px;
+
+        .sheet-action-whatsapp {
+          background: ${theme.whatsapp};
+          color: white;
+          box-shadow: 0 4px 20px rgba(37, 211, 102, 0.25);
         }
+        .sheet-action-whatsapp:hover {
+          box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .sheet-action-telegram {
+          background: ${theme.telegram};
+          color: white;
+          box-shadow: 0 4px 20px rgba(34, 158, 217, 0.25);
+        }
+        .sheet-action-telegram:hover {
+          box-shadow: 0 8px 30px rgba(34, 158, 217, 0.4);
+        }
+
         .sheet-action-icon {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 42px;
-          height: 42px;
-          border-radius: 12px;
           flex-shrink: 0;
           color: white;
-          transition: transform 0.25s ease;
         }
-        .sheet-action-btn:hover .sheet-action-icon {
-          transform: scale(1.05);
-        }
-        .sheet-action-whatsapp .sheet-action-icon {
-          background: #25D366;
-          box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
-        }
-        .sheet-action-telegram .sheet-action-icon {
-          background: #229ED9;
-          box-shadow: 0 4px 16px rgba(34, 158, 217, 0.35);
-        }
+
         .sheet-action-label {
           color: white;
           font-size: 15px;
-          font-weight: 600;
+          font-weight: 700;
           letter-spacing: -0.2px;
-          font-family: system-ui, -apple-system, sans-serif;
-        }
-        
-        /* Updated Chevron Styles */
-        .sheet-action-chevron {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #A2C2BF; /* Brighter, matches your muted text */
-          flex-shrink: 0;
-          margin-left: auto; /* Forces it to the far right edge */
-          transition: all 0.25s ease;
-        }
-        .sheet-action-btn:hover .sheet-action-chevron {
-          color: white;
-          transform: translateX(4px);
         }
 
-        @media (max-width: 650px) {
+        @media (max-width: 768px) {
           .floating-chat-btn {
             bottom: 20px;
             right: 20px;
@@ -367,7 +386,7 @@ export default function FloatingChat({
           }
           .sheet-action-btn {
             max-width: 100%;
-            padding: 14px 16px;
+            padding: 14px 24px;
           }
         }
       `}</style>
@@ -400,7 +419,10 @@ export default function FloatingChat({
       >
         <div className="sheet-handle-bar" />
         <div className="sheet-header">
-          <span className="sheet-title">Connect With Us</span>
+          <div className="sheet-header-text">
+            <span className="sheet-title">Connect With Us</span>
+            <span className="sheet-subtitle">Reach out for guidance and trade support</span>
+          </div>
           <button
             type="button"
             onClick={closeSheet}
@@ -410,47 +432,32 @@ export default function FloatingChat({
             <CloseIcon size={18} />
           </button>
         </div>
-        <div className="sheet-content">
-          <p className="sheet-description">
-            Reach out to the TMB Team for guidance and trade support.
-          </p>
-          <div className="sheet-actions">
-            <Link
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="sheet-action-btn sheet-action-whatsapp"
-              onClick={closeSheet}
-            >
-              <span className="sheet-action-left">
-                <span className="sheet-action-icon">
-                  <WhatsAppIcon size={22} />
-                </span>
-                <span className="sheet-action-label">Chat on WhatsApp</span>
-              </span>
-              <span className="sheet-action-chevron">
-                <ChevronRightIcon size={18} />
-              </span>
-            </Link>
+        <div className="sheet-actions">
+          <Link
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="sheet-action-btn sheet-action-whatsapp"
+            onClick={closeSheet}
+          >
+            <span className="sheet-action-icon">
+              <WhatsAppIcon size={22} />
+            </span>
+            <span className="sheet-action-label">Chat on WhatsApp</span>
+          </Link>
 
-            <Link
-              href={telegramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="sheet-action-btn sheet-action-telegram"
-              onClick={closeSheet}
-            >
-              <span className="sheet-action-left">
-                <span className="sheet-action-icon">
-                  <TelegramIcon size={22} />
-                </span>
-                <span className="sheet-action-label">Message on Telegram</span>
-              </span>
-              <span className="sheet-action-chevron">
-                <ChevronRightIcon size={18} />
-              </span>
-            </Link>
-          </div>
+          <Link
+            href={telegramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="sheet-action-btn sheet-action-telegram"
+            onClick={closeSheet}
+          >
+            <span className="sheet-action-icon">
+              <TelegramIcon size={22} />
+            </span>
+            <span className="sheet-action-label">Message on Telegram</span>
+          </Link>
         </div>
       </div>
     </>
