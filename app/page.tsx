@@ -1210,7 +1210,7 @@ export default async function Home() {
           <div className="hero-fade-bottom" aria-hidden="true" />
 
           
-              </div>
+              
               
               <h1>
                 <span className="hero-title-accent"> </span>
