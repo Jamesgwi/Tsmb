@@ -210,11 +210,6 @@ export default async function Home() {
               text-decoration: none;
             }
 
-            .brand-logo-svg {
-              display: block;
-              flex-shrink: 0;
-            }
-
             .brand-name {
               display: flex;
               flex-direction: column;
@@ -260,58 +255,74 @@ export default async function Home() {
               box-shadow: 0 0 20px rgba(45, 212, 191, 0.15);
             }
 
-            /* ═══ HERO ═══ */
+            /* ═══ HERO WITH BANNER ═══ */
             .hero {
               position: relative;
               width: 100%;
-              min-height: 85vh;
+              background: ${theme.bg};
+              line-height: 0;
+            }
+
+            .hero-image {
+              display: block;
+              width: 100%;
+              height: auto;
+              object-fit: contain;
+            }
+
+            .hero-fade-top {
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              height: 100px;
+              background: linear-gradient(
+                to bottom,
+                ${theme.bg} 0%,
+                transparent 100%
+              );
+              pointer-events: none;
+              z-index: 2;
+            }
+
+            .hero-fade-bottom {
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              height: 120px;
+              background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                ${theme.bg} 100%
+              );
+              pointer-events: none;
+              z-index: 2;
+            }
+
+            .hero-overlay {
+              position: absolute;
+              inset: 0;
               display: flex;
               align-items: center;
               justify-content: center;
               text-align: center;
-              padding: 60px 24px;
-              overflow: hidden;
-              background: 
-                radial-gradient(ellipse at 50% 100%, rgba(45, 212, 191, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 20% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 70%, rgba(45, 212, 191, 0.04) 0%, transparent 50%),
-                linear-gradient(180deg, ${theme.bgDark} 0%, ${theme.bg} 40%, #0a1120 100%);
-            }
-
-            .hero::before {
-              content: '';
-              position: absolute;
-              inset: 0;
-              background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='80' r='1' fill='%232dd4bf' opacity='0.3'/%3E%3Ccircle cx='50' cy='90' r='1.5' fill='%23f59e0b' opacity='0.2'/%3E%3Ccircle cx='80' cy='75' r='1' fill='%232dd4bf' opacity='0.25'/%3E%3Ccircle cx='35' cy='85' r='0.8' fill='%23f59e0b' opacity='0.15'/%3E%3Ccircle cx='65' cy='88' r='1.2' fill='%232dd4bf' opacity='0.2'/%3E%3Ccircle cx='10' cy='70' r='0.6' fill='%23f59e0b' opacity='0.1'/%3E%3Ccircle cx='90' cy='82' r='0.9' fill='%232dd4bf' opacity='0.15'/%3E%3C/svg%3E");
-              background-size: 200px 200px;
-              opacity: 0.6;
+              padding: 40px 24px;
+              z-index: 3;
               pointer-events: none;
             }
 
-            .hero-glow {
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-              width: 600px;
-              height: 400px;
-              background: radial-gradient(ellipse, rgba(45, 212, 191, 0.06) 0%, transparent 70%);
-              pointer-events: none;
-            }
-
-            .hero-content {
-              position: relative;
-              z-index: 2;
-              max-width: 800px;
+            .hero-overlay-content {
+              pointer-events: auto;
+              max-width: 700px;
               display: flex;
               flex-direction: column;
               align-items: center;
-              gap: 24px;
+              gap: 16px;
             }
 
             .hero-logo {
-              margin-bottom: 8px;
-              filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.1));
+              filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5));
             }
 
             .hero-eyebrow {
@@ -320,32 +331,28 @@ export default async function Home() {
               font-weight: 700;
               letter-spacing: 4px;
               text-transform: uppercase;
-              text-shadow: 0 0 20px rgba(45, 212, 191, 0.3);
+              text-shadow: 0 2px 10px rgba(0,0,0,0.5);
             }
 
             .hero h1 {
               margin: 0;
               font-family: var(--font-display), sans-serif;
-              font-size: clamp(32px, 7vw, 64px);
+              font-size: clamp(28px, 6vw, 56px);
               line-height: 1.05;
               font-weight: 800;
               letter-spacing: -0.02em;
               color: white;
+              text-shadow: 0 2px 30px rgba(0,0,0,0.6);
             }
 
             .hero-title-accent {
               display: block;
               color: ${theme.accent};
-              font-size: clamp(14px, 3vw, 22px);
+              font-size: clamp(12px, 2.5vw, 18px);
               font-weight: 700;
               letter-spacing: 3px;
               text-transform: uppercase;
-              margin-bottom: 12px;
-            }
-
-            .hero-title-main {
-              display: block;
-              text-shadow: 0 2px 40px rgba(0, 0, 0, 0.5);
+              margin-bottom: 8px;
             }
 
             .hero-tagline {
@@ -355,14 +362,14 @@ export default async function Home() {
               letter-spacing: 3px;
               text-transform: uppercase;
               opacity: 0.9;
-              margin-top: 8px;
+              text-shadow: 0 2px 10px rgba(0,0,0,0.5);
             }
 
             .hero-divider {
               width: 60px;
               height: 1px;
               background: linear-gradient(90deg, transparent, ${theme.accent}, transparent);
-              opacity: 0.5;
+              opacity: 0.6;
             }
 
             /* ═══ INTRO / CONTACT ═══ */
@@ -447,6 +454,329 @@ export default async function Home() {
 
             .contact-pill .pill-label {
               white-space: nowrap;
+            }
+
+            /* ═══ EXPERIENCE SELECTOR ═══ */
+            .experience {
+              padding: 90px 24px;
+              background: ${theme.bgLight};
+              border-top: 1px solid ${theme.line};
+              border-bottom: 1px solid ${theme.line};
+            }
+
+            .experience-width {
+              width: min(640px, 100%);
+              margin: 0 auto;
+            }
+
+            .experience-title {
+              font-family: var(--font-display), sans-serif;
+              font-size: clamp(36px, 6vw, 52px);
+              font-weight: 700;
+              color: white;
+              margin: 0 0 8px;
+              letter-spacing: -0.02em;
+            }
+
+            .experience-subtitle {
+              color: ${theme.textMuted};
+              font-size: 15px;
+              margin: 0 0 40px;
+            }
+
+            .experience-options {
+              display: flex;
+              flex-direction: column;
+              gap: 14px;
+            }
+
+            .experience-card {
+              display: flex;
+              align-items: center;
+              gap: 18px;
+              padding: 22px 24px;
+              background: ${theme.bgCard};
+              backdrop-filter: blur(10px);
+              border: 1.5px solid ${theme.line};
+              border-radius: 16px;
+              cursor: pointer;
+              transition: all 0.25s ease;
+              position: relative;
+            }
+
+            .experience-card:hover {
+              border-color: rgba(45, 212, 191, 0.3);
+              background: rgba(12, 18, 32, 0.8);
+            }
+
+            .experience-radio {
+              position: absolute;
+              opacity: 0;
+              width: 0;
+              height: 0;
+            }
+
+            .experience-radio:focus-visible + .experience-card {
+              outline: 2px solid ${theme.accent};
+              outline-offset: 3px;
+            }
+
+            .experience-radio:checked + .experience-card {
+              border-color: ${theme.accent};
+              background: rgba(45, 212, 191, 0.06);
+              box-shadow: 0 0 30px rgba(45, 212, 191, 0.1), inset 0 1px 0 rgba(45, 212, 191, 0.05);
+            }
+
+            .radio-circle {
+              width: 22px;
+              height: 22px;
+              border-radius: 50%;
+              border: 2px solid ${theme.line};
+              flex-shrink: 0;
+              display: grid;
+              place-items: center;
+              transition: all 0.25s ease;
+            }
+
+            .radio-circle::after {
+              content: '';
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+              background: ${theme.accent};
+              transform: scale(0);
+              transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+              box-shadow: 0 0 10px rgba(45, 212, 191, 0.5);
+            }
+
+            .experience-radio:checked + .experience-card .radio-circle {
+              border-color: ${theme.accent};
+            }
+
+            .experience-radio:checked + .experience-card .radio-circle::after {
+              transform: scale(1);
+            }
+
+            .experience-label {
+              color: white;
+              font-size: 16px;
+              font-weight: 600;
+              letter-spacing: -0.2px;
+            }
+
+            /* ═══ PILLARS ═══ */
+            .pillars {
+              background: ${theme.bg};
+              padding: 90px 24px;
+              position: relative;
+            }
+
+            .section-width {
+              width: min(1000px, 100%);
+              margin: 0 auto;
+            }
+
+            .dark-eyebrow {
+              color: ${theme.accent};
+              font-size: 11px;
+              font-weight: 700;
+              letter-spacing: 3.5px;
+              text-transform: uppercase;
+              text-shadow: 0 0 16px rgba(45, 212, 191, 0.2);
+            }
+
+            .pillars-title {
+              margin: 16px 0 48px;
+              max-width: 600px;
+              font-family: var(--font-display), sans-serif;
+              font-size: clamp(36px, 6vw, 52px);
+              line-height: 1.05;
+              font-weight: 700;
+              color: white;
+              letter-spacing: -0.02em;
+            }
+
+            .pillar-grid {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 1px;
+              background: ${theme.line};
+              border-radius: 16px;
+              overflow: hidden;
+              border: 1px solid ${theme.line};
+            }
+
+            .pillar {
+              min-height: 300px;
+              padding: 36px 28px;
+              background: ${theme.bgCard};
+              backdrop-filter: blur(10px);
+              transition: background 0.3s ease;
+            }
+
+            .pillar:hover {
+              background: rgba(12, 18, 32, 0.8);
+            }
+
+            .pillar-heading {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              margin: 0 0 16px;
+            }
+
+            .pillar-dot {
+              width: 8px;
+              height: 8px;
+              flex-shrink: 0;
+              border-radius: 50%;
+              background: ${theme.accent};
+              box-shadow: 0 0 12px rgba(45, 212, 191, 0.4);
+            }
+
+            .pillar h2 {
+              margin: 0;
+              color: white;
+              font-family: var(--font-display), sans-serif;
+              font-size: 28px;
+              line-height: 1;
+              font-weight: 700;
+              letter-spacing: -0.02em;
+            }
+
+            .pillar p {
+              margin: 0;
+              color: ${theme.textMuted};
+              font-size: 13.5px;
+              line-height: 1.8;
+            }
+
+            /* ═══ PHILOSOPHY / MANIFESTO ═══ */
+            .philosophy {
+              background: ${theme.bgLight};
+              padding: 100px 24px;
+              border-top: 1px solid ${theme.line};
+              border-bottom: 1px solid ${theme.line};
+            }
+
+            .philosophy-grid {
+              width: min(900px, 100%);
+              margin: 0 auto;
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 80px;
+              align-items: center;
+            }
+
+            .philosophy-left {
+              display: flex;
+              flex-direction: column;
+              gap: 20px;
+            }
+
+            .philosophy h2 {
+              margin: 0;
+              color: white;
+              font-family: var(--font-display), sans-serif;
+              font-size: clamp(32px, 5vw, 48px);
+              line-height: 1.1;
+              font-weight: 700;
+              letter-spacing: -0.02em;
+            }
+
+            .philosophy-sub {
+              color: ${theme.textMuted};
+              font-size: 15px;
+              line-height: 1.8;
+              margin: 0;
+            }
+
+            .philosophy-right {
+              display: flex;
+              flex-direction: column;
+              gap: 28px;
+            }
+
+            .manifesto-item {
+              padding: 24px 28px;
+              background: ${theme.bgCard};
+              backdrop-filter: blur(10px);
+              border: 1px solid ${theme.line};
+              border-radius: 14px;
+              transition: all 0.3s ease;
+            }
+
+            .manifesto-item:hover {
+              border-color: rgba(45, 212, 191, 0.2);
+              transform: translateY(-2px);
+            }
+
+            .manifesto-item h3 {
+              margin: 0 0 6px;
+              color: ${theme.accent};
+              font-family: var(--font-display), sans-serif;
+              font-size: 18px;
+              font-weight: 700;
+            }
+
+            .manifesto-item p {
+              margin: 0;
+              color: ${theme.textMuted};
+              font-size: 13.5px;
+              line-height: 1.7;
+            }
+
+            /* ═══ FINAL CTA ═══ */
+            .final-cta {
+              padding: 100px 24px;
+              background: ${theme.bg};
+              text-align: center;
+              position: relative;
+              overflow: hidden;
+            }
+
+            .final-cta::before {
+              content: '';
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              width: 500px;
+              height: 300px;
+              background: radial-gradient(ellipse, rgba(45, 212, 191, 0.06) 0%, transparent 70%);
+              pointer-events: none;
+            }
+
+            .final-cta-content {
+              position: relative;
+              z-index: 2;
+              max-width: 600px;
+              margin: 0 auto;
+            }
+
+            .final-cta h2 {
+              margin: 0 0 12px;
+              font-family: var(--font-display), sans-serif;
+              font-size: clamp(32px, 5vw, 48px);
+              font-weight: 700;
+              color: white;
+              letter-spacing: -0.02em;
+              line-height: 1.1;
+            }
+
+            .final-cta p {
+              margin: 0 0 36px;
+              color: ${theme.textMuted};
+              font-size: 15px;
+              line-height: 1.8;
+            }
+
+            .final-cta-divider {
+              width: 50px;
+              height: 1px;
+              background: linear-gradient(90deg, transparent, ${theme.accent}, transparent);
+              margin: 0 auto 36px;
+              opacity: 0.5;
             }
 
             /* ═══ FLOATING CHAT BUTTON ═══ */
@@ -677,175 +1007,6 @@ export default async function Home() {
               font-weight: 500;
             }
 
-            .sheet-action-chevron {
-              display: none;
-            }
-
-            /* ═══ PILLARS ═══ */
-            .pillars {
-              background: ${theme.bgLight};
-              padding: 90px 24px;
-              position: relative;
-              border-top: 1px solid ${theme.line};
-              border-bottom: 1px solid ${theme.line};
-            }
-
-            .section-width {
-              width: min(1000px, 100%);
-              margin: 0 auto;
-            }
-
-            .dark-eyebrow {
-              color: ${theme.accent};
-              font-size: 11px;
-              font-weight: 700;
-              letter-spacing: 3.5px;
-              text-transform: uppercase;
-              text-shadow: 0 0 16px rgba(45, 212, 191, 0.2);
-            }
-
-            .pillars-title {
-              margin: 16px 0 48px;
-              max-width: 600px;
-              font-family: var(--font-display), sans-serif;
-              font-size: clamp(36px, 6vw, 52px);
-              line-height: 1.05;
-              font-weight: 700;
-              color: white;
-              letter-spacing: -0.02em;
-            }
-
-            .pillar-grid {
-              display: grid;
-              grid-template-columns: repeat(3, 1fr);
-              gap: 1px;
-              background: ${theme.line};
-              border-radius: 16px;
-              overflow: hidden;
-              border: 1px solid ${theme.line};
-            }
-
-            .pillar {
-              min-height: 300px;
-              padding: 36px 28px;
-              background: ${theme.bgCard};
-              backdrop-filter: blur(10px);
-              transition: background 0.3s ease;
-            }
-
-            .pillar:hover {
-              background: rgba(12, 18, 32, 0.8);
-            }
-
-            .pillar-heading {
-              display: flex;
-              align-items: center;
-              gap: 12px;
-              margin: 0 0 16px;
-            }
-
-            .pillar-dot {
-              width: 8px;
-              height: 8px;
-              flex-shrink: 0;
-              border-radius: 50%;
-              background: ${theme.accent};
-              box-shadow: 0 0 12px rgba(45, 212, 191, 0.4);
-            }
-
-            .pillar h2 {
-              margin: 0;
-              color: white;
-              font-family: var(--font-display), sans-serif;
-              font-size: 28px;
-              line-height: 1;
-              font-weight: 700;
-              letter-spacing: -0.02em;
-            }
-
-            .pillar p {
-              margin: 0;
-              color: ${theme.textMuted};
-              font-size: 13.5px;
-              line-height: 1.8;
-            }
-
-            /* ═══ PHILOSOPHY ═══ */
-            .philosophy {
-              background: ${theme.bg};
-              padding: 90px 24px;
-            }
-
-            .philosophy-eyebrow {
-              margin-left: 0;
-              padding-left: 0;
-            }
-
-            .philosophy-grid {
-              width: min(900px, 100%);
-              margin: 0 auto;
-              display: grid;
-              grid-template-columns: 0.9fr 1.1fr;
-              gap: 80px;
-              align-items: start;
-            }
-
-            .philosophy h2 {
-              margin: 14px 0 0;
-              color: white;
-              font-family: var(--font-display), sans-serif;
-              font-size: clamp(38px, 6vw, 56px);
-              line-height: 1.05;
-              font-weight: 700;
-              letter-spacing: -0.02em;
-            }
-
-            .philosophy h2 em {
-              color: ${theme.accent};
-              font-style: normal;
-              text-shadow: 0 0 30px rgba(45, 212, 191, 0.25);
-            }
-
-            .philosophy-copy {
-              margin: 0 0 28px;
-              color: ${theme.textMuted};
-              font-size: 14.5px;
-              line-height: 1.85;
-            }
-
-            .principle {
-              display: flex;
-              gap: 14px;
-              align-items: flex-start;
-              padding: 14px 0;
-              border-bottom: 1px solid ${theme.line};
-            }
-
-            .principle:last-child {
-              border-bottom: none;
-            }
-
-            .check {
-              width: 20px;
-              height: 20px;
-              flex: 0 0 20px;
-              border: 1.5px solid ${theme.accent};
-              border-radius: 50%;
-              display: grid;
-              place-items: center;
-              color: ${theme.accent};
-              font-size: 10px;
-              margin-top: 2px;
-              box-shadow: 0 0 10px rgba(45, 212, 191, 0.15);
-            }
-
-            .principle span {
-              color: ${theme.text};
-              font-size: 13px;
-              line-height: 1.6;
-              font-weight: 500;
-            }
-
             /* ═══ FOOTER ═══ */
             footer {
               padding: 48px 24px;
@@ -898,13 +1059,16 @@ export default async function Home() {
                 display: none;
               }
 
-              .hero {
-                min-height: 70vh;
-                padding: 48px 20px;
+              .hero-fade-top {
+                height: 60px;
               }
 
-              .hero-title-accent {
-                margin-bottom: 8px;
+              .hero-fade-bottom {
+                height: 80px;
+              }
+
+              .hero-overlay {
+                padding: 30px 16px;
               }
 
               .intro {
@@ -922,6 +1086,14 @@ export default async function Home() {
                 max-width: 280px;
                 justify-content: center;
                 padding: 14px 28px;
+              }
+
+              .experience {
+                padding: 64px 20px;
+              }
+
+              .experience-card {
+                padding: 18px 20px;
               }
 
               .floating-chat-btn {
@@ -965,11 +1137,15 @@ export default async function Home() {
 
               .philosophy-grid {
                 grid-template-columns: 1fr;
-                gap: 36px;
+                gap: 40px;
               }
 
-              .philosophy-copy-wrap {
-                margin-top: 0;
+              .manifesto-item {
+                padding: 20px 22px;
+              }
+
+              .final-cta {
+                padding: 64px 20px;
               }
             }
 
@@ -1019,25 +1195,38 @@ export default async function Home() {
           </div>
         </header>
 
-        {/* ═══ HERO ═══ */}
+        {/* ═══ HERO WITH BANNER IMAGE ═══ */}
         <section className="hero">
-          <div className="hero-glow" aria-hidden="true" />
-          <div className="hero-content fade-in">
-            <div className="hero-logo">
-              <LogoMark size={80} />
-            </div>
-            <div className="hero-eyebrow">The Compounding Hub</div>
-            <h1>
-              <span className="hero-title-accent">Retirement Mastermind</span>
-              <span className="hero-title-main">
-                Build Wealth.<br />
-                Retire Strong.<br />
-                Gain Freedom.
-              </span>
-            </h1>
-            <div className="hero-divider" />
-            <div className="hero-tagline">
-              — Build Wealth — Retire Strong — Gain Freedom —
+          <div className="hero-fade-top" aria-hidden="true" />
+          <Image
+            src="/banner.jpg"
+            alt="The Compounding Hub — Retirement Mastermind"
+            width={1536}
+            height={802}
+            priority
+            sizes="100vw"
+            className="hero-image"
+          />
+          <div className="hero-fade-bottom" aria-hidden="true" />
+
+          <div className="hero-overlay">
+            <div className="hero-overlay-content fade-in">
+              <div className="hero-logo">
+                <LogoMark size={72} />
+              </div>
+              <div className="hero-eyebrow">The Compounding Hub</div>
+              <h1>
+                <span className="hero-title-accent">Retirement Mastermind</span>
+                <span className="hero-title-main">
+                  Build Wealth.<br />
+                  Retire Strong.<br />
+                  Gain Freedom.
+                </span>
+              </h1>
+              <div className="hero-divider" />
+              <div className="hero-tagline">
+                — Build Wealth — Retire Strong — Gain Freedom —
+              </div>
             </div>
           </div>
         </section>
@@ -1082,6 +1271,56 @@ export default async function Home() {
         </section>
 
         <FloatingChat whatsappUrl={WHATSAPP_URL} telegramUrl={TELEGRAM_URL} />
+
+        {/* ═══ EXPERIENCE SELECTOR ═══ */}
+        <section className="experience">
+          <div className="experience-width">
+            <h2 className="experience-title">Experience</h2>
+            <p className="experience-subtitle">Select the option that applies.</p>
+
+            <div className="experience-options">
+              <label className="experience-card-wrapper">
+                <input
+                  type="radio"
+                  name="experience"
+                  value="new"
+                  className="experience-radio"
+                  defaultChecked
+                />
+                <div className="experience-card">
+                  <span className="radio-circle" />
+                  <span className="experience-label">New to trading</span>
+                </div>
+              </label>
+
+              <label className="experience-card-wrapper">
+                <input
+                  type="radio"
+                  name="experience"
+                  value="some"
+                  className="experience-radio"
+                />
+                <div className="experience-card">
+                  <span className="radio-circle" />
+                  <span className="experience-label">Some experience</span>
+                </div>
+              </label>
+
+              <label className="experience-card-wrapper">
+                <input
+                  type="radio"
+                  name="experience"
+                  value="experienced"
+                  className="experience-radio"
+                />
+                <div className="experience-card">
+                  <span className="radio-circle" />
+                  <span className="experience-label">Experienced trader</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </section>
 
         {/* ═══ PILLARS ═══ */}
         <section className="pillars">
@@ -1133,55 +1372,77 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ═══ PHILOSOPHY ═══ */}
+        {/* ═══ PHILOSOPHY / MANIFESTO ═══ */}
         <section className="philosophy">
           <div className="philosophy-grid">
-            <div>
-              <div className="dark-eyebrow philosophy-eyebrow">
-                Our Philosophy
-              </div>
-
+            <div className="philosophy-left">
+              <div className="dark-eyebrow">Our Philosophy</div>
               <h2>
-                Less noise.<br />
-                More <em>conviction.</em>
+                Your Future Is Built By What You Do Today.
               </h2>
+              <p className="philosophy-sub">
+                Every decision you make right now compounds into the life you will live 
+                tomorrow. We help you stack those decisions in your favor.
+              </p>
             </div>
 
-            <div className="philosophy-copy-wrap">
-              <p className="philosophy-copy">
-                The financial world is designed to distract you. Our mastermind cuts 
-                through the chaos by focusing on what actually moves the needle: your 
-                goals, your habits, your time horizon, and the disciplined choices you 
-                make consistently over time.
-              </p>
-
-              <div className="principle">
-                <div className="check">✓</div>
-                <span>
-                  Start with a clear baseline before making your next capital move.
-                </span>
+            <div className="philosophy-right">
+              <div className="manifesto-item">
+                <h3>Build Real Wealth Over Time.</h3>
+                <p>
+                  Wealth is not a lottery ticket. It is the result of disciplined 
+                  capital deployment, consistent contributions, and the patience to 
+                  let compounding do the heavy lifting.
+                </p>
               </div>
 
-              <div className="principle">
-                <div className="check">✓</div>
-                <span>
-                  Build systems that survive volatility and thrive through it.
-                </span>
+              <div className="manifesto-item">
+                <h3>Make Smarter Decisions.</h3>
+                <p>
+                  Cut through the noise of market hype and short-term volatility. 
+                  We equip you with frameworks, data, and a community that keeps 
+                  you focused on what actually matters.
+                </p>
               </div>
+            </div>
+          </div>
+        </section>
 
-              <div className="principle">
-                <div className="check">✓</div>
-                <span>
-                  Think in decades, not days. Compounding rewards patience.
-                </span>
-              </div>
+        {/* ═══ FINAL CTA ═══ */}
+        <section className="final-cta">
+          <div className="final-cta-content fade-up">
+            <h2>Let&apos;s discuss what&apos;s next.</h2>
+            <div className="final-cta-divider" />
+            <p>
+              Whether you are just starting out or refining a seven-figure strategy, 
+              our team is ready to meet you where you are. Reach out and let&apos;s 
+              build your roadmap together.
+            </p>
 
-              <div className="principle">
-                <div className="check">✓</div>
-                <span>
-                  Align every financial decision with the life you are building.
+            <div className="contact-pills">
+              <Link
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-pill whatsapp"
+              >
+                <span className="pill-icon">
+                  <WhatsAppIcon size={18} />
                 </span>
-              </div>
+                <span className="pill-label">Contact on WhatsApp</span>
+              </Link>
+
+              <Link
+                href={TELEGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-pill telegram"
+              >
+                <span className="pill-icon">
+                  <TelegramIcon size={18} />
+                </span>
+                <span className="pill-label">Contact on Telegram</span>
+              </Link>
             </div>
           </div>
         </section>
