@@ -1,5 +1,11 @@
 // components/Logo.tsx
 //
+// The HERO logo — two flowing curved bands inside a clean circle
+//
+// The mark consists of two separate filled shapes:
+//   1. Upper band — curves upward from left to right
+//   2. Lower band — curves downward from left to right
+//
 // Usage examples:
 //   <Logo />                          — default white on dark
 //   <Logo theme="light" />            — dark icon on light background
@@ -33,7 +39,7 @@ export default function Logo({
       aria-hidden={!iconOnly}
       focusable="false"
     >
-      {/* Outer circle — clean outline, matching the original */}
+      {/* Outer circle — clean white outline */}
       <circle
         cx="60"
         cy="60"
@@ -44,32 +50,38 @@ export default function Logo({
       />
 
       {/*
-        Upper swoosh band — curves upward from left to right.
-        Starts thick on the left, tapers as it sweeps up and right.
-        This is the top half of the stylized flowing mark.
+        ╔══════════════════════════════════════════════════════╗
+        ║  UPPER BAND — filled shape curving upward           ║
+        ║                                                     ║
+        ║  Top edge:    rises from left to peak, then down    ║
+        ║  Bottom edge: stays lower, creating band thickness  ║
+        ╚══════════════════════════════════════════════════════╝
       */}
       <path
-        d="M 28 54
-           C 28 54, 34 36, 54 33
-           C 68 30, 80 36, 86 42
-           C 86 42, 72 38, 56 42
-           C 42 45, 36 54, 36 54
-           L 28 54 Z"
+        d="M 28 50
+           C 28 50, 32 32, 50 26
+           C 64 22, 76 30, 82 36
+           C 82 36, 70 32, 56 36
+           C 44 39, 34 48, 34 48
+           L 28 50 Z"
         fill={iconColor}
       />
 
       {/*
-        Lower swoosh band — curves downward from left to right.
-        Starts thick on the left, sweeps down and right, then tapers back.
-        This is the bottom half of the stylized flowing mark.
+        ╔══════════════════════════════════════════════════════╗
+        ║  LOWER BAND — filled shape curving downward         ║
+        ║                                                     ║
+        ║  Top edge:    stays higher, creating band thickness ║
+        ║  Bottom edge: dips from left to valley, then up     ║
+        ╚══════════════════════════════════════════════════════╝
       */}
       <path
-        d="M 36 60
-           C 36 60, 42 50, 56 46
-           C 72 42, 86 46, 86 46
-           C 80 52, 68 58, 54 55
-           C 34 52, 28 60, 28 60
-           L 36 60 Z"
+        d="M 32 60
+           C 32 60, 38 48, 54 42
+           C 68 38, 80 44, 84 48
+           C 84 48, 72 48, 58 50
+           C 44 52, 32 60, 32 60
+           Z"
         fill={iconColor}
       />
     </svg>
