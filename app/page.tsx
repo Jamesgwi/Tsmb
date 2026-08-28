@@ -1,20 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { neon } from "@neondatabase/serverless";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
-import Logo from "../components/Logo";
+import { Outfit, Inter } from "next/font/google";
 import FloatingChat from "../components/FloatingChat";
 
-const display = Cormorant_Garamond({
+const display = Outfit({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  style: ["normal", "italic"],
+  weight: ["600", "700", "800", "900"],
   variable: "--font-display",
 });
 
-const body = Manrope({
+const body = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-body",
 });
 
@@ -46,19 +44,62 @@ async function getLinks() {
 export const dynamic = "force-dynamic";
 
 const theme = {
-  bg: "#0A152E",
-  bgDark: "#0A152E",
-  bgLight: "#0A152E",
-  bgLighter: "0A152E",
-  gold: "#2dd4bf",
-  goldLight: "#5eead4",
-  text: "#e0f2f1",
-  textMuted: "#A2C2BF",
-  line: "#134e4a",
+  bg: "#080c14",
+  bgDark: "#050810",
+  bgLight: "#0c1220",
+  bgLighter: "#101828",
+  bgCard: "rgba(12, 18, 32, 0.6)",
+  accent: "#2dd4bf",
+  accentLight: "#5eead4",
+  accentDark: "#14b8a6",
+  accentGlow: "rgba(45, 212, 191, 0.15)",
+  gold: "#f59e0b",
+  goldLight: "#fbbf24",
+  goldGlow: "rgba(245, 158, 11, 0.12)",
+  text: "#f0f9ff",
+  textMuted: "#94a3b8",
+  line: "#1e293b",
   white: "#FFFFFF",
   whatsapp: "#25D366",
   telegram: "#229ED9",
 };
+
+function LogoMark({ size = 44 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 100 100"
+      fill="none"
+      className="logo-mark"
+    >
+      <circle
+        cx="50"
+        cy="50"
+        r="44"
+        stroke="white"
+        strokeWidth="3"
+        opacity="0.9"
+      />
+      <path
+        d="M30 52 C30 38, 40 28, 52 28 C64 28, 74 38, 74 52"
+        stroke="white"
+        strokeWidth="7"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <path
+        d="M74 52 C74 66, 64 76, 52 76"
+        stroke="white"
+        strokeWidth="7"
+        strokeLinecap="round"
+        fill="none"
+        opacity="0.5"
+      />
+      <circle cx="52" cy="52" r="6" fill="white" opacity="0.9" />
+    </svg>
+  );
+}
 
 function WhatsAppIcon({ size = 16 }: { size?: number }) {
   return (
@@ -116,17 +157,21 @@ export default async function Home() {
             }
 
             body {
-              font-family: var(--font-body), sans-serif;
+              font-family: var(--font-body), system-ui, -apple-system, sans-serif;
               color: ${theme.text};
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
             }
 
             a {
               color: inherit;
+              text-decoration: none;
             }
 
             a:focus-visible {
-              outline: 3px solid ${theme.gold};
+              outline: 2px solid ${theme.accent};
               outline-offset: 3px;
+              border-radius: 4px;
             }
 
             .page {
@@ -136,14 +181,21 @@ export default async function Home() {
               background: ${theme.bg};
             }
 
+            /* ═══ BRAND BAR ═══ */
             .brand-bar {
-              background: ${theme.bg};
+              background: rgba(8, 12, 20, 0.85);
+              backdrop-filter: blur(20px) saturate(1.4);
+              -webkit-backdrop-filter: blur(20px) saturate(1.4);
+              border-bottom: 1px solid ${theme.line};
               color: white;
-              padding: 17px 20px;
+              padding: 16px 24px;
+              position: sticky;
+              top: 0;
+              z-index: 50;
             }
 
             .brand-bar-inner {
-              width: min(100%, 760px);
+              width: min(100%, 900px);
               margin: 0 auto;
               display: flex;
               align-items: center;
@@ -154,7 +206,7 @@ export default async function Home() {
             .brand {
               display: flex;
               align-items: center;
-              gap: 10px;
+              gap: 12px;
               text-decoration: none;
             }
 
@@ -166,128 +218,189 @@ export default async function Home() {
             .brand-name {
               display: flex;
               flex-direction: column;
-              gap: 3px;
+              gap: 2px;
             }
 
             .brand-name-primary {
-              font-size: 16px;
+              font-family: var(--font-display), sans-serif;
+              font-size: 15px;
               font-weight: 800;
-              letter-spacing: 3px;
+              letter-spacing: 2px;
               text-transform: uppercase;
-              color: ${theme.gold};
-              text-shadow: 0 0 12px rgba(45, 212, 191, 0.3);
+              color: ${theme.accent};
               line-height: 1;
             }
 
             .brand-name-sub {
-              font-size: 7.5px;
-              font-weight: 500;
-              letter-spacing: 1.8px;
+              font-size: 9px;
+              font-weight: 600;
+              letter-spacing: 2.5px;
               text-transform: uppercase;
               color: ${theme.textMuted};
               line-height: 1;
-              opacity: 0.8;
+              opacity: 0.7;
             }
 
             .brand-link {
-              color: ${theme.goldLight};
+              color: ${theme.accent};
               text-decoration: none;
-              font-size: 10px;
-              font-weight: 800;
+              font-size: 11px;
+              font-weight: 700;
               letter-spacing: 1.5px;
               text-transform: uppercase;
+              padding: 8px 16px;
+              border: 1px solid ${theme.line};
+              border-radius: 100px;
+              transition: all 0.25s ease;
             }
 
+            .brand-link:hover {
+              border-color: ${theme.accent};
+              background: rgba(45, 212, 191, 0.08);
+              box-shadow: 0 0 20px rgba(45, 212, 191, 0.15);
+            }
+
+            /* ═══ HERO ═══ */
             .hero {
               position: relative;
               width: 100%;
-              background: ${theme.bg};
-              line-height: 0;
+              min-height: 85vh;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+              padding: 60px 24px;
+              overflow: hidden;
+              background: 
+                radial-gradient(ellipse at 50% 100%, rgba(45, 212, 191, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(45, 212, 191, 0.04) 0%, transparent 50%),
+                linear-gradient(180deg, ${theme.bgDark} 0%, ${theme.bg} 40%, #0a1120 100%);
             }
 
-            .hero-image {
+            .hero::before {
+              content: '';
+              position: absolute;
+              inset: 0;
+              background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='80' r='1' fill='%232dd4bf' opacity='0.3'/%3E%3Ccircle cx='50' cy='90' r='1.5' fill='%23f59e0b' opacity='0.2'/%3E%3Ccircle cx='80' cy='75' r='1' fill='%232dd4bf' opacity='0.25'/%3E%3Ccircle cx='35' cy='85' r='0.8' fill='%23f59e0b' opacity='0.15'/%3E%3Ccircle cx='65' cy='88' r='1.2' fill='%232dd4bf' opacity='0.2'/%3E%3Ccircle cx='10' cy='70' r='0.6' fill='%23f59e0b' opacity='0.1'/%3E%3Ccircle cx='90' cy='82' r='0.9' fill='%232dd4bf' opacity='0.15'/%3E%3C/svg%3E");
+              background-size: 200px 200px;
+              opacity: 0.6;
+              pointer-events: none;
+            }
+
+            .hero-glow {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              width: 600px;
+              height: 400px;
+              background: radial-gradient(ellipse, rgba(45, 212, 191, 0.06) 0%, transparent 70%);
+              pointer-events: none;
+            }
+
+            .hero-content {
+              position: relative;
+              z-index: 2;
+              max-width: 800px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 24px;
+            }
+
+            .hero-logo {
+              margin-bottom: 8px;
+              filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.1));
+            }
+
+            .hero-eyebrow {
+              color: ${theme.accent};
+              font-size: 12px;
+              font-weight: 700;
+              letter-spacing: 4px;
+              text-transform: uppercase;
+              text-shadow: 0 0 20px rgba(45, 212, 191, 0.3);
+            }
+
+            .hero h1 {
+              margin: 0;
+              font-family: var(--font-display), sans-serif;
+              font-size: clamp(32px, 7vw, 64px);
+              line-height: 1.05;
+              font-weight: 800;
+              letter-spacing: -0.02em;
+              color: white;
+            }
+
+            .hero-title-accent {
               display: block;
-              width: 100%;
-              height: auto;
-              object-fit: contain;
+              color: ${theme.accent};
+              font-size: clamp(14px, 3vw, 22px);
+              font-weight: 700;
+              letter-spacing: 3px;
+              text-transform: uppercase;
+              margin-bottom: 12px;
             }
 
-            .hero-fade-top {
+            .hero-title-main {
+              display: block;
+              text-shadow: 0 2px 40px rgba(0, 0, 0, 0.5);
+            }
+
+            .hero-tagline {
+              color: ${theme.accent};
+              font-size: 11px;
+              font-weight: 600;
+              letter-spacing: 3px;
+              text-transform: uppercase;
+              opacity: 0.9;
+              margin-top: 8px;
+            }
+
+            .hero-divider {
+              width: 60px;
+              height: 1px;
+              background: linear-gradient(90deg, transparent, ${theme.accent}, transparent);
+              opacity: 0.5;
+            }
+
+            /* ═══ INTRO / CONTACT ═══ */
+            .intro {
+              padding: 80px 24px 100px;
+              background: ${theme.bg};
+              text-align: center;
+              position: relative;
+            }
+
+            .intro::before {
+              content: '';
               position: absolute;
               top: 0;
               left: 0;
               right: 0;
-              height: 80px;
-              background: linear-gradient(
-                to bottom,
-                ${theme.bg} 0%,
-                transparent 100%
-              );
-              pointer-events: none;
-            }
-
-            .hero-fade-bottom {
-              position: absolute;
-              bottom: 0;
-              left: 0;
-              right: 0;
-              height: 80px;
-              background: linear-gradient(
-                to bottom,
-                transparent 0%,
-                ${theme.bg} 100%
-              );
-              pointer-events: none;
-            }
-
-            .intro {
-              padding: 56px 22px 64px;
-              background: ${theme.bg};
-              text-align: center;
+              height: 1px;
+              background: linear-gradient(90deg, transparent 0%, ${theme.line} 50%, transparent 100%);
             }
 
             .content-width {
-              width: min(760px, 100%);
+              width: min(720px, 100%);
               margin: 0 auto;
-            }
-
-            .eyebrow {
-              margin-bottom: 16px;
-              color: ${theme.gold};
-              font-size: 10px;
-              font-weight: 800;
-              letter-spacing: 3px;
-              text-transform: uppercase;
-            }
-
-            .intro h1 {
-              margin: 0 auto;
-              max-width: 680px;
-              color: white;
-              font-family: var(--font-display), serif;
-              font-size: clamp(42px, 8vw, 65px);
-              line-height: .98;
-              font-weight: 600;
-            }
-
-            .intro h1 em {
-              color: ${theme.gold};
-              font-style: italic;
             }
 
             .intro p {
-              max-width: 625px;
-              margin: 25px auto 0;
+              max-width: 600px;
+              margin: 0 auto 36px;
               color: ${theme.textMuted};
-              font-size: 14px;
-              line-height: 1.9;
+              font-size: 15px;
+              line-height: 1.85;
             }
 
             .contact-pills {
               display: flex;
               justify-content: center;
-              gap: 12px;
-              margin-top: 32px;
+              gap: 14px;
+              flex-wrap: wrap;
             }
 
             .contact-pill {
@@ -297,12 +410,11 @@ export default async function Home() {
               padding: 16px 32px;
               border-radius: 100px;
               text-decoration: none;
-              font-size: 15px;
+              font-size: 14px;
               font-weight: 700;
-              letter-spacing: 0.2px;
-              transition:
-                transform .2s ease,
-                box-shadow .2s ease;
+              letter-spacing: 0.5px;
+              transition: all 0.25s ease;
+              border: 1px solid transparent;
             }
 
             .contact-pill:hover {
@@ -312,13 +424,21 @@ export default async function Home() {
             .contact-pill.whatsapp {
               background: ${theme.whatsapp};
               color: white;
-              box-shadow: 0 6px 20px rgba(37,211,102,.25);
+              box-shadow: 0 4px 20px rgba(37, 211, 102, 0.2);
+            }
+
+            .contact-pill.whatsapp:hover {
+              box-shadow: 0 8px 30px rgba(37, 211, 102, 0.35);
             }
 
             .contact-pill.telegram {
               background: ${theme.telegram};
               color: white;
-              box-shadow: 0 6px 20px rgba(34,158,217,.25);
+              box-shadow: 0 4px 20px rgba(34, 158, 217, 0.2);
+            }
+
+            .contact-pill.telegram:hover {
+              box-shadow: 0 8px 30px rgba(34, 158, 217, 0.35);
             }
 
             .contact-pill .pill-icon {
@@ -339,15 +459,16 @@ export default async function Home() {
               height: 56px;
               border-radius: 50%;
               border: none;
-              background: ${theme.gold};
-              color: ${theme.bg};
+              background: ${theme.accent};
+              color: ${theme.bgDark};
               cursor: pointer;
               display: flex;
               align-items: center;
               justify-content: center;
               box-shadow:
-                0 4px 20px rgba(45, 212, 191, 0.35),
-                0 0 0 1px rgba(45, 212, 191, 0.15);
+                0 4px 24px rgba(45, 212, 191, 0.3),
+                0 0 0 1px rgba(45, 212, 191, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
               transform: translateY(100px) scale(0.8);
               opacity: 0;
               transition:
@@ -366,8 +487,9 @@ export default async function Home() {
             .floating-chat-btn:hover {
               transform: translateY(-3px) scale(1.05);
               box-shadow:
-                0 8px 30px rgba(45, 212, 191, 0.45),
-                0 0 0 1px rgba(45, 212, 191, 0.2);
+                0 8px 32px rgba(45, 212, 191, 0.4),
+                0 0 0 1px rgba(45, 212, 191, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
             }
 
             .floating-chat-btn:active {
@@ -379,9 +501,9 @@ export default async function Home() {
               position: fixed;
               inset: 0;
               z-index: 200;
-              background: rgba(10, 21, 46, 0.6);
-              backdrop-filter: blur(12px) saturate(1.2);
-              -webkit-backdrop-filter: blur(12px) saturate(1.2);
+              background: rgba(5, 8, 16, 0.7);
+              backdrop-filter: blur(16px) saturate(1.2);
+              -webkit-backdrop-filter: blur(16px) saturate(1.2);
               opacity: 0;
               visibility: hidden;
               transition: opacity 0.4s ease, visibility 0.4s ease;
@@ -401,15 +523,15 @@ export default async function Home() {
               z-index: 210;
               background: linear-gradient(
                 180deg,
-                rgba(20, 40, 80, 0.95) 0%,
-                rgba(10, 21, 46, 0.98) 100%
+                rgba(16, 24, 40, 0.95) 0%,
+                rgba(8, 12, 20, 0.98) 100%
               );
-              border-top: 1px solid rgba(45, 212, 191, 0.15);
+              border-top: 1px solid ${theme.line};
               border-top-left-radius: 28px;
               border-top-right-radius: 28px;
               box-shadow:
-                0 -20px 60px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+                0 -20px 60px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
               transform: translateY(100%);
               transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
               max-height: 85vh;
@@ -425,7 +547,7 @@ export default async function Home() {
               width: 40px;
               height: 5px;
               border-radius: 3px;
-              background: rgba(255, 255, 255, 0.12);
+              background: rgba(255, 255, 255, 0.1);
               margin: 14px auto 20px;
               flex-shrink: 0;
             }
@@ -445,16 +567,16 @@ export default async function Home() {
             }
 
             .sheet-title {
-              font-family: var(--font-display), serif;
+              font-family: var(--font-display), sans-serif;
               font-size: 24px;
-              font-weight: 600;
+              font-weight: 700;
               color: white;
               letter-spacing: -0.3px;
               line-height: 1.2;
             }
 
             .sheet-subtitle {
-              color: #A2C2BF;
+              color: ${theme.textMuted};
               font-size: 12.5px;
               line-height: 1.5;
               opacity: 0.8;
@@ -464,9 +586,9 @@ export default async function Home() {
               width: 36px;
               height: 36px;
               border-radius: 50%;
-              border: 1px solid rgba(255, 255, 255, 0.08);
-              background: rgba(255, 255, 255, 0.04);
-              color: #A2C2BF;
+              border: 1px solid ${theme.line};
+              background: rgba(255, 255, 255, 0.03);
+              color: ${theme.textMuted};
               cursor: pointer;
               display: flex;
               align-items: center;
@@ -476,11 +598,12 @@ export default async function Home() {
             }
 
             .sheet-close-btn:hover {
-              background: rgba(255, 255, 255, 0.1);
+              background: rgba(255, 255, 255, 0.08);
               color: white;
+              border-color: ${theme.accent};
             }
 
-            /* ═══ SHEET ACTIONS — CENTERED, FILLED, ROUNDED ═══ */
+            /* ═══ SHEET ACTIONS ═══ */
             .sheet-actions {
               display: flex;
               flex-direction: column;
@@ -489,32 +612,41 @@ export default async function Home() {
               padding: 8px 0;
             }
 
-            
+            .sheet-action-btn {
+              display: inline-flex;
+              align-items: center;
+              gap: 14px;
+              padding: 16px 28px;
+              border-radius: 16px;
+              text-decoration: none;
+              font-weight: 700;
+              transition: all 0.25s ease;
+              width: 100%;
+              max-width: 320px;
+              justify-content: center;
+            }
 
             .sheet-action-btn:hover {
               transform: translateY(-2px);
-              box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
             }
 
             .sheet-action-whatsapp {
-              background: #25D366;
+              background: ${theme.whatsapp};
               color: white;
               box-shadow: 0 4px 20px rgba(37, 211, 102, 0.25);
             }
 
             .sheet-action-whatsapp:hover {
-              background: #22c55e;
               box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
             }
 
             .sheet-action-telegram {
-              background: #229ED9;
+              background: ${theme.telegram};
               color: white;
               box-shadow: 0 4px 20px rgba(34, 158, 217, 0.25);
             }
 
             .sheet-action-telegram:hover {
-              background: #1d8bc0;
               box-shadow: 0 8px 30px rgba(34, 158, 217, 0.4);
             }
 
@@ -549,53 +681,67 @@ export default async function Home() {
               display: none;
             }
 
+            /* ═══ PILLARS ═══ */
             .pillars {
               background: ${theme.bgLight};
-              color: white;
-              padding: 75px 22px;
+              padding: 90px 24px;
+              position: relative;
+              border-top: 1px solid ${theme.line};
+              border-bottom: 1px solid ${theme.line};
             }
 
             .section-width {
-              width: min(900px, 100%);
+              width: min(1000px, 100%);
               margin: 0 auto;
             }
 
             .dark-eyebrow {
-              color: ${theme.goldLight};
-              font-size: 10px;
-              font-weight: 800;
-              letter-spacing: 3px;
+              color: ${theme.accent};
+              font-size: 11px;
+              font-weight: 700;
+              letter-spacing: 3.5px;
               text-transform: uppercase;
+              text-shadow: 0 0 16px rgba(45, 212, 191, 0.2);
             }
 
             .pillars-title {
-              margin: 15px 0 42px;
-              max-width: 620px;
-              font-family: var(--font-display), serif;
-              font-size: clamp(40px, 7vw, 58px);
-              line-height: .98;
-              font-weight: 600;
+              margin: 16px 0 48px;
+              max-width: 600px;
+              font-family: var(--font-display), sans-serif;
+              font-size: clamp(36px, 6vw, 52px);
+              line-height: 1.05;
+              font-weight: 700;
+              color: white;
+              letter-spacing: -0.02em;
             }
 
             .pillar-grid {
               display: grid;
               grid-template-columns: repeat(3, 1fr);
+              gap: 1px;
+              background: ${theme.line};
+              border-radius: 16px;
+              overflow: hidden;
+              border: 1px solid ${theme.line};
             }
 
             .pillar {
-              min-height: 285px;
-              padding: 30px 25px;
+              min-height: 300px;
+              padding: 36px 28px;
+              background: ${theme.bgCard};
+              backdrop-filter: blur(10px);
+              transition: background 0.3s ease;
             }
 
-            .pillar:last-child {
-              border-right: 0;
+            .pillar:hover {
+              background: rgba(12, 18, 32, 0.8);
             }
 
             .pillar-heading {
               display: flex;
               align-items: center;
-              gap: 10px;
-              margin: 0 0 12px;
+              gap: 12px;
+              margin: 0 0 16px;
             }
 
             .pillar-dot {
@@ -603,28 +749,31 @@ export default async function Home() {
               height: 8px;
               flex-shrink: 0;
               border-radius: 50%;
-              background: ${theme.gold};
+              background: ${theme.accent};
+              box-shadow: 0 0 12px rgba(45, 212, 191, 0.4);
             }
 
             .pillar h2 {
               margin: 0;
               color: white;
-              font-family: var(--font-display), serif;
-              font-size: 31px;
+              font-family: var(--font-display), sans-serif;
+              font-size: 28px;
               line-height: 1;
-              font-weight: 600;
+              font-weight: 700;
+              letter-spacing: -0.02em;
             }
 
             .pillar p {
               margin: 0;
-              color: rgba(255,255,255,.55);
-              font-size: 12.5px;
+              color: ${theme.textMuted};
+              font-size: 13.5px;
               line-height: 1.8;
             }
 
+            /* ═══ PHILOSOPHY ═══ */
             .philosophy {
-              background: ${theme.bgLighter};
-              padding: 76px 22px;
+              background: ${theme.bg};
+              padding: 90px 24px;
             }
 
             .philosophy-eyebrow {
@@ -636,108 +785,143 @@ export default async function Home() {
               width: min(900px, 100%);
               margin: 0 auto;
               display: grid;
-              grid-template-columns: .8fr 1.2fr;
-              gap: 70px;
+              grid-template-columns: 0.9fr 1.1fr;
+              gap: 80px;
               align-items: start;
             }
 
             .philosophy h2 {
               margin: 14px 0 0;
               color: white;
-              font-family: var(--font-display), serif;
-              font-size: clamp(43px, 7vw, 63px);
-              line-height: .92;
-              font-weight: 600;
+              font-family: var(--font-display), sans-serif;
+              font-size: clamp(38px, 6vw, 56px);
+              line-height: 1.05;
+              font-weight: 700;
+              letter-spacing: -0.02em;
             }
 
             .philosophy h2 em {
-              color: ${theme.gold};
-              font-style: italic;
+              color: ${theme.accent};
+              font-style: normal;
+              text-shadow: 0 0 30px rgba(45, 212, 191, 0.25);
             }
 
             .philosophy-copy {
-              margin: 0 0 27px;
+              margin: 0 0 28px;
               color: ${theme.textMuted};
-              font-size: 14px;
-              line-height: 1.9;
+              font-size: 14.5px;
+              line-height: 1.85;
             }
 
             .principle {
               display: flex;
               gap: 14px;
               align-items: flex-start;
-              padding: 16px 0;
+              padding: 14px 0;
+              border-bottom: 1px solid ${theme.line};
+            }
+
+            .principle:last-child {
+              border-bottom: none;
             }
 
             .check {
-              width: 19px;
-              height: 19px;
-              flex: 0 0 19px;
-              border: 1px solid ${theme.gold};
+              width: 20px;
+              height: 20px;
+              flex: 0 0 20px;
+              border: 1.5px solid ${theme.accent};
               border-radius: 50%;
               display: grid;
               place-items: center;
-              color: ${theme.gold};
+              color: ${theme.accent};
               font-size: 10px;
-              margin-top: 1px;
+              margin-top: 2px;
+              box-shadow: 0 0 10px rgba(45, 212, 191, 0.15);
             }
 
             .principle span {
               color: ${theme.text};
-              font-size: 12px;
-              line-height: 1.55;
-              font-weight: 700;
+              font-size: 13px;
+              line-height: 1.6;
+              font-weight: 500;
             }
 
+            /* ═══ FOOTER ═══ */
             footer {
-              padding: 30px 22px;
+              padding: 48px 24px;
               background: ${theme.bgDark};
               text-align: center;
+              border-top: 1px solid ${theme.line};
+            }
+
+            .footer-logo {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 12px;
+              margin-bottom: 16px;
             }
 
             .footer-name {
-              margin-bottom: 8px;
-              color: ${theme.goldLight};
-              font-family: var(--font-display), serif;
-              font-size: 21px;
-              font-weight: 600;
+              color: white;
+              font-family: var(--font-display), sans-serif;
+              font-size: 20px;
+              font-weight: 700;
+              letter-spacing: -0.02em;
+            }
+
+            .footer-tagline {
+              color: ${theme.accent};
+              font-size: 10px;
+              font-weight: 700;
+              letter-spacing: 2.5px;
+              text-transform: uppercase;
+              margin-bottom: 20px;
+              opacity: 0.8;
             }
 
             .footer-copy {
-              max-width: 600px;
+              max-width: 500px;
               margin: 0 auto;
-              color: rgba(255,255,255,.35);
-              font-size: 9.5px;
+              color: rgba(148, 163, 184, 0.5);
+              font-size: 11px;
               line-height: 1.7;
             }
 
-            @media (max-width: 650px) {
+            /* ═══ RESPONSIVE ═══ */
+            @media (max-width: 768px) {
               .brand-bar {
-                padding: 14px 15px;
+                padding: 14px 16px;
               }
 
               .brand-link {
                 display: none;
               }
 
-              .hero-fade-top,
-              .hero-fade-bottom {
-                height: 50px;
+              .hero {
+                min-height: 70vh;
+                padding: 48px 20px;
+              }
+
+              .hero-title-accent {
+                margin-bottom: 8px;
               }
 
               .intro {
-                padding: 44px 20px 52px;
+                padding: 64px 20px 80px;
               }
 
               .contact-pills {
-                flex-direction: row;
-                justify-content: center;
-                gap: 10px;
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
               }
 
               .contact-pill {
-                padding: 14px 24px;
-                font-size: 14px;
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+                padding: 14px 28px;
               }
 
               .floating-chat-btn {
@@ -757,35 +941,22 @@ export default async function Home() {
                 font-size: 22px;
               }
 
-              .sheet-action-btn {
-                min-width: 200px;
-                padding: 12px 24px;
-                border-radius: 14px;
-              }
-
-              .sheet-action-label {
-                font-size: 14px;
-              }
-
-              .sheet-action-sublabel {
-                font-size: 11px;
-              }
-
               .pillars {
                 padding: 64px 20px;
               }
 
               .pillar-grid {
-                display: block;
+                grid-template-columns: 1fr;
               }
 
               .pillar {
                 min-height: auto;
-                padding: 28px 0;
+                padding: 28px 24px;
+                border-bottom: 1px solid ${theme.line};
               }
 
               .pillar:last-child {
-                border-bottom: 0;
+                border-bottom: none;
               }
 
               .philosophy {
@@ -793,29 +964,38 @@ export default async function Home() {
               }
 
               .philosophy-grid {
-                display: block;
+                grid-template-columns: 1fr;
+                gap: 36px;
               }
 
               .philosophy-copy-wrap {
-                margin-top: 42px;
+                margin-top: 0;
               }
             }
 
             @media (prefers-reduced-motion: no-preference) {
               .fade-up {
-                animation: fadeUp .7s cubic-bezier(.22,1,.36,1) both;
+                animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
               }
 
               @keyframes fadeUp {
                 from {
                   opacity: 0;
-                  transform: translateY(14px);
+                  transform: translateY(20px);
                 }
-
                 to {
                   opacity: 1;
                   transform: none;
                 }
+              }
+
+              .fade-in {
+                animation: fadeIn 1s ease both;
+              }
+
+              @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
               }
             }
           `,
@@ -823,49 +1003,54 @@ export default async function Home() {
       />
 
       <div className="page">
-
+        {/* ═══ BRAND BAR ═══ */}
         <header className="brand-bar">
           <div className="brand-bar-inner">
-
             <Link href="/" className="brand">
-  <Logo size={44} />
-</Link>
-
+              <LogoMark size={36} />
+              <div className="brand-name">
+                <span className="brand-name-primary">The Compounding Hub</span>
+                <span className="brand-name-sub">Retirement Mastermind</span>
+              </div>
+            </Link>
             <a href="#contact" className="brand-link">
               Connect With Us
             </a>
-
           </div>
         </header>
 
+        {/* ═══ HERO ═══ */}
         <section className="hero">
-          <div className="hero-fade-top" aria-hidden="true" />
-          <Image
-            src="/banner.jpg"
-            alt="TheSmartMoneyBlueprint — Invest. Earn. Retire."
-            width={1536}
-            height={802}
-            priority
-            sizes="100vw"
-            className="hero-image"
-          />
-          <div className="hero-fade-bottom" aria-hidden="true" />
+          <div className="hero-glow" aria-hidden="true" />
+          <div className="hero-content fade-in">
+            <div className="hero-logo">
+              <LogoMark size={80} />
+            </div>
+            <div className="hero-eyebrow">The Compounding Hub</div>
+            <h1>
+              <span className="hero-title-accent">Retirement Mastermind</span>
+              <span className="hero-title-main">
+                Build Wealth.<br />
+                Retire Strong.<br />
+                Gain Freedom.
+              </span>
+            </h1>
+            <div className="hero-divider" />
+            <div className="hero-tagline">
+              — Build Wealth — Retire Strong — Gain Freedom —
+            </div>
+          </div>
         </section>
 
+        {/* ═══ INTRO / CONTACT ═══ */}
         <section className="intro" id="contact">
           <div className="content-width fade-up">
-
-            <div className="eyebrow">
-              Invest, earn, and Retire
-            </div>
-
-            <h1>
-              Build wealth with
-              <em> purpose.</em>
-            </h1>
-
             <p>
-              The Smart Money Blueprint simplifies your path to financial growth through disciplined saving, informed investing, and long-term planning. For step-by-step guidance and trade support, connect with the TMB Team on Telegram or WhatsApp using the link below.
+              The Compounding Hub is a private community of serious wealth-builders 
+              focused on one outcome: a retirement built on strength, clarity, and 
+              compound growth. We cut through the noise and deliver disciplined 
+              strategies, real-time trade support, and a roadmap to financial freedom. 
+              Connect with our team directly on Telegram or WhatsApp.
             </p>
 
             <div className="contact-pills">
@@ -876,9 +1061,9 @@ export default async function Home() {
                 className="contact-pill whatsapp"
               >
                 <span className="pill-icon">
-                  <WhatsAppIcon size={20} />
+                  <WhatsAppIcon size={18} />
                 </span>
-                <span className="pill-label">WhatsApp</span>
+                <span className="pill-label">Join on WhatsApp</span>
               </Link>
 
               <Link
@@ -888,143 +1073,132 @@ export default async function Home() {
                 className="contact-pill telegram"
               >
                 <span className="pill-icon">
-                  <TelegramIcon size={20} />
+                  <TelegramIcon size={18} />
                 </span>
-                <span className="pill-label">Telegram</span>
+                <span className="pill-label">Join on Telegram</span>
               </Link>
             </div>
-
           </div>
         </section>
 
         <FloatingChat whatsappUrl={WHATSAPP_URL} telegramUrl={TELEGRAM_URL} />
 
+        {/* ═══ PILLARS ═══ */}
         <section className="pillars">
           <div className="section-width">
-
-            <div className="dark-eyebrow">
-              The framework
-            </div>
+            <div className="dark-eyebrow">The Framework</div>
 
             <h2 className="pillars-title">
-              Three pillars.
-              <br />
-              One stronger financial future.
+              Three pillars.<br />
+              One unstoppable future.
             </h2>
 
             <div className="pillar-grid">
-
               <article className="pillar">
                 <div className="pillar-heading">
                   <div className="pillar-dot" />
-                  <h2>Invest</h2>
+                  <h2>Build Wealth</h2>
                 </div>
                 <p>
-                  Put your money to work with intention. Learn how to evaluate opportunities, manage risk, and build an investment strategy designed to grow your wealth over time.
+                  Deploy capital with precision. Learn how to identify high-conviction 
+                  opportunities, manage downside risk, and construct a portfolio that 
+                  compounds reliably over decades—not days.
                 </p>
               </article>
 
               <article className="pillar">
                 <div className="pillar-heading">
                   <div className="pillar-dot" />
-                  <h2>Earn</h2>
+                  <h2>Retire Strong</h2>
                 </div>
                 <p>
-                  Put your money to work with purpose.
-                  Develop income streams, invest strategically,
-                  and create the financial momentum that
-                  compounds over time.
+                  Design a retirement that is funded, flexible, and fearless. We help 
+                  you map out income streams, tax-efficient drawdowns, and a plan that 
+                  outlasts market cycles.
                 </p>
               </article>
 
               <article className="pillar">
                 <div className="pillar-heading">
                   <div className="pillar-dot" />
-                  <h2>Retire</h2>
+                  <h2>Gain Freedom</h2>
                 </div>
                 <p>
-                  Turn today's discipline into tomorrow's freedom. Plan for the future, build lasting wealth, and create a financial foundation that allows you to retire with confidence and choice.
+                  True wealth is autonomy. Build the financial foundation that lets you 
+                  choose how you spend your time, where you live, and what legacy you 
+                  leave—on your own terms.
                 </p>
               </article>
-
             </div>
           </div>
         </section>
 
+        {/* ═══ PHILOSOPHY ═══ */}
         <section className="philosophy">
           <div className="philosophy-grid">
-
             <div>
-              <div className="eyebrow philosophy-eyebrow">
-                Our philosophy
+              <div className="dark-eyebrow philosophy-eyebrow">
+                Our Philosophy
               </div>
 
               <h2>
-                Less noise.
-                <br />
-                More <em>clarity.</em>
+                Less noise.<br />
+                More <em>conviction.</em>
               </h2>
             </div>
 
             <div className="philosophy-copy-wrap">
-
               <p className="philosophy-copy">
-                Money can become complicated quickly. Our
-                approach starts by bringing the conversation
-                back to the things you can control: your goals,
-                your habits, your time horizon, and the choices
-                you make consistently.
+                The financial world is designed to distract you. Our mastermind cuts 
+                through the chaos by focusing on what actually moves the needle: your 
+                goals, your habits, your time horizon, and the disciplined choices you 
+                make consistently over time.
               </p>
 
               <div className="principle">
                 <div className="check">✓</div>
                 <span>
-                  Understand your starting point before
-                  planning your next move.
+                  Start with a clear baseline before making your next capital move.
                 </span>
               </div>
 
               <div className="principle">
                 <div className="check">✓</div>
                 <span>
-                  Build habits that remain useful through
-                  changing markets and circumstances.
+                  Build systems that survive volatility and thrive through it.
                 </span>
               </div>
 
               <div className="principle">
                 <div className="check">✓</div>
                 <span>
-                  Think long term rather than reacting to
-                  every short-term headline.
+                  Think in decades, not days. Compounding rewards patience.
                 </span>
               </div>
 
               <div className="principle">
                 <div className="check">✓</div>
                 <span>
-                  Keep your financial strategy aligned with
-                  the life you actually want.
+                  Align every financial decision with the life you are building.
                 </span>
               </div>
-
             </div>
           </div>
         </section>
 
+        {/* ═══ FOOTER ═══ */}
         <footer>
-          <div className="footer-name">
-            TheSmartMoneyBlueprint
+          <div className="footer-logo">
+            <LogoMark size={28} />
+            <div className="footer-name">The Compounding Hub</div>
           </div>
-
+          <div className="footer-tagline">Retirement Mastermind</div>
           <p className="footer-copy">
-            © ${new Date().getFullYear()} TheSmartMoneyBlueprint.
-            All rights reserved.
+            © ${new Date().getFullYear()} The Compounding Hub. All rights reserved.
             <br />
-            Financial decisions should be considered in light of your individual position.
+            Financial decisions should be evaluated against your individual risk profile and objectives.
           </p>
         </footer>
-
       </div>
     </main>
   );
