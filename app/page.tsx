@@ -44,21 +44,21 @@ async function getLinks() {
 export const dynamic = "force-dynamic";
 
 const theme = {
-  bg: "#080c14",
-  bgDark: "#050810",
-  bgLight: "#0c1220",
-  bgLighter: "#101828",
-  bgCard: "rgba(12, 18, 32, 0.6)",
+  bg: "#0a0a0a",
+  bgDark: "#050505",
+  bgLight: "#0f0f0f",
+  bgLighter: "#141414",
+  bgCard: "rgba(15, 15, 15, 0.7)",
   accent: "#2dd4bf",
   accentLight: "#5eead4",
   accentDark: "#14b8a6",
-  accentGlow: "rgba(45, 212, 191, 0.15)",
+  accentGlow: "rgba(45, 212, 191, 0.12)",
   gold: "#f59e0b",
   goldLight: "#fbbf24",
-  goldGlow: "rgba(245, 158, 11, 0.12)",
-  text: "#f0f9ff",
-  textMuted: "#94a3b8",
-  line: "#1e293b",
+  goldGlow: "rgba(245, 158, 11, 0.1)",
+  text: "#f0f0f0",
+  textMuted: "#8a8a8a",
+  line: "#1a1a1a",
   white: "#FFFFFF",
   whatsapp: "#25D366",
   telegram: "#229ED9",
@@ -183,7 +183,7 @@ export default async function Home() {
 
             /* ═══ BRAND BAR ═══ */
             .brand-bar {
-              background: rgba(8, 12, 20, 0.85);
+              background: rgba(10, 10, 10, 0.9);
               backdrop-filter: blur(20px) saturate(1.4);
               -webkit-backdrop-filter: blur(20px) saturate(1.4);
               border-bottom: 1px solid ${theme.line};
@@ -275,7 +275,7 @@ export default async function Home() {
               top: 0;
               left: 0;
               right: 0;
-              height: 100px;
+              height: 120px;
               background: linear-gradient(
                 to bottom,
                 ${theme.bg} 0%,
@@ -290,7 +290,7 @@ export default async function Home() {
               bottom: 0;
               left: 0;
               right: 0;
-              height: 120px;
+              height: 160px;
               background: linear-gradient(
                 to bottom,
                 transparent 0%,
@@ -459,7 +459,7 @@ export default async function Home() {
             /* ═══ EXPERIENCE SELECTOR ═══ */
             .experience {
               padding: 90px 24px;
-              background: ${theme.bgLight};
+              background: ${theme.bgDark};
               border-top: 1px solid ${theme.line};
               border-bottom: 1px solid ${theme.line};
             }
@@ -506,7 +506,7 @@ export default async function Home() {
 
             .experience-card:hover {
               border-color: rgba(45, 212, 191, 0.3);
-              background: rgba(12, 18, 32, 0.8);
+              background: rgba(20, 20, 20, 0.8);
             }
 
             .experience-radio {
@@ -523,8 +523,8 @@ export default async function Home() {
 
             .experience-radio:checked + .experience-card {
               border-color: ${theme.accent};
-              background: rgba(45, 212, 191, 0.06);
-              box-shadow: 0 0 30px rgba(45, 212, 191, 0.1), inset 0 1px 0 rgba(45, 212, 191, 0.05);
+              background: rgba(45, 212, 191, 0.05);
+              box-shadow: 0 0 30px rgba(45, 212, 191, 0.08), inset 0 1px 0 rgba(45, 212, 191, 0.05);
             }
 
             .radio-circle {
@@ -615,7 +615,7 @@ export default async function Home() {
             }
 
             .pillar:hover {
-              background: rgba(12, 18, 32, 0.8);
+              background: rgba(20, 20, 20, 0.8);
             }
 
             .pillar-heading {
@@ -653,7 +653,7 @@ export default async function Home() {
 
             /* ═══ PHILOSOPHY / MANIFESTO ═══ */
             .philosophy {
-              background: ${theme.bgLight};
+              background: ${theme.bgDark};
               padding: 100px 24px;
               border-top: 1px solid ${theme.line};
               border-bottom: 1px solid ${theme.line};
@@ -743,7 +743,7 @@ export default async function Home() {
               transform: translate(-50%, -50%);
               width: 500px;
               height: 300px;
-              background: radial-gradient(ellipse, rgba(45, 212, 191, 0.06) 0%, transparent 70%);
+              background: radial-gradient(ellipse, rgba(45, 212, 191, 0.05) 0%, transparent 70%);
               pointer-events: none;
             }
 
@@ -831,7 +831,7 @@ export default async function Home() {
               position: fixed;
               inset: 0;
               z-index: 200;
-              background: rgba(5, 8, 16, 0.7);
+              background: rgba(5, 5, 5, 0.7);
               backdrop-filter: blur(16px) saturate(1.2);
               -webkit-backdrop-filter: blur(16px) saturate(1.2);
               opacity: 0;
@@ -853,8 +853,8 @@ export default async function Home() {
               z-index: 210;
               background: linear-gradient(
                 180deg,
-                rgba(16, 24, 40, 0.95) 0%,
-                rgba(8, 12, 20, 0.98) 100%
+                rgba(20, 20, 20, 0.95) 0%,
+                rgba(10, 10, 10, 0.98) 100%
               );
               border-top: 1px solid ${theme.line};
               border-top-left-radius: 28px;
@@ -1044,7 +1044,7 @@ export default async function Home() {
             .footer-copy {
               max-width: 500px;
               margin: 0 auto;
-              color: rgba(148, 163, 184, 0.5);
+              color: rgba(138, 138, 138, 0.5);
               font-size: 11px;
               line-height: 1.7;
             }
@@ -1060,11 +1060,11 @@ export default async function Home() {
               }
 
               .hero-fade-top {
-                height: 60px;
+                height: 80px;
               }
 
               .hero-fade-bottom {
-                height: 80px;
+                height: 100px;
               }
 
               .hero-overlay {
