@@ -1217,6 +1217,14 @@ export default async function Home() {
               <div className="hero-eyebrow">The Compounding Hub</div>
               <h1>
                 <span className="hero-title-accent">Retirement Mastermind</span>
+                <span className="hero-title-main">
+                  
+                  
+                
+                </span>
+              </h1>
+              <div className="hero-divider" />
+              <div className="hero-tagline">
                 
               </div>
             </div>
