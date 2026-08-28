@@ -44,7 +44,7 @@ async function getLinks() {
 export const dynamic = "force-dynamic";
 
 const theme = {
-  bg: "#0a0a0a",
+  bg: "#000000",
   bgDark: "#050505",
   bgLight: "#0f0f0f",
   bgLighter: "#141414",
