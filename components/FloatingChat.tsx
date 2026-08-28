@@ -186,7 +186,7 @@ export default function FloatingChat({
           position: fixed;
           inset: 0;
           z-index: 200;
-          background: rgba(10, 21, 46, 0.6);
+          background: rgba(5, 5, 5, 0.6);
           backdrop-filter: blur(12px) saturate(1.2);
           -webkit-backdrop-filter: blur(12px) saturate(1.2);
           opacity: 0;
@@ -203,7 +203,7 @@ export default function FloatingChat({
           left: 0;
           right: 0;
           z-index: 210;
-          background: linear-gradient(180deg, rgba(20, 40, 80, 0.95) 0%, rgba(10, 21, 46, 0.98) 100%);
+          background: linear-gradient(180deg, rgba(5, 5, 5, 0.95) 0%, rgba(10, 21, 46, 0.98) 100%);
           border-top: 1px solid rgba(45, 212, 191, 0.15);
           border-top-left-radius: 28px;
           border-top-right-radius: 28px;
