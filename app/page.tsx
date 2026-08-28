@@ -1214,9 +1214,9 @@ export default async function Home() {
               <div className="hero-logo">
                 <LogoMark size={72} />
               </div>
-              <div className="hero-eyebrow">The Compounding Hub</div>
+              
               <h1>
-                <span className="hero-title-accent">Retirement Mastermind</span>
+                <span className="hero-title-accent"> </span>
                 <span className="hero-title-main">
                   
                   
