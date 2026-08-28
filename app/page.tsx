@@ -57,7 +57,7 @@ const theme = {
   goldLight: "#fbbf24",
   goldGlow: "rgba(245, 158, 11, 0.1)",
   text: "#f0f0f0",
-  textMuted: "#A2C2BF",
+  textMuted: "#D5E6E4",
   line: "#1a1a1a",
   white: "#FFFFFF",
   whatsapp: "#25D366",
@@ -290,86 +290,15 @@ export default async function Home() {
               bottom: 0;
               left: 0;
               right: 0;
-              height: 160px;
+              height: 200px;
               background: linear-gradient(
                 to bottom,
                 transparent 0%,
+                rgba(0, 0, 0, 0.6) 50%,
                 ${theme.bg} 100%
               );
               pointer-events: none;
               z-index: 2;
-            }
-
-            .hero-overlay {
-              position: absolute;
-              inset: 0;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              text-align: center;
-              padding: 40px 24px;
-              z-index: 3;
-              pointer-events: none;
-            }
-
-            .hero-overlay-content {
-              pointer-events: auto;
-              max-width: 700px;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              gap: 16px;
-            }
-
-            .hero-logo {
-              filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5));
-            }
-
-            .hero-eyebrow {
-              color: ${theme.accent};
-              font-size: 12px;
-              font-weight: 700;
-              letter-spacing: 4px;
-              text-transform: uppercase;
-              text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            }
-
-            .hero h1 {
-              margin: 0;
-              font-family: var(--font-display), sans-serif;
-              font-size: clamp(28px, 6vw, 56px);
-              line-height: 1.05;
-              font-weight: 800;
-              letter-spacing: -0.02em;
-              color: white;
-              text-shadow: 0 2px 30px rgba(0,0,0,0.6);
-            }
-
-            .hero-title-accent {
-              display: block;
-              color: ${theme.accent};
-              font-size: clamp(12px, 2.5vw, 18px);
-              font-weight: 700;
-              letter-spacing: 3px;
-              text-transform: uppercase;
-              margin-bottom: 8px;
-            }
-
-            .hero-tagline {
-              color: ${theme.accent};
-              font-size: 11px;
-              font-weight: 600;
-              letter-spacing: 3px;
-              text-transform: uppercase;
-              opacity: 0.9;
-              text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            }
-
-            .hero-divider {
-              width: 60px;
-              height: 1px;
-              background: linear-gradient(90deg, transparent, ${theme.accent}, transparent);
-              opacity: 0.6;
             }
 
             /* ═══ INTRO / CONTACT ═══ */
@@ -378,6 +307,8 @@ export default async function Home() {
               background: ${theme.bg};
               text-align: center;
               position: relative;
+              margin-top: -40px;
+              z-index: 3;
             }
 
             .intro::before {
@@ -460,7 +391,6 @@ export default async function Home() {
             .experience {
               padding: 90px 24px;
               background: ${theme.bgDark};
-              border-top: 1px solid ${theme.line};
               border-bottom: 1px solid ${theme.line};
             }
 
@@ -1064,15 +994,12 @@ export default async function Home() {
               }
 
               .hero-fade-bottom {
-                height: 100px;
-              }
-
-              .hero-overlay {
-                padding: 30px 16px;
+                height: 140px;
               }
 
               .intro {
                 padding: 64px 20px 80px;
+                margin-top: -30px;
               }
 
               .contact-pills {
@@ -1195,7 +1122,7 @@ export default async function Home() {
           </div>
         </header>
 
-                        {/* ═══ HERO WITH BANNER IMAGE ═══ */}
+        {/* ═══ HERO WITH BANNER IMAGE ═══ */}
         <section className="hero">
           <div className="hero-fade-top" aria-hidden="true" />
           <Image
@@ -1209,7 +1136,6 @@ export default async function Home() {
           />
           <div className="hero-fade-bottom" aria-hidden="true" />
         </section>
-
 
         {/* ═══ INTRO / CONTACT ═══ */}
         <section className="intro" id="contact">
