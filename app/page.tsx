@@ -44,11 +44,11 @@ async function getLinks() {
 export const dynamic = "force-dynamic";
 
 const theme = {
-  bg: "#0a0a0a",
+  bg: "#000000",
   bgDark: "#050505",
   bgLight: "#0f0f0f",
   bgLighter: "#141414",
-  bgCard: "rgba(15, 15, 15, 0.7)",
+  bgCard:    "#050505",
   accent: "#2dd4bf",
   accentLight: "#5eead4",
   accentDark: "#14b8a6",
@@ -275,7 +275,7 @@ export default async function Home() {
               top: 0;
               left: 0;
               right: 0;
-              height: 80px;
+              height: 120px;
               background: linear-gradient(
                 to bottom,
                 ${theme.bg} 0%,
@@ -290,7 +290,7 @@ export default async function Home() {
               bottom: 0;
               left: 0;
               right: 0;
-              height: 120px;
+              height: 160px;
               background: linear-gradient(
                 to bottom,
                 transparent 0%,
@@ -298,6 +298,78 @@ export default async function Home() {
               );
               pointer-events: none;
               z-index: 2;
+            }
+
+            .hero-overlay {
+              position: absolute;
+              inset: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+              padding: 40px 24px;
+              z-index: 3;
+              pointer-events: none;
+            }
+
+            .hero-overlay-content {
+              pointer-events: auto;
+              max-width: 700px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 16px;
+            }
+
+            .hero-logo {
+              filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5));
+            }
+
+            .hero-eyebrow {
+              color: ${theme.accent};
+              font-size: 12px;
+              font-weight: 700;
+              letter-spacing: 4px;
+              text-transform: uppercase;
+              text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            }
+
+            .hero h1 {
+              margin: 0;
+              font-family: var(--font-display), sans-serif;
+              font-size: clamp(28px, 6vw, 56px);
+              line-height: 1.05;
+              font-weight: 800;
+              letter-spacing: -0.02em;
+              color: white;
+              text-shadow: 0 2px 30px rgba(0,0,0,0.6);
+            }
+
+            .hero-title-accent {
+              display: block;
+              color: ${theme.accent};
+              font-size: clamp(12px, 2.5vw, 18px);
+              font-weight: 700;
+              letter-spacing: 3px;
+              text-transform: uppercase;
+              margin-bottom: 8px;
+            }
+
+            .hero-tagline {
+              color: ${theme.accent};
+              font-size: 11px;
+              font-weight: 600;
+              letter-spacing: 3px;
+              text-transform: uppercase;
+              opacity: 0.9;
+              text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            }
+
+            .hero-divider {
+              width: 60px;
+              height: 1px;
+              background: linear-gradient(90deg, transparent, ${theme.accent}, transparent);
+              opacity: 0.6;
             }
 
             /* ═══ INTRO / CONTACT ═══ */
@@ -988,11 +1060,15 @@ export default async function Home() {
               }
 
               .hero-fade-top {
-                height: 60px;
+                height: 80px;
               }
 
               .hero-fade-bottom {
-                height: 80px;
+                height: 100px;
+              }
+
+              .hero-overlay {
+                padding: 30px 16px;
               }
 
               .intro {
@@ -1132,6 +1208,19 @@ export default async function Home() {
             className="hero-image"
           />
           <div className="hero-fade-bottom" aria-hidden="true" />
+
+          <div className="hero-overlay">
+            <div className="hero-overlay-content fade-in">
+              <div className="hero-logo">
+                <LogoMark size={72} />
+              </div>
+              <div className="hero-eyebrow">The Compounding Hub</div>
+              <h1>
+                <span className="hero-title-accent">Retirement Mastermind</span>
+                
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* ═══ INTRO / CONTACT ═══ */}
