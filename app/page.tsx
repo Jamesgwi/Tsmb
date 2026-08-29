@@ -77,7 +77,7 @@ export default async function Home() {
 
         /* BRAND BAR */
         .brand-bar {
-          background: rgba(9, 16,26, 0.88);
+          background: rgba(11, 22,38, 0.50);
           backdrop-filter: blur(20px) saturate(1.4);
           -webkit-backdrop-filter: blur(20px) saturate(1.4);
           border-bottom: 1px solid transparent;
@@ -121,7 +121,7 @@ export default async function Home() {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 120px;
-  background: linear-gradient(to bottom, #0B1626 0%, transparent 100%);
+  background: linear-gradient(to bottom, rgba(11, 22, 38, 0.6) 0%, transparent 100%);
   z-index: 1;
   pointer-events: none;
 }
