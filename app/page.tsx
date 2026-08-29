@@ -93,30 +93,47 @@ export default async function Home() {
         .brand-link:hover { border-color: ${theme.accent}; background: rgba(${theme.accentRgb}, 0.08); box-shadow: 0 0 20px rgba(${theme.accentRgb}, 0.15); }
 
         /* HERO */
-        .hero {
-          position: relative;
-          width: 100%;
-          background: ${theme.bg};
-          line-height: 0;
-          overflow: hidden;
-        }
-        .hero-image {
-          display: block;
-          width: 100%;
-          height: auto;
-          object-fit: contain;
-          position: relative;
-          z-index: 0;
-          -webkit-mask-image:
-            linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%),
-            linear-gradient(to bottom, transparent 0%, black 18%, black 68%, transparent 100%);
-          mask-image:
-            linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%),
-            linear-gradient(to bottom, transparent 0%, black 18%, black 68%, transparent 100%);
-          -webkit-mask-composite: source-in;
-          mask-composite: intersect;
-        }
-        .hero::after { display: none; }
+.hero {
+  position: relative;
+  width: 100%;
+  background: #0B1626;
+  line-height: 0;
+  overflow: hidden;
+}
+.hero-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 0;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, black 32%, black 54%, transparent 100%);
+  mask-image:
+    linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, black 32%, black 54%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, #0B1626 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 140px;
+  background: linear-gradient(to top, #0B1626 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
 
         /* INTRO */
         .intro { padding: 48px 24px 48px; background: ${theme.bg}; text-align: center; position: relative; margin-top: -80px; z-index: 3; }
