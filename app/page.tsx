@@ -77,7 +77,7 @@ export default async function Home() {
 
         /* BRAND BAR */
         .brand-bar {
-          background: rgba(11, 22,38, 0.68);
+          background: rgba(11, 22,38, 0.75);
           backdrop-filter: blur(20px) saturate(1.4);
           -webkit-backdrop-filter: blur(20px) saturate(1.4);
           border-bottom: 1px solid transparent;
