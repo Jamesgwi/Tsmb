@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { neon } from "@neondatabase/serverless";
-import { Outfit, Inter } from "next/font/google";
+import { Outfit, Inter, Playfair_Display } from "next/font/google";
 import Logo from "../components/Logo";
 import FloatingChat from "../components/FloatingChat";
 
@@ -15,6 +15,13 @@ const body = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-body",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["700", "800", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-playfair",
 });
 
 const sql = neon(process.env.DATABASE_URL!);
@@ -65,9 +72,6 @@ const theme = {
   telegram: "#229ED9",
 };
 
-
-
-
 function WhatsAppIcon({ size = 16 }: { size?: number }) {
   return (
     <svg
@@ -104,7 +108,7 @@ export default async function Home() {
   } = await getLinks();
 
   return (
-    <main className={`${display.variable} ${body.variable}`}>
+    <main className={`${display.variable} ${body.variable} ${playfair.variable}`}>
       <style
         dangerouslySetInnerHTML={{
           __html: `
@@ -252,17 +256,20 @@ export default async function Home() {
               z-index: 2;
             }
 
+            /* Midnight bleed — tall gradient, feather-light in the middle, solid black only at the very end */
             .hero-fade-bottom {
               position: absolute;
               bottom: 0;
               left: 0;
               right: 0;
-              height: 200px;
+              height: 300px;
               background: linear-gradient(
                 to bottom,
                 transparent 0%,
-                rgba(0, 0, 0, 0.6) 50%,
-                ${theme.bg} 100%
+                rgba(0, 0, 0, 0.08) 40%,
+                rgba(0, 0, 0, 0.22) 65%,
+                rgba(0, 0, 0, 0.6) 80%,
+                #000000 100%
               );
               pointer-events: none;
               z-index: 2;
@@ -270,34 +277,39 @@ export default async function Home() {
 
             /* ═══ INTRO / CONTACT ═══ */
             .intro {
-              padding: 80px 24px 100px;
+              padding: 60px 24px 100px;
               background: ${theme.bg};
               text-align: center;
               position: relative;
-              margin-top: -40px;
+              margin-top: -60px;
               z-index: 3;
             }
 
-            .intro::before {
-              content: '';
-              position: absolute;
-              top: 0;
-              left: 0;
-              right: 0;
-              height: 1px;
-              background: linear-gradient(90deg, transparent 0%, ${theme.line} 50%, transparent 100%);
-            }
+            
 
             .content-width {
               width: min(720px, 100%);
               margin: 0 auto;
             }
 
-            .intro p {
-              max-width: 600px;
-              margin: 0 auto 36px;
-              color: ${theme.textMuted};
+            /* FIX: H1 — Playfair Display italic serif, teal, refined spacing */
+            .intro-heading {
+              font-family: var(--font-playfair), Georgia, serif;
+              font-size: clamp(32px, 7vw, 54px);
+              font-weight: 800;
+              font-style: italic;
+              color: ${theme.accent};
+              letter-spacing: -0.01em;
+              line-height: 1.15;
+              margin: 0 0 20px;
+            }
+
+            .intro-body {
+              max-width: 560px;
+              margin: 0 auto 40px;
+              color: #D5E6E4;
               font-size: 15px;
+              font-weight: 500;
               line-height: 1.85;
             }
 
@@ -316,7 +328,7 @@ export default async function Home() {
               border-radius: 100px;
               text-decoration: none;
               font-size: 14px;
-              font-weight: 700;
+              font-weight: 900;
               letter-spacing: 0.5px;
               transition: all 0.25s ease;
               border: 1px solid transparent;
@@ -352,6 +364,43 @@ export default async function Home() {
 
             .contact-pill .pill-label {
               white-space: nowrap;
+              font-weight: 800;
+            }
+
+            /* ═══ TOP ACTION BUTTONS (INTRO) ═══ */
+            .intro .contact-pills {
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+              gap: 10px;
+              flex-wrap: nowrap;
+              width: 100%;
+              max-width: 400px;
+              margin: 0 auto;
+            }
+
+            .intro .contact-pill {
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              gap: 8px;
+              padding: 24px 16px;
+              font-size: 12.5px;
+              white-space: nowrap;
+              flex-shrink: 0;
+              flex: 1 1 0;
+              max-width: 190px;
+              min-width: 0;
+            }
+
+            .intro .contact-pill .pill-icon {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-shrink: 0;
+              width: 16px;
+              height: 16px;
             }
 
             /* ═══ EXPERIENCE SELECTOR ═══ */
@@ -369,7 +418,7 @@ export default async function Home() {
             .experience-title {
               font-family: var(--font-display), sans-serif;
               font-size: clamp(36px, 6vw, 52px);
-              font-weight: 700;
+              font-weight: 800;
               color: white;
               margin: 0 0 8px;
               letter-spacing: -0.02em;
@@ -461,166 +510,59 @@ export default async function Home() {
               letter-spacing: -0.2px;
             }
 
-            /* ═══ PILLARS ═══ */
-            .pillars {
-              background: ${theme.bg};
-              padding: 90px 24px;
-              position: relative;
-            }
-
-            .section-width {
-              width: min(1000px, 100%);
-              margin: 0 auto;
-            }
-
-            .dark-eyebrow {
-              color: ${theme.accent};
-              font-size: 11px;
-              font-weight: 700;
-              letter-spacing: 3.5px;
-              text-transform: uppercase;
-              text-shadow: 0 0 16px rgba(45, 212, 191, 0.2);
-            }
-
-            .pillars-title {
-              margin: 16px 0 48px;
-              max-width: 600px;
-              font-family: var(--font-display), sans-serif;
-              font-size: clamp(36px, 6vw, 52px);
-              line-height: 1.05;
-              font-weight: 700;
-              color: white;
-              letter-spacing: -0.02em;
-            }
-
-            .pillar-grid {
-              display: grid;
-              grid-template-columns: repeat(3, 1fr);
-              gap: 1px;
-              background: ${theme.line};
-              border-radius: 16px;
-              overflow: hidden;
-              border: 1px solid ${theme.line};
-            }
-
-            .pillar {
-              min-height: 300px;
-              padding: 36px 28px;
-              background: ${theme.bgCard};
-              backdrop-filter: blur(10px);
-              transition: background 0.3s ease;
-            }
-
-            .pillar:hover {
-              background: rgba(20, 20, 20, 0.8);
-            }
-
-            .pillar-heading {
-              display: flex;
-              align-items: center;
-              gap: 12px;
-              margin: 0 0 16px;
-            }
-
-            .pillar-dot {
-              width: 8px;
-              height: 8px;
-              flex-shrink: 0;
-              border-radius: 50%;
-              background: ${theme.accent};
-              box-shadow: 0 0 12px rgba(45, 212, 191, 0.4);
-            }
-
-            .pillar h2 {
-              margin: 0;
-              color: white;
-              font-family: var(--font-display), sans-serif;
-              font-size: 28px;
-              line-height: 1;
-              font-weight: 700;
-              letter-spacing: -0.02em;
-            }
-
-            .pillar p {
-              margin: 0;
-              color: ${theme.textMuted};
-              font-size: 13.5px;
-              line-height: 1.8;
-            }
-
-            /* ═══ PHILOSOPHY / MANIFESTO ═══ */
-            .philosophy {
+            /* ═══ MEMBERSHIP BANNER ═══ */
+            .membership-banner {
+              padding: 80px 24px;
               background: ${theme.bgDark};
-              padding: 100px 24px;
+              text-align: center;
+              position: relative;
               border-top: 1px solid ${theme.line};
               border-bottom: 1px solid ${theme.line};
             }
 
-            .philosophy-grid {
-              width: min(900px, 100%);
-              margin: 0 auto;
-              display: grid;
-              grid-template-columns: 1fr 1fr;
-              gap: 80px;
-              align-items: center;
+            .membership-banner::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              height: 1px;
+              background: linear-gradient(90deg, transparent 0%, ${theme.accent} 50%, transparent 100%);
+              opacity: 0.3;
             }
 
-            .philosophy-left {
-              display: flex;
-              flex-direction: column;
-              gap: 20px;
-            }
-
-            .philosophy h2 {
-              margin: 0;
-              color: white;
+            .membership-headline {
               font-family: var(--font-display), sans-serif;
-              font-size: clamp(32px, 5vw, 48px);
-              line-height: 1.1;
+              font-size: clamp(28px, 5vw, 42px);
               font-weight: 700;
+              color: white;
               letter-spacing: -0.02em;
+              line-height: 1.15;
+              margin: 0 0 16px;
+              text-shadow: 0 0 30px rgba(45, 212, 191, 0.1);
             }
 
-            .philosophy-sub {
+            .membership-subline {
+              color: ${theme.textMuted};
+              font-size: 16px;
+              line-height: 1.7;
+              margin: 0 0 32px;
+            }
+
+            .membership-divider {
+              width: 50px;
+              height: 1px;
+              background: linear-gradient(90deg, transparent, ${theme.accent}, transparent);
+              margin: 0 auto 32px;
+              opacity: 0.5;
+            }
+
+            .membership-body {
               color: ${theme.textMuted};
               font-size: 15px;
               line-height: 1.8;
-              margin: 0;
-            }
-
-            .philosophy-right {
-              display: flex;
-              flex-direction: column;
-              gap: 28px;
-            }
-
-            .manifesto-item {
-              padding: 24px 28px;
-              background: ${theme.bgCard};
-              backdrop-filter: blur(10px);
-              border: 1px solid ${theme.line};
-              border-radius: 14px;
-              transition: all 0.3s ease;
-            }
-
-            .manifesto-item:hover {
-              border-color: rgba(45, 212, 191, 0.2);
-              transform: translateY(-2px);
-            }
-
-            .manifesto-item h3 {
-              margin: 0 0 6px;
-              color: ${theme.accent};
-              font-family: var(--font-display), sans-serif;
-              font-size: 18px;
-              font-weight: 700;
-            }
-
-            .manifesto-item p {
-              margin: 0;
-              color: ${theme.textMuted};
-              font-size: 13.5px;
-              line-height: 1.7;
+              margin: 0 auto;
+              max-width: 560px;
             }
 
             /* ═══ FINAL CTA ═══ */
@@ -961,12 +903,28 @@ export default async function Home() {
               }
 
               .hero-fade-bottom {
-                height: 140px;
+                height: 260px;
               }
 
               .intro {
-                padding: 64px 20px 80px;
-                margin-top: -30px;
+                padding: 48px 20px 80px;
+                margin-top: -50px;
+              }
+
+              .intro .contact-pills {
+                gap: 8px;
+                max-width: 340px;
+              }
+
+              .intro .contact-pill {
+                padding: 16px 10px;
+                font-size: 12.5px;
+                gap: 6px;
+              }
+
+              .intro .contact-pill .pill-icon {
+                width: 14px;
+                height: 14px;
               }
 
               .contact-pills {
@@ -1005,37 +963,6 @@ export default async function Home() {
 
               .sheet-title {
                 font-size: 22px;
-              }
-
-              .pillars {
-                padding: 64px 20px;
-              }
-
-              .pillar-grid {
-                grid-template-columns: 1fr;
-              }
-
-              .pillar {
-                min-height: auto;
-                padding: 28px 24px;
-                border-bottom: 1px solid ${theme.line};
-              }
-
-              .pillar:last-child {
-                border-bottom: none;
-              }
-
-              .philosophy {
-                padding: 64px 20px;
-              }
-
-              .philosophy-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-              }
-
-              .manifesto-item {
-                padding: 20px 22px;
               }
 
               .final-cta {
@@ -1107,12 +1034,12 @@ export default async function Home() {
         {/* ═══ INTRO / CONTACT ═══ */}
         <section className="intro" id="contact">
           <div className="content-width fade-up">
-            <p>
-              The Compounding Hub is a private community of serious wealth-builders 
-              focused on one outcome: a retirement built on strength, clarity, and 
-              compound growth. We cut through the noise and deliver disciplined 
-              strategies, real-time trade support, and a roadmap to financial freedom. 
-              Connect with our team directly on Telegram or WhatsApp.
+            {/* FIX: H1 pulled out of <p>, given its own class for teal color + tight spacing */}
+            <h1 className="intro-heading">
+              Your Future Is Built By What You Do Today
+            </h1>
+            <p className="intro-body">
+              Build Real Wealth Over Time. Make Smarter Decisions. Reach out on Telegram or WhatsApp for membership inquiries.
             </p>
 
             <div className="contact-pills">
@@ -1125,7 +1052,7 @@ export default async function Home() {
                 <span className="pill-icon">
                   <WhatsAppIcon size={18} />
                 </span>
-                <span className="pill-label">Join on WhatsApp</span>
+                <span className="pill-label">WhatsApp</span>
               </Link>
 
               <Link
@@ -1137,7 +1064,7 @@ export default async function Home() {
                 <span className="pill-icon">
                   <TelegramIcon size={18} />
                 </span>
-                <span className="pill-label">Join on Telegram</span>
+                <span className="pill-label">Telegram</span>
               </Link>
             </div>
           </div>
@@ -1145,11 +1072,22 @@ export default async function Home() {
 
         <FloatingChat whatsappUrl={WHATSAPP_URL} telegramUrl={TELEGRAM_URL} />
 
+        {/* ═══ MEMBERSHIP BANNER ═══ */}
+        <section className="membership-banner">
+          <div className="content-width">
+            <div className="membership-divider" />
+            <h2 className="membership-headline">Membership Now Open</h2>
+            <p className="membership-body">
+              Actionable learning for those who want to master market dynamics instead of taking blind risks.
+            </p>
+          </div>
+        </section>
+
         {/* ═══ EXPERIENCE SELECTOR ═══ */}
         <section className="experience">
           <div className="experience-width">
             <h2 className="experience-title">Experience</h2>
-            <p className="experience-subtitle">Select the option that applies.</p>
+            <p className="experience-subtitle">Select the option that best describes your level of trading experience</p>
 
             <div className="experience-options">
               <label className="experience-card-wrapper">
@@ -1162,7 +1100,7 @@ export default async function Home() {
                 />
                 <div className="experience-card">
                   <span className="radio-circle" />
-                  <span className="experience-label">New to trading</span>
+                  <span className="experience-label">Beginner</span>
                 </div>
               </label>
 
@@ -1195,101 +1133,13 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ═══ PILLARS ═══ */}
-        <section className="pillars">
-          <div className="section-width">
-            <div className="dark-eyebrow">The Framework</div>
-
-            <h2 className="pillars-title">
-              Three pillars.<br />
-              One unstoppable future.
-            </h2>
-
-            <div className="pillar-grid">
-              <article className="pillar">
-                <div className="pillar-heading">
-                  <div className="pillar-dot" />
-                  <h2>Build Wealth</h2>
-                </div>
-                <p>
-                  Deploy capital with precision. Learn how to identify high-conviction 
-                  opportunities, manage downside risk, and construct a portfolio that 
-                  compounds reliably over decades—not days.
-                </p>
-              </article>
-
-              <article className="pillar">
-                <div className="pillar-heading">
-                  <div className="pillar-dot" />
-                  <h2>Retire Strong</h2>
-                </div>
-                <p>
-                  Design a retirement that is funded, flexible, and fearless. We help 
-                  you map out income streams, tax-efficient drawdowns, and a plan that 
-                  outlasts market cycles.
-                </p>
-              </article>
-
-              <article className="pillar">
-                <div className="pillar-heading">
-                  <div className="pillar-dot" />
-                  <h2>Gain Freedom</h2>
-                </div>
-                <p>
-                  True wealth is autonomy. Build the financial foundation that lets you 
-                  choose how you spend your time, where you live, and what legacy you 
-                  leave—on your own terms.
-                </p>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        {/* ═══ PHILOSOPHY / MANIFESTO ═══ */}
-        <section className="philosophy">
-          <div className="philosophy-grid">
-            <div className="philosophy-left">
-              <div className="dark-eyebrow">Our Philosophy</div>
-              <h2>
-                Your Future Is Built By What You Do Today.
-              </h2>
-              <p className="philosophy-sub">
-                Every decision you make right now compounds into the life you will live 
-                tomorrow. We help you stack those decisions in your favor.
-              </p>
-            </div>
-
-            <div className="philosophy-right">
-              <div className="manifesto-item">
-                <h3>Build Real Wealth Over Time.</h3>
-                <p>
-                  Wealth is not a lottery ticket. It is the result of disciplined 
-                  capital deployment, consistent contributions, and the patience to 
-                  let compounding do the heavy lifting.
-                </p>
-              </div>
-
-              <div className="manifesto-item">
-                <h3>Make Smarter Decisions.</h3>
-                <p>
-                  Cut through the noise of market hype and short-term volatility. 
-                  We equip you with frameworks, data, and a community that keeps 
-                  you focused on what actually matters.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ═══ FINAL CTA ═══ */}
         <section className="final-cta">
           <div className="final-cta-content fade-up">
-            <h2>Let&apos;s discuss what&apos;s next.</h2>
+            <h2>Let&apos;s discuss what&apos;s next</h2>
             <div className="final-cta-divider" />
             <p>
-              Whether you are just starting out or refining a seven-figure strategy, 
-              our team is ready to meet you where you are. Reach out and let&apos;s 
-              build your roadmap together.
+              Whether you are just starting out or refining your strategy, our team is ready to help you achieve your goals. Reach out and let&apos;s build your roadmap together.
             </p>
 
             <div className="contact-pills">
@@ -1328,7 +1178,7 @@ export default async function Home() {
           </div>
           <div className="footer-tagline">Retirement Mastermind</div>
           <p className="footer-copy">
-            © ${new Date().getFullYear()} The Compounding Hub. All rights reserved.
+            © {new Date().getFullYear()} The Compounding Hub. All rights reserved.
             <br />
             Financial decisions should be evaluated against your individual risk profile and objectives.
           </p>
