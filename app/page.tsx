@@ -139,14 +139,14 @@ export default async function Home() {
         /* MEMBERSHIP — gradient bridges bg to bgDark */
         .membership-banner { padding: 40px 24px; background: linear-gradient(180deg, ${theme.bg} 0%, ${theme.bgDark} 100%); text-align: center; position: relative; border-top: none; border-bottom: 1px solid ${theme.lineSoft}; }
         .membership-banner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent 0%, ${theme.accent} 50%, transparent 100%); opacity: 0.3; }
-        .membership-headline { font-family: var(--font-playfair), Georgia, serif; font-size: clamp(18px, 3.2vw, 21px); font-weight: 700; font-style: italic; color: ${theme.accent}; letter-spacing: -0.01em; line-height: 1.15; margin: 0 0 16px; }
+        .membership-headline { font-family: var(--font-display), sans-serif; font-size: clamp(18px, 3.2vw, 21px); font-weight: 700; color: white; letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 16px; text-shadow: 0 0 30px rgba(${theme.accentRgb}, 0.1); }
         .membership-subline { color: ${theme.textMuted}; font-size: 16px; line-height: 1.7; margin: 0 0 32px; }
         .membership-body { color: ${theme.textMuted}; font-size: 15px; line-height: 1.8; margin: 0 auto; max-width: 560px; }
 
         /* EXPERIENCE */
         .experience { padding: 48px 24px; background: ${theme.bgDark}; border-bottom: 1px solid ${theme.lineSoft}; }
         .experience-width { width: min(640px, 100%); margin: 0 auto; }
-        .experience-title { font-family: var(--font-playfair), Georgia, serif; font-size: clamp(18px, 3.2vw, 21px); font-weight: 700; font-style: italic; color: ${theme.accent}; margin: 0 0 8px; letter-spacing: -0.01em; }
+        .experience-title { font-family: var(--font-display), sans-serif; font-size: clamp(18px, 3.2vw, 21px); font-weight: 800; color: white; margin: 0 0 8px; letter-spacing: -0.02em; }
         .experience-subtitle { color: ${theme.textMuted}; font-size: 15px; margin: 0 0 40px; }
         .experience-options { display: flex; flex-direction: column; gap: 14px; }
         .experience-card { display: flex; align-items: center; gap: 18px; padding: 22px 24px; background: ${theme.bgCard}; backdrop-filter: blur(10px); border: 1.5px solid ${theme.line}; border-radius: 16px; cursor: pointer; transition: all 0.25s ease; position: relative; }
@@ -164,7 +164,7 @@ export default async function Home() {
         .final-cta { padding: 100px 24px; background: linear-gradient(180deg, ${theme.bgDark} 0%, ${theme.bg} 45%); text-align: center; position: relative; overflow: hidden; }
         .final-cta::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 300px; background: radial-gradient(ellipse, rgba(${theme.accentRgb}, 0.05) 0%, transparent 70%); pointer-events: none; }
         .final-cta-content { position: relative; z-index: 2; max-width: 600px; margin: 0 auto; }
-        .final-cta h2 { margin: 0 0 12px; font-family: var(--font-playfair), Georgia, serif; font-size: clamp(18px, 3.2vw, 21px); font-weight: 700; font-style: italic; color: ${theme.accent}; letter-spacing: -0.01em; line-height: 1.15; }
+        .final-cta h2 { margin: 0 0 12px; font-family: var(--font-display), sans-serif; font-size: clamp(18px, 3.2vw, 21px); font-weight: 700; color: white; letter-spacing: -0.02em; line-height: 1.1; }
         .final-cta p { margin: 0 0 36px; color: ${theme.textMuted}; font-size: 15px; line-height: 1.8; }
         .final-cta-divider { width: 50px; height: 1px; background: linear-gradient(90deg, transparent, ${theme.accent}, transparent); margin: 0 auto 36px; opacity: 0.5; }
 
