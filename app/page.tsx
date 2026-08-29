@@ -158,7 +158,7 @@ export default async function Home() {
         .radio-circle::after { content: ''; width: 10px; height: 10px; border-radius: 50%; background: ${theme.accent}; transform: scale(0); transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 0 10px rgba(${theme.accentRgb}, 0.5); }
         .experience-radio:checked + .experience-card .radio-circle { border-color: ${theme.accent}; }
         .experience-radio:checked + .experience-card .radio-circle::after { transform: scale(1); }
-        .experience-label { color: white; font-size: 12px; font-weight: 300; letter-spacing: -0.2px; }
+        .experience-label { color: white; font-size: 12px; font-weight: 500; letter-spacing: -0.2px; }
 
         /* FINAL CTA — bridges bgDark back to bg */
         .final-cta { padding: 100px 24px; background: linear-gradient(180deg, ${theme.bgDark} 0%, ${theme.bg} 45%); text-align: center; position: relative; overflow: hidden; }
