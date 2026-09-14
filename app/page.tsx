@@ -762,11 +762,8 @@ export default async function Home() {
             </h1>
 
             <p>
-              Join us to explore strategies, ideas, and tips for your entire
-              financial journey — retiring wisely, building a prosperous
-              future, and achieving early retirement. For step-by-step
-              guidance and trade support, connect with the WRFN team on
-              Telegram or WhatsApp using the links below.
+              Explore strategies for wealth accumulation, retirement planning, and financial independence. 
+Reach the WRFN team on Telegram or WhatsApp for personalized guidance and trade support.
             </p>
 
             <div className="contact-pills">
