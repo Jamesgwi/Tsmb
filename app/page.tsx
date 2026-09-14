@@ -288,9 +288,9 @@ export default async function Home() {
               max-width: 720px;
               color: ${theme.ink};
               font-family: var(--font-display), sans-serif;
-              font-size: clamp(38px, 7.5vw, 62px);
+              font-size: clamp(28px, 5.5vw, 52px);
               line-height: 1.02;
-              font-weight: 900;
+              font-weight: 700;
               text-transform: uppercase;
               letter-spacing: -0.5px;
             }
@@ -481,7 +481,7 @@ export default async function Home() {
               margin: 14px 0 0;
               color: ${theme.ink};
               font-family: var(--font-display), sans-serif;
-              font-size: clamp(36px, 6.5vw, 56px);
+              font-size: clamp(26px, 4.5vw, 46px);
               line-height: 1.02;
               font-weight: 900;
               text-transform: uppercase;
@@ -813,12 +813,12 @@ export default async function Home() {
               <article className="pillar">
                 <div className="pillar-heading">
                   <div className="pillar-dot" />
-                  <h2>Learn</h2>
+                  <h2>Explore</h2>
                 </div>
                 <p>
                   Explore strategies, ideas, and tips that make money simple.
-                  Understand your starting point, decode the jargon, and gain
-                  the confidence to act on your financial journey.
+                  Understand your starting point and gain
+                  the confidence in your financial journey.
                 </p>
               </article>
 
@@ -828,7 +828,7 @@ export default async function Home() {
                   <h2>Grow</h2>
                 </div>
                 <p>
-                  Put your money to work with intention. Grow wealth 
+                  Grow wealth 
                   step by step and explore opportunities.
                   
       
@@ -843,7 +843,7 @@ export default async function Home() {
                 <p>
                   Today&apos;s discipline is tomorrow&apos;s freedom.
                   Retire wisely  and early with a plan that
-                  grow wealth and gives you choice over your time.
+                  compound wealth and gives you freedom.
                 </p>
               </article>
             </div>
