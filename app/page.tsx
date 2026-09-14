@@ -816,8 +816,8 @@ export default async function Home() {
                   <h2>Explore</h2>
                 </div>
                 <p>
-                  Explore strategies, ideas, and tips that make money simple.
-                  Understand your starting point and gain
+                  Explore strategies, ideas, and tips that make money simple
+                  and gain
                   the confidence in your financial journey.
                 </p>
               </article>
