@@ -763,9 +763,7 @@ export default async function Home() {
 
             <p>Explore strategies for wealth accumulation, retirement planning, and financial independence.</p>
 
-<p className="divider" style={{ margin: '5px 0', fontSize: '0.85rem', color: '#888' }}>
-  ──── Connect With Us ────
-</p>
+
 
 <p>Reach the WRFN team on Telegram or WhatsApp for personalized guidance and trade support.</p>
 
