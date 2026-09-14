@@ -756,7 +756,7 @@ export default async function Home() {
             </div>
 
             <h1>
-              Rise in wealth.
+              Grow in wealth.
               <br />
               <em className="grad-text">Retire in freedom.</em>
             </h1>
@@ -801,12 +801,12 @@ export default async function Home() {
 
         <section className="pillars">
           <div className="section-width">
-            <div className="eyebrow grad-text">The WRFN framework</div>
+            <div className="eyebrow grad-text">The WRFN Goal</div>
 
             <h2 className="pillars-title">
-              One network.
+               Success.
               <br />
-              Every step of your journey.
+              Every step of the way.
             </h2>
 
             <div className="pillar-grid">
@@ -828,10 +828,10 @@ export default async function Home() {
                   <h2>Grow</h2>
                 </div>
                 <p>
-                  Put your money to work with intention. Learn growth
-                  investing step by step — evaluate opportunities, manage
-                  risk, and climb toward a prosperous future that compounds
-                  over time.
+                  Put your money to work with intention. Grow wealth 
+                  step by step and explore opportunities.
+                  
+      
                 </p>
               </article>
 
@@ -841,9 +841,9 @@ export default async function Home() {
                   <h2>Retire</h2>
                 </div>
                 <p>
-                  Turn today&apos;s discipline into tomorrow&apos;s freedom.
-                  Retire wisely — and early if you choose — with a plan that
-                  builds lasting wealth and gives you choice over your time.
+                  Today&apos;s discipline is tomorrow&apos;s freedom.
+                  Retire wisely  and early with a plan that
+                  grow wealth and gives you choice over your time.
                 </p>
               </article>
             </div>
@@ -865,20 +865,20 @@ export default async function Home() {
 
           <div className="philosophy-grid">
             <div>
-              <div className="eyebrow grad-text">Our philosophy</div>
+              <div className="eyebrow grad-text"> The Goal</div>
 
               <h2>
-                Less noise.
+                Explore
                 <br />
-                More <em className="grad-text">growth.</em>
+                Build <em className="grad-text">Grow.</em>
               </h2>
             </div>
 
             <div className="philosophy-copy-wrap">
               <p className="philosophy-copy">
-                Money can become complicated quickly. WRFN brings the
-                conversation back to the things you can control: your goals,
-                your habits, your time horizon — and the community you rise
+                 WRFN brings the
+                conversation to what matters, your goals,
+                your habits, your time horizon and the community you rise
                 with.
               </p>
 
@@ -908,8 +908,8 @@ export default async function Home() {
               <div className="principle">
                 <div className="check">✓</div>
                 <span>
-                  Aim for freedom — early retirement is a plan, not a lottery
-                  ticket.
+                  Aim for freedom, early retirement starts with a plan
+                  
                 </span>
               </div>
             </div>
