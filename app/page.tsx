@@ -371,9 +371,9 @@ export default async function Home() {
               max-width: 660px;
               color: ${theme.ink};
               font-family: var(--font-display), sans-serif;
-              font-size: clamp(32px, 4vw, 40px);
+              font-size: clamp(25px, 4vw, 30px);
               line-height: 1.05;
-              font-weight: 900;
+              font-weight: 700;
               text-transform: uppercase;
               letter-spacing: -0.5px;
             }
@@ -885,22 +885,22 @@ export default async function Home() {
               <div className="principle">
                 <div className="check">✓</div>
                 <span>
-                  Start with a plan built for your journey — not someone
-                  else&apos;s highlight reel.
+                  Start with a plan tailored to your goals 
+                  
                 </span>
               </div>
 
               <div className="principle">
                 <div className="check">✓</div>
                 <span>
-                  Invest for growth while keeping risk clearly in view.
+                  Invest for growth with risks professionally mitigated.
                 </span>
               </div>
 
               <div className="principle">
                 <div className="check">✓</div>
                 <span>
-                  Retire wisely: build the prosperous future you actually
+                  Build the prosperous future you actually
                   want.
                 </span>
               </div>
@@ -908,7 +908,7 @@ export default async function Home() {
               <div className="principle">
                 <div className="check">✓</div>
                 <span>
-                  Aim for freedom, early retirement starts with a plan
+                  Attain freedom. Early retirement starts with a plan
                   
                 </span>
               </div>
