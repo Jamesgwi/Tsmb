@@ -371,7 +371,7 @@ export default async function Home() {
               max-width: 660px;
               color: ${theme.ink};
               font-family: var(--font-display), sans-serif;
-              font-size: clamp(32px, 6vw, 50px);
+              font-size: clamp(32px, 4vw, 40px);
               line-height: 1.05;
               font-weight: 900;
               text-transform: uppercase;
@@ -804,9 +804,9 @@ export default async function Home() {
             <div className="eyebrow grad-text">The WRFN Goal</div>
 
             <h2 className="pillars-title">
-               Success.
+               
               <br />
-              Every step of the way.
+             Success Every step of the way
             </h2>
 
             <div className="pillar-grid">
