@@ -481,9 +481,9 @@ export default async function Home() {
               margin: 14px 0 0;
               color: ${theme.ink};
               font-family: var(--font-display), sans-serif;
-              font-size: clamp(26px, 4.5vw, 46px);
+              font-size: clamp(23px, 4.5vw, 36px);
               line-height: 1.02;
-              font-weight: 900;
+              font-weight: 700;
               text-transform: uppercase;
               letter-spacing: -0.5px;
             }
@@ -870,7 +870,7 @@ export default async function Home() {
               <h2>
                 Explore
                 <br />
-                Build <em className="grad-text">Grow.</em>
+                Build <em className="grad-text">Grow </em>
               </h2>
             </div>
 
