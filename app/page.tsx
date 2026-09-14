@@ -762,7 +762,8 @@ export default async function Home() {
             </h1>
 
             <p>
-              Explore strategies for wealth accumulation, retirement planning, and financial independence. 
+              Explore strategies for wealth accumulation, retirement planning, and financial independence.
+─── Connect With Us ───
 Reach the WRFN team on Telegram or WhatsApp for personalized guidance and trade support.
             </p>
 
