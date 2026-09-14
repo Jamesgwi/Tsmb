@@ -449,6 +449,23 @@ export default async function Home() {
               opacity: .07;
             }
 
+            .philosophy-art {
+              position: absolute;
+              right: -30px;
+              bottom: -20px;
+              width: min(520px, 58%);
+              pointer-events: none;
+              mix-blend-mode: multiply;
+              opacity: .10;
+              z-index: 0;
+            }
+
+            .philosophy-art img {
+              display: block;
+              width: 100%;
+              height: auto;
+            }
+
             .philosophy-grid {
               position: relative;
               z-index: 1;
@@ -510,6 +527,87 @@ export default async function Home() {
               font-size: 13px;
               line-height: 1.6;
               font-weight: 700;
+            }
+
+            .cta {
+              position: relative;
+              overflow: hidden;
+              padding: 96px 22px;
+              text-align: center;
+              color: #fff;
+            }
+
+            .cta-bg {
+              position: absolute;
+              inset: 0;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              object-position: center;
+            }
+
+            .cta-overlay {
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(
+                120deg,
+                rgba(255,122,0,.93) 0%,
+                rgba(255,31,107,.91) 48%,
+                rgba(200,30,224,.93) 100%
+              );
+            }
+
+            .cta-inner {
+              position: relative;
+              z-index: 1;
+              width: min(720px, 100%);
+              margin: 0 auto;
+            }
+
+            .cta-eyebrow {
+              margin-bottom: 14px;
+              color: #fff;
+              font-size: 10px;
+              font-weight: 800;
+              letter-spacing: 3px;
+              text-transform: uppercase;
+            }
+
+            .cta-title {
+              margin: 0 auto;
+              max-width: 640px;
+              color: #fff;
+              font-family: var(--font-display), sans-serif;
+              font-size: clamp(30px, 5.5vw, 46px);
+              line-height: 1.05;
+              font-weight: 900;
+              text-transform: uppercase;
+              letter-spacing: -0.5px;
+            }
+
+            .cta-copy {
+              max-width: 560px;
+              margin: 18px auto 0;
+              color: rgba(255,255,255,.92);
+              font-size: 15px;
+              line-height: 1.85;
+              font-weight: 600;
+            }
+
+            .cta .contact-pills {
+              margin-top: 30px;
+            }
+
+            .cta .contact-pill.whatsapp {
+              background: #fff;
+              color: ${theme.whatsapp};
+              box-shadow: 0 12px 30px rgba(0,0,0,.20);
+            }
+
+            .cta .contact-pill.telegram {
+              background: #fff;
+              color: ${theme.telegram};
+              box-shadow: 0 12px 30px rgba(0,0,0,.20);
             }
 
             footer {
@@ -580,12 +678,20 @@ export default async function Home() {
                 padding: 64px 20px;
               }
 
+              .philosophy-art {
+                display: none;
+              }
+
               .philosophy-grid {
                 display: block;
               }
 
               .philosophy-copy-wrap {
                 margin-top: 42px;
+              }
+
+              .cta {
+                padding: 72px 20px;
               }
             }
 
@@ -748,6 +854,15 @@ export default async function Home() {
           <div className="blob blob-a" aria-hidden="true" />
           <div className="blob blob-b" aria-hidden="true" />
 
+          <div className="philosophy-art" aria-hidden="true">
+            <Image
+              src="/growth.jpg"
+              alt=""
+              width={1152}
+              height={672}
+            />
+          </div>
+
           <div className="philosophy-grid">
             <div>
               <div className="eyebrow grad-text">Our philosophy</div>
@@ -797,6 +912,57 @@ export default async function Home() {
                   ticket.
                 </span>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="cta">
+          <Image
+            src="/signing.jpg"
+            alt=""
+            width={1200}
+            height={1707}
+            className="cta-bg"
+            aria-hidden="true"
+          />
+          <div className="cta-overlay" aria-hidden="true" />
+
+          <div className="cta-inner fade-up">
+            <div className="cta-eyebrow">Take the first step</div>
+
+            <h2 className="cta-title">
+              Your freedom journey starts with one conversation.
+            </h2>
+
+            <p className="cta-copy">
+              Connect with the WRFN team for step-by-step guidance and trade
+              support — free, friendly, and at your pace.
+            </p>
+
+            <div className="contact-pills">
+              <Link
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-pill whatsapp"
+              >
+                <span className="pill-icon">
+                  <WhatsAppIcon size={20} />
+                </span>
+                <span className="pill-label">WhatsApp</span>
+              </Link>
+
+              <Link
+                href={TELEGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-pill telegram"
+              >
+                <span className="pill-icon">
+                  <TelegramIcon size={20} />
+                </span>
+                <span className="pill-label">Telegram</span>
+              </Link>
             </div>
           </div>
         </section>
