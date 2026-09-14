@@ -763,7 +763,7 @@ export default async function Home() {
 
             <p>Explore strategies for wealth accumulation, retirement planning, and financial independence.</p>
 
-<p className="divider" style={{ margin: '8px 0', fontSize: '0.85rem', color: '#888' }}>
+<p className="divider" style={{ margin: '5px 0', fontSize: '0.85rem', color: '#888' }}>
   ──── Connect With Us ────
 </p>
 
