@@ -425,7 +425,7 @@ export default async function Home() {
               font-family: var(--font-display), sans-serif;
               font-size: 24px;
               line-height: 1;
-              font-weight: 800;
+              font-weight: 700;
               text-transform: uppercase;
               letter-spacing: .5px;
             }
