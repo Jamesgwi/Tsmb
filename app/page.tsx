@@ -184,29 +184,13 @@ export default async function Home() {
               text-decoration: none;
             }
 
-            .brand-name {
-              display: flex;
-              flex-direction: column;
-              gap: 4px;
-            }
-
-            .brand-name-primary {
-              font-family: var(--font-display), sans-serif;
-              font-size: 17px;
-              font-weight: 900;
-              font-style: italic;
-              letter-spacing: 3px;
-              text-transform: uppercase;
-              line-height: 1;
-            }
-
             .brand-name-sub {
-              font-size: 8px;
+              font-size: 10px;
               font-weight: 700;
-              letter-spacing: 1.8px;
+              letter-spacing: 2.4px;
               text-transform: uppercase;
               color: ${theme.inkSoft};
-              line-height: 1;
+              line-height: 1.2;
             }
 
             .brand-link {
@@ -630,12 +614,9 @@ export default async function Home() {
         <header className="brand-bar">
           <div className="brand-bar-inner">
             <Link href="/" className="brand">
-              <Logo size={44} />
-              <span className="brand-name">
-                <span className="brand-name-primary grad-text">WRFN</span>
-                <span className="brand-name-sub">
-                  Wealth Rise &amp; Freedom Network
-                </span>
+              <Logo size={40} />
+              <span className="brand-name-sub">
+                Wealth Rise &amp; Freedom Network
               </span>
             </Link>
 
@@ -649,7 +630,7 @@ export default async function Home() {
           <div className="hero-fade-top" aria-hidden="true" />
           <Image
             src="/banner.jpg"
-            alt="Wealth Rise & Freedom Network — strategies, ideas, and tips for growth investing and early retirement"
+            alt="Growth investing in motion — Wealth Rise & Freedom Network"
             width={1536}
             height={802}
             priority
@@ -675,12 +656,11 @@ export default async function Home() {
             </h1>
 
             <p>
-              Wealth Rise &amp; Freedom Network (WRFN) is your community for
-              the entire financial journey — exploring strategies, ideas, and
-              tips to grow your money, retire wisely, build a prosperous
-              future, and achieve early retirement. For step-by-step guidance
-              and trade support, connect with the WRFN team on Telegram or
-              WhatsApp using the links below.
+              Join us to explore strategies, ideas, and tips for your entire
+              financial journey — retiring wisely, building a prosperous
+              future, and achieving early retirement. For step-by-step
+              guidance and trade support, connect with the WRFN team on
+              Telegram or WhatsApp using the links below.
             </p>
 
             <div className="contact-pills">
