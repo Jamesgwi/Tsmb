@@ -307,13 +307,7 @@ export default async function Home() {
               line-height: 1.9;
               font-weight: 500;
             }
-           .divider {
-  display: block;
-  margin: 12px 0;
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
-  color: #888; /* or match your brand */
-}
+           
             .contact-pills {
               display: flex;
               justify-content: center;
@@ -769,7 +763,7 @@ export default async function Home() {
 
             <p>Explore strategies for wealth accumulation, retirement planning, and financial independence.</p>
 
-<span class="divider">──── Connect With Us ────</span>
+<p class="divider">──── Connect With Us ────</p>
 
 <p>Reach the WRFN team on Telegram or WhatsApp for personalized guidance and trade support.</p>
 
