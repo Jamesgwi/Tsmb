@@ -553,7 +553,7 @@ export default async function Home() {
                 120deg,
                 rgba(255,122,0,.93) 0%,
                 rgba(255,31,107,.91) 48%,
-                rgba(200,30,224,.93) 100%
+                rgba(200,30,224,.93) 80%
               );
             }
 
@@ -578,7 +578,7 @@ export default async function Home() {
               max-width: 640px;
               color: #fff;
               font-family: var(--font-display), sans-serif;
-              font-size: clamp(30px, 5.5vw, 46px);
+              font-size: clamp(20px, 4.5vw, 36px);
               line-height: 1.05;
               font-weight: 900;
               text-transform: uppercase;
@@ -936,7 +936,7 @@ export default async function Home() {
 
             <p className="cta-copy">
               Connect with the WRFN team for step-by-step guidance and trade
-              support — free, friendly, and at your pace.
+              support. 
             </p>
 
             <div className="contact-pills">
