@@ -3,18 +3,20 @@
 import { useEffect, useState } from "react";
 
 const theme = {
-  bg: "#000000",
-  bgDark: "#050505",
-  bgLight: "#0f0f0f",
-  bgLighter: "#141414",
-  bgCard: "#0a0a0a",
-  accent: "#2dd4bf",
-  accentLight: "#5eead4",
-  accentDark: "#14b8a6",
-  accentGlow: "rgba(45, 212, 191, 0.12)",
-  text: "#f0f0f0",
-  textMuted: "#8a8a8a",
-  line: "#1a1a1a",
+  bg: "#ffffff",
+  bgDark: "#fdf7fb",
+  bgLight: "#faf5fc",
+  bgLighter: "#ffffff",
+  bgCard: "#ffffff",
+  accent: "#ec139c",
+  accentOrange: "#ff7a18",
+  accentPink: "#ff2e88",
+  accentPurple: "#8b1be0",
+  accentGradient: "linear-gradient(90deg, #ff7a18 0%, #ec139c 50%, #8b1be0 100%)",
+  accentGlow: "rgba(236, 19, 156, 0.10)",
+  text: "#1a1a2e",
+  textMuted: "#8a8a9a",
+  line: "#eee6f0",
   white: "#FFFFFF",
   error: "#EF4444",
   success: "#25D366",
@@ -95,8 +97,38 @@ export default function AdminPage() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          position: "relative",
+          overflow: "hidden",
         }}
       >
+        {/* Banner-style decorative blobs */}
+        <div
+          style={{
+            position: "absolute",
+            top: -140,
+            right: -140,
+            width: 420,
+            height: 420,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle at 30% 30%, rgba(255,122,24,0.12), rgba(236,19,156,0.12) 60%, transparent 70%)",
+            pointerEvents: "none",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: -160,
+            left: -160,
+            width: 460,
+            height: 460,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle at 60% 60%, rgba(236,19,156,0.10), rgba(139,27,224,0.10) 60%, transparent 70%)",
+            pointerEvents: "none",
+          }}
+        />
+
         <div
           style={{
             maxWidth: 400,
@@ -104,33 +136,56 @@ export default function AdminPage() {
             margin: "0 auto",
             background: theme.bgCard,
             padding: "40px 32px",
-            borderRadius: 16,
+            borderRadius: 24,
             border: `1.5px solid ${theme.line}`,
+            boxShadow: "0 20px 60px rgba(236, 19, 156, 0.08)",
+            position: "relative",
           }}
         >
           {/* Logo */}
           <div style={{ textAlign: "center", marginBottom: 32 }}>
-            <svg width="56" height="56" viewBox="0 0 100 100" fill="none" style={{ marginBottom: 16 }}>
-              <circle cx="50" cy="50" r="44" stroke="white" strokeWidth="3" opacity="0.9" />
-              <path d="M30 52 C30 38, 40 28, 52 28 C64 28, 74 38, 74 52" stroke="white" strokeWidth="7" strokeLinecap="round" fill="none" />
-              <path d="M74 52 C74 66, 64 76, 52 76" stroke="white" strokeWidth="7" strokeLinecap="round" fill="none" opacity="0.5" />
-              <circle cx="52" cy="52" r="6" fill="white" opacity="0.9" />
+            <svg width="64" height="64" viewBox="0 0 100 100" fill="none" style={{ marginBottom: 16 }}>
+              <defs>
+                <linearGradient id="wrfnGrad" x1="0" y1="0" x2="100" y2="100">
+                  <stop offset="0%" stopColor="#ff7a18" />
+                  <stop offset="55%" stopColor="#ec139c" />
+                  <stop offset="100%" stopColor="#8b1be0" />
+                </linearGradient>
+              </defs>
+              <circle cx="50" cy="50" r="44" stroke="url(#wrfnGrad)" strokeWidth="3" opacity="0.9" />
+              <path d="M30 52 C30 38, 40 28, 52 28 C64 28, 74 38, 74 52" stroke="url(#wrfnGrad)" strokeWidth="7" strokeLinecap="round" fill="none" />
+              <path d="M74 52 C74 66, 64 76, 52 76" stroke="url(#wrfnGrad)" strokeWidth="7" strokeLinecap="round" fill="none" opacity="0.5" />
+              <circle cx="52" cy="52" r="6" fill="url(#wrfnGrad)" opacity="0.9" />
             </svg>
             <h1
               style={{
                 fontFamily: "var(--font-display), sans-serif",
-                color: theme.accent,
-                fontSize: 20,
+                background: theme.accentGradient,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                fontSize: 28,
                 margin: "0 0 6px",
-                fontWeight: 800,
+                fontWeight: 900,
+                letterSpacing: "3px",
+              }}
+            >
+              WRFN
+            </h1>
+            <p style={{ color: theme.textMuted, fontSize: 11, margin: 0, fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", opacity: 0.8 }}>
+              Wealth Rise &amp; Freedom Network
+            </p>
+            <p
+              style={{
+                color: theme.accent,
+                fontSize: 11,
+                margin: "12px 0 0",
+                fontWeight: 700,
                 letterSpacing: "2px",
                 textTransform: "uppercase",
               }}
             >
               Admin Portal
-            </h1>
-            <p style={{ color: theme.textMuted, fontSize: 11, margin: 0, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", opacity: 0.7 }}>
-              The Compounding Hub
             </p>
           </div>
 
@@ -159,7 +214,7 @@ export default function AdminPage() {
                 padding: "14px 16px",
                 borderRadius: 12,
                 border: `1.5px solid ${theme.line}`,
-                background: theme.bgDark,
+                background: theme.bgLight,
                 color: theme.text,
                 fontSize: 15,
                 outline: "none",
@@ -169,7 +224,7 @@ export default function AdminPage() {
                 fontFamily: "var(--font-body), system-ui, sans-serif",
               }}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = theme.accent;
+                e.currentTarget.style.borderColor = theme.accentPink;
                 e.currentTarget.style.boxShadow = `0 0 0 3px ${theme.accentGlow}`;
               }}
               onBlur={(e) => {
@@ -183,8 +238,8 @@ export default function AdminPage() {
                 style={{
                   padding: "12px 14px",
                   borderRadius: 12,
-                  background: "rgba(239, 68, 68, 0.08)",
-                  border: `1px solid rgba(239, 68, 68, 0.15)`,
+                  background: "rgba(239, 68, 68, 0.06)",
+                  border: `1px solid rgba(239, 68, 68, 0.2)`,
                   color: theme.error,
                   fontSize: 13,
                   fontWeight: 600,
@@ -201,9 +256,9 @@ export default function AdminPage() {
                 width: "100%",
                 padding: "16px",
                 borderRadius: 100,
-                border: `1.5px solid ${theme.line}`,
-                background: "transparent",
-                color: theme.accent,
+                border: "none",
+                background: theme.accentGradient,
+                color: "#ffffff",
                 fontWeight: 700,
                 fontSize: 12,
                 letterSpacing: "1.5px",
@@ -211,16 +266,15 @@ export default function AdminPage() {
                 cursor: "pointer",
                 transition: "all 0.25s ease",
                 fontFamily: "var(--font-display), sans-serif",
+                boxShadow: "0 4px 20px rgba(236, 19, 156, 0.25)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = theme.accent;
-                e.currentTarget.style.background = "rgba(45, 212, 191, 0.08)";
-                e.currentTarget.style.boxShadow = "0 0 20px rgba(45, 212, 191, 0.15)";
+                e.currentTarget.style.boxShadow = "0 8px 30px rgba(236, 19, 156, 0.4)";
+                e.currentTarget.style.transform = "translateY(-2px)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = theme.line;
-                e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.boxShadow = "0 4px 20px rgba(236, 19, 156, 0.25)";
+                e.currentTarget.style.transform = "none";
               }}
             >
               Authenticate
@@ -241,8 +295,38 @@ export default function AdminPage() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      {/* Banner-style decorative blobs */}
+      <div
+        style={{
+          position: "absolute",
+          top: -160,
+          right: -160,
+          width: 460,
+          height: 460,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle at 30% 30%, rgba(255,122,24,0.10), rgba(236,19,156,0.10) 60%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: -180,
+          left: -180,
+          width: 500,
+          height: 500,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle at 60% 60%, rgba(236,19,156,0.08), rgba(139,27,224,0.08) 60%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
+
       <div
         style={{
           maxWidth: 520,
@@ -250,8 +334,10 @@ export default function AdminPage() {
           margin: "0 auto",
           background: theme.bgCard,
           padding: "32px 28px",
-          borderRadius: 16,
+          borderRadius: 24,
           border: `1.5px solid ${theme.line}`,
+          boxShadow: "0 20px 60px rgba(236, 19, 156, 0.08)",
+          position: "relative",
         }}
       >
         {/* Header */}
@@ -284,8 +370,8 @@ export default function AdminPage() {
                   width: 6,
                   height: 6,
                   borderRadius: "50%",
-                  background: theme.accent,
-                  boxShadow: "0 0 8px rgba(45, 212, 191, 0.5)",
+                  background: theme.accentGradient,
+                  boxShadow: "0 0 8px rgba(236, 19, 156, 0.5)",
                 }}
               />
               Authenticated
@@ -293,15 +379,21 @@ export default function AdminPage() {
             <h1
               style={{
                 fontFamily: "var(--font-display), sans-serif",
-                color: theme.white,
+                background: theme.accentGradient,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
                 fontSize: 24,
                 margin: 0,
-                fontWeight: 700,
+                fontWeight: 800,
                 letterSpacing: "-0.02em",
               }}
             >
               Edit Community Links
             </h1>
+            <p style={{ color: theme.textMuted, fontSize: 11, margin: "6px 0 0", fontWeight: 600, letterSpacing: "1px", textTransform: "uppercase" }}>
+              WRFN — Wealth Rise &amp; Freedom Network
+            </p>
           </div>
 
           <button
@@ -320,9 +412,9 @@ export default function AdminPage() {
               transition: "all 0.25s ease",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = theme.accent;
+              e.currentTarget.style.borderColor = theme.accentPink;
               e.currentTarget.style.color = theme.accent;
-              e.currentTarget.style.background = "rgba(45, 212, 191, 0.05)";
+              e.currentTarget.style.background = "rgba(236, 19, 156, 0.05)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.borderColor = theme.line;
@@ -399,7 +491,7 @@ export default function AdminPage() {
                   padding: "12px 14px",
                   borderRadius: 12,
                   border: `1.5px solid ${theme.line}`,
-                  background: theme.bgDark,
+                  background: theme.bgLight,
                   color: theme.text,
                   fontSize: 14,
                   outline: "none",
@@ -408,7 +500,7 @@ export default function AdminPage() {
                   fontFamily: "var(--font-body), system-ui, sans-serif",
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = theme.accent;
+                  e.currentTarget.style.borderColor = theme.accentPink;
                   e.currentTarget.style.boxShadow = `0 0 0 3px ${theme.accentGlow}`;
                 }}
                 onBlur={(e) => {
@@ -454,7 +546,7 @@ export default function AdminPage() {
                   padding: "12px 14px",
                   borderRadius: 12,
                   border: `1.5px solid ${theme.line}`,
-                  background: theme.bgDark,
+                  background: theme.bgLight,
                   color: theme.text,
                   fontSize: 14,
                   outline: "none",
@@ -463,7 +555,7 @@ export default function AdminPage() {
                   fontFamily: "var(--font-body), system-ui, sans-serif",
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = theme.accent;
+                  e.currentTarget.style.borderColor = theme.accentPink;
                   e.currentTarget.style.boxShadow = `0 0 0 3px ${theme.accentGlow}`;
                 }}
                 onBlur={(e) => {
@@ -509,7 +601,7 @@ export default function AdminPage() {
                   padding: "12px 14px",
                   borderRadius: 12,
                   border: `1.5px solid ${theme.line}`,
-                  background: theme.bgDark,
+                  background: theme.bgLight,
                   color: theme.text,
                   fontSize: 14,
                   outline: "none",
@@ -518,7 +610,7 @@ export default function AdminPage() {
                   fontFamily: "var(--font-body), system-ui, sans-serif",
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = theme.accent;
+                  e.currentTarget.style.borderColor = theme.accentPink;
                   e.currentTarget.style.boxShadow = `0 0 0 3px ${theme.accentGlow}`;
                 }}
                 onBlur={(e) => {
@@ -564,7 +656,7 @@ export default function AdminPage() {
                   padding: "12px 14px",
                   borderRadius: 12,
                   border: `1.5px solid ${theme.line}`,
-                  background: theme.bgDark,
+                  background: theme.bgLight,
                   color: theme.text,
                   fontSize: 14,
                   outline: "none",
@@ -573,7 +665,7 @@ export default function AdminPage() {
                   fontFamily: "var(--font-body), system-ui, sans-serif",
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = theme.accent;
+                  e.currentTarget.style.borderColor = theme.accentPink;
                   e.currentTarget.style.boxShadow = `0 0 0 3px ${theme.accentGlow}`;
                 }}
                 onBlur={(e) => {
@@ -592,26 +684,26 @@ export default function AdminPage() {
                 padding: "16px",
                 borderRadius: 100,
                 border: "none",
-                background: theme.accent,
-                color: theme.bgDark,
+                background: theme.accentGradient,
+                color: "#ffffff",
                 fontWeight: 700,
                 fontSize: 12,
                 letterSpacing: "1.5px",
                 textTransform: "uppercase",
                 cursor: saving ? "default" : "pointer",
-                opacity: saving ? 0.6 : 1,
+                opacity: saving ? 0.7 : 1,
                 transition: "all 0.25s ease",
                 fontFamily: "var(--font-display), sans-serif",
-                boxShadow: "0 4px 20px rgba(45, 212, 191, 0.2)",
+                boxShadow: "0 4px 20px rgba(236, 19, 156, 0.25)",
               }}
               onMouseEnter={(e) => {
                 if (!saving) {
-                  e.currentTarget.style.boxShadow = "0 8px 30px rgba(45, 212, 191, 0.35)";
+                  e.currentTarget.style.boxShadow = "0 8px 30px rgba(236, 19, 156, 0.4)";
                   e.currentTarget.style.transform = "translateY(-2px)";
                 }
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = "0 4px 20px rgba(45, 212, 191, 0.2)";
+                e.currentTarget.style.boxShadow = "0 4px 20px rgba(236, 19, 156, 0.25)";
                 e.currentTarget.style.transform = "none";
               }}
             >
@@ -627,14 +719,14 @@ export default function AdminPage() {
                   borderRadius: 12,
                   background:
                     saveMessage === "Saved!"
-                      ? "rgba(45, 212, 191, 0.08)"
-                      : "rgba(239, 68, 68, 0.08)",
+                      ? "rgba(37, 211, 102, 0.06)"
+                      : "rgba(239, 68, 68, 0.06)",
                   border: `1.5px solid ${
                     saveMessage === "Saved!"
-                      ? "rgba(45, 212, 191, 0.15)"
-                      : "rgba(239, 68, 68, 0.15)"
+                      ? "rgba(37, 211, 102, 0.25)"
+                      : "rgba(239, 68, 68, 0.2)"
                   }`,
-                  color: saveMessage === "Saved!" ? theme.accent : theme.error,
+                  color: saveMessage === "Saved!" ? "#16a34a" : theme.error,
                   fontSize: 13,
                   fontWeight: 700,
                   textAlign: "center",
