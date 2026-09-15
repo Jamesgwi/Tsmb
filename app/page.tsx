@@ -116,12 +116,13 @@ export default async function Home() {
               scroll-margin-top: 76px;
             }
 
-            .grad-text {
-              background: var(--grad);
-              -webkit-background-clip: text;
-              background-clip: text;
-              -webkit-text-fill-color: transparent;
-              color: transparent;
+            /* Accent system — replaces gradient text (orange / pink alternating) */
+            .accent-orange {
+              color: ${theme.orange};
+            }
+
+            .accent-pink {
+              color: ${theme.pink};
             }
 
             .page {
@@ -172,6 +173,7 @@ export default async function Home() {
               font-weight: 800;
               letter-spacing: 1.5px;
               text-transform: uppercase;
+              color: ${theme.pink};
               text-decoration: underline;
               text-decoration-color: transparent;
               text-underline-offset: 4px;
@@ -186,6 +188,7 @@ export default async function Home() {
               position: relative;
               width: 100%;
               background: ${theme.bg};
+              background: linear-gradient(135deg, #FFF1E5 0%, #FFE7F0 100%);
               line-height: 0;
             }
 
@@ -194,6 +197,8 @@ export default async function Home() {
               width: 100%;
               height: auto;
               object-fit: contain;
+              position: relative;
+              z-index: 1;
             }
 
             .hero-fade-top {
@@ -204,6 +209,7 @@ export default async function Home() {
               height: 70px;
               background: linear-gradient(to bottom, ${theme.bg} 0%, transparent 100%);
               pointer-events: none;
+              z-index: 2;
             }
 
             .hero-fade-bottom {
@@ -214,6 +220,7 @@ export default async function Home() {
               height: 80px;
               background: linear-gradient(to bottom, transparent 0%, ${theme.bg} 100%);
               pointer-events: none;
+              z-index: 2;
             }
 
             .blob {
@@ -289,7 +296,9 @@ export default async function Home() {
               font-weight: 500;
             }
 
-            .contact-reveal {
+            /* ---- Contact flow ---- */
+
+            .contact-flow {
               display: flex;
               justify-content: center;
               margin-top: 34px;
@@ -302,14 +311,14 @@ export default async function Home() {
               padding: 16px 40px;
               border: 0;
               border-radius: 100px;
-              background: var(--grad);
+              background: ${theme.orange};
               color: #fff;
               font-family: var(--font-body), sans-serif;
               font-size: 15px;
               font-weight: 700;
               letter-spacing: .3px;
               cursor: pointer;
-              box-shadow: 0 10px 26px rgba(255,31,107,.26);
+              box-shadow: 0 10px 26px rgba(255,122,0,.30);
               transition:
                 transform .2s ease,
                 box-shadow .2s ease;
@@ -317,7 +326,103 @@ export default async function Home() {
 
             .contact-us-btn:hover {
               transform: translateY(-2px);
-              box-shadow: 0 14px 32px rgba(255,31,107,.34);
+              box-shadow: 0 14px 32px rgba(255,122,0,.38);
+            }
+
+            .contact-panel {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 22px;
+            }
+
+            .selector-block {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 12px;
+            }
+
+            .selector-title {
+              font-size: 11px;
+              font-weight: 800;
+              letter-spacing: 2.2px;
+              text-transform: uppercase;
+              color: ${theme.inkSoft};
+              font-family: var(--font-body), sans-serif;
+            }
+
+            .selector-title strong {
+              color: ${theme.ink};
+            }
+
+            .option-chips {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-wrap: wrap;
+              gap: 10px;
+            }
+
+            .option-chip {
+              font-family: var(--font-body), sans-serif;
+              padding: 12px 24px;
+              border-radius: 100px;
+              border: 1.5px solid ${theme.line};
+              background: #fff;
+              color: ${theme.ink};
+              font-size: 14px;
+              font-weight: 700;
+              cursor: pointer;
+              transition:
+                transform .2s ease,
+                border-color .2s ease,
+                background .2s ease,
+                color .2s ease,
+                box-shadow .2s ease;
+            }
+
+            .option-chip:hover {
+              transform: translateY(-2px);
+              border-color: ${theme.inkSoft};
+            }
+
+            .option-chip.selected.exp {
+              background: ${theme.orange};
+              border-color: ${theme.orange};
+              color: #fff;
+              box-shadow: 0 8px 20px rgba(255,122,0,.28);
+            }
+
+            .option-chip.selected.mkt {
+              background: ${theme.pink};
+              border-color: ${theme.pink};
+              color: #fff;
+              box-shadow: 0 8px 20px rgba(255,31,107,.28);
+            }
+
+            .flow-hint {
+              margin: 0;
+              font-size: 12.5px;
+              font-weight: 600;
+              color: ${theme.inkSoft};
+            }
+
+            .channels {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 14px;
+            }
+
+            .flow-summary {
+              font-size: 13px;
+              font-weight: 600;
+              color: ${theme.inkSoft};
+            }
+
+            .flow-summary b {
+              color: ${theme.ink};
             }
 
             .contact-pills {
@@ -332,16 +437,14 @@ export default async function Home() {
             .contact-pill {
               display: inline-flex;
               align-items: center;
-              gap: 10px;
-              padding: 16px 32px;
-              border-radius: 100px;
+              gap: 12px;
+              padding: 13px 24px 13px 14px;
+              border-radius: 18px;
               text-decoration: none;
               font-size: 15px;
               font-weight: 700;
               letter-spacing: 0.2px;
-              transition:
-                transform .2s ease,
-                box-shadow .2s ease;
+              transition: transform .2s ease, box-shadow .2s ease;
             }
 
             .contact-pill:hover {
@@ -351,20 +454,40 @@ export default async function Home() {
             .contact-pill.whatsapp {
               background: ${theme.whatsapp};
               color: white;
-              box-shadow: 0 8px 22px rgba(37,211,102,.30);
+              box-shadow: 0 10px 24px rgba(16,20,38,.14);
             }
 
             .contact-pill.telegram {
               background: ${theme.telegram};
               color: white;
-              box-shadow: 0 8px 22px rgba(34,158,217,.30);
+              box-shadow: 0 10px 24px rgba(16,20,38,.14);
             }
 
-            .contact-pill .pill-icon {
+            .pill-icon-wrap {
+              width: 36px;
+              height: 36px;
               flex-shrink: 0;
+              border-radius: 12px;
+              background: rgba(255,255,255,.24);
+              display: grid;
+              place-items: center;
             }
 
-            .contact-pill .pill-label {
+            .pill-glyph {
+              width: 19px;
+              height: 19px;
+              fill: #fff;
+              display: block;
+            }
+
+            .pill-arrow {
+              width: 16px;
+              height: 16px;
+              flex-shrink: 0;
+              opacity: .85;
+            }
+
+            .pill-label {
               white-space: nowrap;
             }
 
@@ -464,7 +587,6 @@ export default async function Home() {
 
             .pillar h2 {
               margin: 0;
-              color: ${theme.ink};
               font-family: var(--font-display), sans-serif;
               font-size: 23px;
               line-height: 1;
@@ -501,6 +623,8 @@ export default async function Home() {
               mix-blend-mode: multiply;
               opacity: .22;
               z-index: 0;
+              background: ${theme.bgSoft};
+              border-radius: 24px;
             }
 
             .philosophy-art img {
@@ -578,6 +702,7 @@ export default async function Home() {
               padding: 96px 22px;
               text-align: center;
               color: #fff;
+              background: ${theme.pink};
             }
 
             .cta-bg {
@@ -594,9 +719,9 @@ export default async function Home() {
               inset: 0;
               background: linear-gradient(
                 120deg,
-                rgba(255,122,0,.86) 0%,
-                rgba(255,31,107,.84) 48%,
-                rgba(224,80,158,.87) 80%
+                rgba(255,122,0,.80) 0%,
+                rgba(255,31,107,.78) 48%,
+                rgba(224,80,158,.82) 80%
               );
             }
 
@@ -637,8 +762,58 @@ export default async function Home() {
               font-weight: 600;
             }
 
-            .cta .contact-reveal {
+            .cta .contact-flow {
               margin-top: 30px;
+            }
+
+            .cta .contact-us-btn {
+              background: #fff;
+              color: ${theme.orange};
+              box-shadow: 0 12px 30px rgba(0,0,0,.22);
+            }
+
+            .cta .selector-title {
+              color: rgba(255,255,255,.85);
+            }
+
+            .cta .selector-title strong {
+              color: #fff;
+            }
+
+            .cta .flow-hint {
+              color: rgba(255,255,255,.85);
+            }
+
+            .cta .flow-summary {
+              color: rgba(255,255,255,.9);
+            }
+
+            .cta .flow-summary b {
+              color: #fff;
+            }
+
+            .cta .option-chip {
+              background: rgba(255,255,255,.12);
+              border-color: rgba(255,255,255,.45);
+              color: #fff;
+            }
+
+            .cta .option-chip:hover {
+              border-color: #fff;
+            }
+
+            .cta .option-chip.selected.exp {
+              background: #fff;
+              border-color: #fff;
+              color: ${theme.orange};
+              box-shadow: 0 8px 20px rgba(0,0,0,.20);
+            }
+
+            .cta .option-chip.selected.mkt {
+              background: #fff;
+              border-color: #fff;
+              color: ${theme.pink};
+              box-shadow: 0 8px 20px rgba(0,0,0,.20);
             }
 
             .cta .contact-pill.whatsapp {
@@ -651,6 +826,18 @@ export default async function Home() {
               background: #fff;
               color: ${theme.telegram};
               box-shadow: 0 12px 30px rgba(0,0,0,.20);
+            }
+
+            .cta .pill-icon-wrap {
+              background: rgba(37,211,102,.14);
+            }
+
+            .cta .contact-pill.telegram .pill-icon-wrap {
+              background: rgba(34,158,217,.14);
+            }
+
+            .cta .pill-glyph {
+              fill: currentColor;
             }
 
             .cta .contact-close {
@@ -708,16 +895,21 @@ export default async function Home() {
                 padding: 48px 20px 56px;
               }
 
-              .contact-reveal {
+              .contact-flow {
                 margin-top: 28px;
               }
 
-              .contact-pills {
-                gap: 10px;
+              .contact-panel {
+                gap: 18px;
+              }
+
+              .option-chip {
+                padding: 10px 18px;
+                font-size: 13px;
               }
 
               .contact-pill {
-                padding: 14px 24px;
+                padding: 11px 18px 11px 12px;
                 font-size: 14px;
               }
 
@@ -761,7 +953,8 @@ export default async function Home() {
                 animation: fadeUp .7s cubic-bezier(.22,1,.36,1) both;
               }
 
-              .contact-pills.revealed {
+              .contact-panel.revealed,
+              .channels.revealed {
                 animation: pillIn .35s cubic-bezier(.22,1,.36,1) both;
               }
 
@@ -803,7 +996,7 @@ export default async function Home() {
               </span>
             </Link>
 
-            <a href="#contact" className="brand-link grad-text">
+            <a href="#contact" className="brand-link">
               Connect With Us
             </a>
           </div>
@@ -828,14 +1021,14 @@ export default async function Home() {
           <div className="blob blob-b" aria-hidden="true" />
 
           <div className="content-width fade-up">
-            <div className="eyebrow grad-text">
+            <div className="eyebrow accent-orange">
               Strategies · Ideas · Tips
             </div>
 
             <h1>
               Grow in wealth.
               <br />
-              <em className="grad-text">Retire in freedom.</em>
+              <em className="accent-pink">Retire in freedom.</em>
             </h1>
 
             <p>
@@ -854,7 +1047,7 @@ export default async function Home() {
 
         <section className="pillars">
           <div className="section-width">
-            <div className="eyebrow grad-text">The WRFN Goal</div>
+            <div className="eyebrow accent-orange">The WRFN Goal</div>
 
             <h2 className="pillars-title">
               Success every step of the way
@@ -864,7 +1057,7 @@ export default async function Home() {
               <article className="pillar">
                 <div className="pillar-heading">
                   <div className="pillar-dot" />
-                  <h2>Explore</h2>
+                  <h2 className="accent-orange">Explore</h2>
                 </div>
                 <p>
                   Explore strategies, ideas, and tips that make money simple —
@@ -875,7 +1068,7 @@ export default async function Home() {
               <article className="pillar">
                 <div className="pillar-heading">
                   <div className="pillar-dot" />
-                  <h2>Grow</h2>
+                  <h2 className="accent-pink">Grow</h2>
                 </div>
                 <p>
                   Grow wealth step by step with clear habits, steady
@@ -886,7 +1079,7 @@ export default async function Home() {
               <article className="pillar">
                 <div className="pillar-heading">
                   <div className="pillar-dot" />
-                  <h2>Retire</h2>
+                  <h2 className="accent-orange">Retire</h2>
                 </div>
                 <p>
                   Today&apos;s discipline is tomorrow&apos;s freedom. Retire
@@ -915,12 +1108,12 @@ export default async function Home() {
 
           <div className="philosophy-grid">
             <div>
-              <div className="eyebrow grad-text">Our Philosophy</div>
+              <div className="eyebrow accent-orange">Our Philosophy</div>
 
               <h2>
                 Explore.
                 <br />
-                Build. <em className="grad-text">Grow.</em>
+                Build. <em className="accent-pink">Grow.</em>
               </h2>
             </div>
 
@@ -963,7 +1156,7 @@ export default async function Home() {
             alt=""
             width={1200}
             height={1707}
-            loading="lazy"
+            loading="eager"
             sizes="100vw"
             className="cta-bg"
             aria-hidden="true"
