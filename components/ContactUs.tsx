@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
+import type { CSSProperties } from "react";
 
 const EXPERIENCES = [
   { value: "", label: "Select your experience level" },
@@ -54,6 +55,109 @@ const PillArrow = () => (
   </svg>
 );
 
+function Dropdown({
+  id,
+  label,
+  value,
+  options,
+  accent,
+  onChange,
+}: {
+  id: string;
+  label: string;
+  value: string;
+  options: { value: string; label: string }[];
+  accent: "exp" | "mkt";
+  onChange: (value: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const current = options.find((o) => o.value === value);
+  const accentColor = accent === "exp" ? "#FF7A00" : "#FF1F6B";
+
+  return (
+    <div className={`dropdown${open ? " open" : ""}`}>
+      {open && (
+        <div
+          className="dropdown-backdrop"
+          aria-hidden="true"
+          onClick={() => setOpen(false)}
+        />
+      )}
+
+      <button
+        type="button"
+        className="dropdown-toggle"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+        onKeyDown={(e) => {
+          if (e.key === "Escape") setOpen(false);
+        }}
+      >
+        <span className={`dropdown-value${current?.value ? "" : " placeholder"}`}>
+          {current?.label ?? label}
+        </span>
+        <svg
+          className="dropdown-chevron"
+          viewBox="0 0 24 24"
+          width="14"
+          height="14"
+          aria-hidden="true"
+        >
+          <path
+            d="M6 9l6 6 6-6"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+
+      {open && (
+        <div className="dropdown-menu" role="listbox">
+          {options
+            .filter((o) => o.value !== "")
+            .map((o) => {
+              const selected = o.value === value;
+              return (
+                <button
+                  key={o.value}
+                  type="button"
+                  role="option"
+                  aria-selected={selected}
+                  className={`dropdown-option${selected ? " selected" : ""}`}
+                  style={{ "--accent": accentColor } as CSSProperties}
+                  onClick={() => {
+                    onChange(o.value);
+                    setOpen(false);
+                  }}
+                >
+                  <span>{o.label}</span>
+                  <span className="dropdown-check" aria-hidden="true">
+                    {selected && (
+                      <svg viewBox="0 0 24 24" width="10" height="10">
+                        <path
+                          d="M4 12.5l5 5L20 6.5"
+                          fill="none"
+                          stroke="#fff"
+                          strokeWidth="3.2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                  </span>
+                </button>
+              );
+            })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ContactUs({
   whatsappUrl,
   telegramUrl,
@@ -64,7 +168,7 @@ export default function ContactUs({
   const [open, setOpen] = useState(false);
   const [experience, setExperience] = useState("");
   const [market, setMarket] = useState("");
-  const id = useId(); // two instances on the page — keeps label/select ids unique
+  const id = useId(); // two instances on the page — keeps ids unique
 
   if (!open) {
     return (
@@ -95,45 +199,49 @@ export default function ContactUs({
   return (
     <div className="contact-flow">
       <div className="contact-panel revealed">
+        <button
+          type="button"
+          className="contact-close"
+          aria-label="Close contact options"
+          onClick={() => {
+            setOpen(false);
+            setExperience("");
+            setMarket("");
+          }}
+        >
+          &times;
+        </button>
+
         <div className="selector-row">
           <div className="selector-block">
-            <label className="selector-title" htmlFor={`${id}-experience`}>
-              <strong>Step 1</strong> — What&apos;s your experience level?
-            </label>
-            <select
-              id={`${id}-experience`}
-              className="selector-select"
+            <span className="selector-title" id={`${id}-exp-label`}>
+              <strong></strong> What&apos;s your experience level?
+            </span>
+            <Dropdown
+              id={`${id}-exp`}
+              label="Select your experience level"
               value={experience}
-              onChange={(e) => setExperience(e.target.value)}
-            >
-              {EXPERIENCES.map((o) => (
-                <option key={o.value} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
+              options={EXPERIENCES}
+              accent="exp"
+              onChange={setExperience}
+            />
           </div>
 
           <div className="selector-block">
-            <label className="selector-title" htmlFor={`${id}-market`}>
-              <strong>Step 2</strong> — Which market interests you?
-            </label>
-            <select
-              id={`${id}-market`}
-              className="selector-select"
+            <span className="selector-title" id={`${id}-mkt-label`}>
+              <strong> </strong> Which market interests you?
+            </span>
+            <Dropdown
+              id={`${id}-mkt`}
+              label="Select your market"
               value={market}
-              onChange={(e) => setMarket(e.target.value)}
-            >
-              {MARKETS.map((o) => (
-                <option key={o.value} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
+              options={MARKETS}
+              accent="mkt"
+              onChange={setMarket}
+            />
           </div>
         </div>
 
-        {/* Channels always visible — selections only personalize the link */}
         <div className="channels">
           <span className="flow-summary">
             {ready ? (
@@ -142,11 +250,11 @@ export default function ContactUs({
                   {EXPERIENCES.find((e) => e.value === experience)?.label}
                 </b>{" "}
                 &middot;{" "}
-                <b>{MARKETS.find((m) => m.value === market)?.label}</b> —
+                <b>{MARKETS.find((m) => m.value === market)?.label}</b> 
                 reach the team on:
               </>
             ) : (
-              "Optional — your picks personalize the chat link."
+              " personalize your inquiries ."
             )}
           </span>
           <div className="contact-pills">
@@ -174,18 +282,6 @@ export default function ContactUs({
               <span className="pill-label">Telegram</span>
               <PillArrow />
             </a>
-            <button
-              type="button"
-              className="contact-close"
-              aria-label="Close contact options"
-              onClick={() => {
-                setOpen(false);
-                setExperience("");
-                setMarket("");
-              }}
-            >
-              &times;
-            </button>
           </div>
         </div>
       </div>
