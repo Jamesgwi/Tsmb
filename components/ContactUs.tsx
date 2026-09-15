@@ -1,28 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 
-type Experience = "beginner" | "intermediate" | "experienced";
-type Market = "stocks" | "forex" | "binary" | "crypto";
-
-const EXPERIENCES: { id: Experience; label: string }[] = [
-  { id: "beginner", label: "Beginner" },
-  { id: "intermediate", label: "Intermediate" },
-  { id: "experienced", label: "Experienced" },
+const EXPERIENCES = [
+  { value: "", label: "Select your experience level" },
+  { value: "beginner", label: "Beginner" },
+  { value: "intermediate", label: "Intermediate" },
+  { value: "experienced", label: "Experienced" },
 ];
 
-const MARKETS: { id: Market; label: string }[] = [
-  { id: "stocks", label: "Stocks" },
-  { id: "forex", label: "Forex" },
-  { id: "binary", label: "Binary" },
-  { id: "crypto", label: "Crypto" },
+const MARKETS = [
+  { value: "", label: "Select your market" },
+  { value: "stocks", label: "Stocks" },
+  { value: "forex", label: "Forex" },
+  { value: "binary", label: "Binary" },
+  { value: "crypto", label: "Crypto" },
 ];
 
-function buildUrl(
-  base: string,
-  experience: Experience | null,
-  market: Market | null
-) {
+function buildUrl(base: string, experience: string, market: string) {
   if (!experience && !market) return base;
   try {
     const url = new URL(base);
@@ -30,7 +25,7 @@ function buildUrl(
     if (market) url.searchParams.set("market", market);
     return url.toString();
   } catch {
-    return base; // stored link isn't a valid absolute URL — use as-is
+    return base;
   }
 }
 
@@ -67,13 +62,9 @@ export default function ContactUs({
   telegramUrl: string;
 }) {
   const [open, setOpen] = useState(false);
-  const [experience, setExperience] = useState<Experience | null>(null);
-  const [market, setMarket] = useState<Market | null>(null);
-
-  const ready = Boolean(experience && market);
-  const experienceLabel =
-    EXPERIENCES.find((e) => e.id === experience)?.label ?? "";
-  const marketLabel = MARKETS.find((m) => m.id === market)?.label ?? "";
+  const [experience, setExperience] = useState("");
+  const [market, setMarket] = useState("");
+  const id = useId(); // two instances on the page — keeps label/select ids unique
 
   if (!open) {
     return (
@@ -99,104 +90,104 @@ export default function ContactUs({
     );
   }
 
+  const ready = Boolean(experience && market);
+
   return (
     <div className="contact-flow">
       <div className="contact-panel revealed">
-        {/* Step 1 — experience selector */}
-        <div className="selector-block">
-          <div className="selector-title">
-            <strong>Step 1</strong> — What&apos;s your experience level?
+        <div className="selector-row">
+          <div className="selector-block">
+            <label className="selector-title" htmlFor={`${id}-experience`}>
+              <strong>Step 1</strong> — What&apos;s your experience level?
+            </label>
+            <select
+              id={`${id}-experience`}
+              className="selector-select"
+              value={experience}
+              onChange={(e) => setExperience(e.target.value)}
+            >
+              {EXPERIENCES.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
           </div>
-          <div className="option-chips">
-            {EXPERIENCES.map((e) => (
-              <button
-                key={e.id}
-                type="button"
-                aria-pressed={experience === e.id}
-                className={`option-chip${
-                  experience === e.id ? " selected exp" : ""
-                }`}
-                onClick={() => setExperience(e.id)}
-              >
-                {e.label}
-              </button>
-            ))}
+
+          <div className="selector-block">
+            <label className="selector-title" htmlFor={`${id}-market`}>
+              <strong>Step 2</strong> — Which market interests you?
+            </label>
+            <select
+              id={`${id}-market`}
+              className="selector-select"
+              value={market}
+              onChange={(e) => setMarket(e.target.value)}
+            >
+              {MARKETS.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
-        {/* Step 2 — market selector */}
-        <div className="selector-block">
-          <div className="selector-title">
-            <strong>Step 2</strong> — Which market interests you?
-          </div>
-          <div className="option-chips">
-            {MARKETS.map((m) => (
-              <button
-                key={m.id}
-                type="button"
-                aria-pressed={market === m.id}
-                className={`option-chip${
-                  market === m.id ? " selected mkt" : ""
-                }`}
-                onClick={() => setMarket(m.id)}
-              >
-                {m.label}
-              </button>
-            ))}
+        {/* Channels always visible — selections only personalize the link */}
+        <div className="channels">
+          <span className="flow-summary">
+            {ready ? (
+              <>
+                <b>
+                  {EXPERIENCES.find((e) => e.value === experience)?.label}
+                </b>{" "}
+                &middot;{" "}
+                <b>{MARKETS.find((m) => m.value === market)?.label}</b> —
+                reach the team on:
+              </>
+            ) : (
+              "Optional — your picks personalize the chat link."
+            )}
+          </span>
+          <div className="contact-pills">
+            <a
+              className="contact-pill whatsapp"
+              href={buildUrl(whatsappUrl, experience, market)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="pill-icon-wrap">
+                <WhatsAppGlyph />
+              </span>
+              <span className="pill-label">WhatsApp</span>
+              <PillArrow />
+            </a>
+            <a
+              className="contact-pill telegram"
+              href={buildUrl(telegramUrl, experience, market)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="pill-icon-wrap">
+                <TelegramGlyph />
+              </span>
+              <span className="pill-label">Telegram</span>
+              <PillArrow />
+            </a>
+            <button
+              type="button"
+              className="contact-close"
+              aria-label="Close contact options"
+              onClick={() => {
+                setOpen(false);
+                setExperience("");
+                setMarket("");
+              }}
+            >
+              &times;
+            </button>
           </div>
         </div>
-
-        {/* Channels — revealed once both are chosen */}
-        {ready ? (
-          <div className="channels revealed">
-            <span className="flow-summary">
-              <b>{experienceLabel}</b> &middot; <b>{marketLabel}</b> — reach
-              the team on:
-            </span>
-            <div className="contact-pills">
-              <a
-                className="contact-pill whatsapp"
-                href={buildUrl(whatsappUrl, experience, market)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="pill-icon-wrap">
-                  <WhatsAppGlyph />
-                </span>
-                <span className="pill-label">WhatsApp</span>
-                <PillArrow />
-              </a>
-              <a
-                className="contact-pill telegram"
-                href={buildUrl(telegramUrl, experience, market)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="pill-icon-wrap">
-                  <TelegramGlyph />
-                </span>
-                <span className="pill-label">Telegram</span>
-                <PillArrow />
-              </a>
-              <button
-                type="button"
-                className="contact-close"
-                aria-label="Close contact options"
-                onClick={() => {
-                  setOpen(false);
-                  setExperience(null);
-                  setMarket(null);
-                }}
-              >
-                &times;
-              </button>
-            </div>
-          </div>
-        ) : (
-          <p className="flow-hint">
-            Select your experience and market to reveal the channels.
-          </p>
-        )}
       </div>
     </div>
   );
