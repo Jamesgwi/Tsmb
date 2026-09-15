@@ -1033,11 +1033,11 @@ export default async function Home() {
 
             <p>
               Practical strategies for wealth accumulation, retirement
-              planning, and financial independence — without the jargon.
+              planning, and financial independence
             </p>
 
             <p>
-              Tap below to reach the WRFN team on Telegram or WhatsApp for
+              Tap below to reach the WRFN team for 
               personalized guidance and trade support.
             </p>
 
