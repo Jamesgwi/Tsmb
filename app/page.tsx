@@ -206,7 +206,7 @@ export default async function Home() {
 
             .brand-name-sub {
               font-size: 10px;
-              font-weight: 700;
+              font-weight: 800;
               letter-spacing: 2.4px;
               text-transform: uppercase;
               color: ${theme.ink};
