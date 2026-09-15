@@ -206,13 +206,14 @@ export default async function Home() {
 }
 
             .brand-name-sub {
-              font-size: 12px;
-              font-weight: 900;
-              letter-spacing: 2.4px;
-              text-transform: uppercase;
-              color: ${theme.ink};
-              line-height: 1.2;
-            }
+  font-size: 13px;          /* slight bump helps a lot at this spacing */
+  font-weight: 900;
+  letter-spacing: 1.6px;   /* pull it in — 2.4px was too aggressive for 12px */
+  text-transform: uppercase;
+  color: #1a1a2e;           /* hard-coded dark navy instead of relying on theme.ink */
+  line-height: 1.2;
+  opacity: 1;               /* rule out any inherited opacity fade */
+}
 
             .brand-link {
               text-decoration: none;
