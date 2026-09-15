@@ -926,7 +926,7 @@ export default async function Home() {
 
             footer {
               padding: 42px 22px;
-              background: ${theme.inkSoft};
+              background: ${theme.bgSoft};
               text-align: center;
               color: #fff;
             }
