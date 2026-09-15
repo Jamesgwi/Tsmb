@@ -206,7 +206,7 @@ export default async function Home() {
 }
 
             .brand-name-sub {
-              font-size: 10px;
+              font-size: 12px;
               font-weight: 900;
               letter-spacing: 2.4px;
               text-transform: uppercase;
