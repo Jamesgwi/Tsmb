@@ -206,13 +206,13 @@ export default async function Home() {
 }
 
             .brand-name-sub {
-  font-size: 13px;          /* slight bump helps a lot at this spacing */
-  font-weight: 900;
-  letter-spacing: 1.6px;   /* pull it in — 2.4px was too aggressive for 12px */
+  font-family: var(--font-display), sans-serif;  /* ← Montserrat instead of Quicksand */
+  font-size: 13px;
+  font-weight: 900;                               /* ← now actually 900 */
+  letter-spacing: 1.6px;
   text-transform: uppercase;
-  color: #1a1a2e;           /* hard-coded dark navy instead of relying on theme.ink */
+  color: #1a1a2e;
   line-height: 1.2;
-  opacity: 1;               /* rule out any inherited opacity fade */
 }
 
             .brand-link {
