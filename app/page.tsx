@@ -571,9 +571,8 @@ export default async function Home() {
             }
 
             .contact-close {
-              position: absolute;
-              top: -8px;
-              right: -8px;
+              align-self: center;
+              margin-top: 8px;
               flex-shrink: 0;
               width: 36px;
               height: 36px;
@@ -801,9 +800,9 @@ export default async function Home() {
               inset: 0;
               background: linear-gradient(
                 120deg,
-                rgba(255,122,0,.80) 0%,
-                rgba(255,31,107,.78) 48%,
-                rgba(224,80,158,.82) 80%
+                rgba(255,122,0,.55) 0%,
+                rgba(255,31,107,.55) 48%,
+                rgba(224,80,158,.60) 80%
               );
             }
 
@@ -925,7 +924,7 @@ export default async function Home() {
 
             footer {
               padding: 42px 22px;
-              background: var(--grad);
+              background: ${theme.pink};
               text-align: center;
               color: #fff;
             }
