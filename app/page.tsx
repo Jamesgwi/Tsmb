@@ -1268,8 +1268,8 @@ export default async function Home() {
 
               <h2>
                 Explore.
-                <br />
-                Build. <em className="accent-pink">Grow.</em>
+                
+                 Build. <em className="accent-pink">Grow.</em>
               </h2>
             </div>
 
