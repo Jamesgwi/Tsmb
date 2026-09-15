@@ -200,7 +200,7 @@ export default async function Home() {
             .brand {
   display: flex;
   flex-direction: column;
-  align-items: center; /* or flex-start to left-align */
+  align-items: flex-start; 
   gap: 12px;
   text-decoration: none;
 }
