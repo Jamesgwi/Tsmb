@@ -1128,19 +1128,7 @@ export default async function Home() {
       />
 
       <div className="page">
-        <div className="ticker" role="status" aria-label="WRFN is now accepting new members">
-          <div className="ticker-track">
-            {[0, 1].map((copy) => (
-              <div className="ticker-group" key={copy} aria-hidden={copy === 1}>
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <span className="ticker-item" key={i}>
-                    WRFN now accepting new members
-                  </span>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
+        
 
         <header className="brand-bar">
           <div className="brand-bar-inner">
@@ -1200,6 +1188,19 @@ export default async function Home() {
           </div>
         </section>
 
+        <div className="ticker" role="status" aria-label="WRFN is now accepting new members">
+          <div className="ticker-track">
+            {[0, 1].map((copy) => (
+              <div className="ticker-group" key={copy} aria-hidden={copy === 1}>
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <span className="ticker-item" key={i}>
+                    WRFN now accepting new members
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
         <section className="pillars">
           <div className="section-width">
             <div className="eyebrow accent-orange">The WRFN Goal</div>
