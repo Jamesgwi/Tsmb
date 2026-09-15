@@ -713,9 +713,9 @@ export default async function Home() {
             .pillar h2 {
               margin: 0;
               font-family: var(--font-display), sans-serif;
-              font-size: 23px;
+              font-size: 14px;
               line-height: 1;
-              font-weight: 700;
+              font-weight: 500;
               text-transform: uppercase;
               letter-spacing: .5px;
             }
