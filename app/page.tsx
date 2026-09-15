@@ -329,7 +329,124 @@ export default async function Home() {
               box-shadow: 0 14px 32px rgba(255,122,0,.38);
             }
 
+            /* ---- Custom dropdown ---- */
+
+            .dropdown {
+              position: relative;
+            }
+
+            .dropdown-backdrop {
+              position: fixed;
+              inset: 0;
+              z-index: 25;
+              background: transparent;
+            }
+
+            .dropdown-toggle {
+              appearance: none;
+              -webkit-appearance: none;
+              display: inline-flex;
+              align-items: center;
+              justify-content: space-between;
+              gap: 14px;
+              width: 100%;
+              font-family: var(--font-body), sans-serif;
+              padding: 13px 20px;
+              min-width: 250px;
+              border-radius: 100px;
+              border: 1.5px solid ${theme.line};
+              background: #fff;
+              color: ${theme.ink};
+              font-size: 14px;
+              font-weight: 700;
+              cursor: pointer;
+              text-align: left;
+              transition: border-color .2s ease, box-shadow .2s ease;
+            }
+
+            .dropdown-toggle:hover {
+              border-color: ${theme.inkSoft};
+            }
+
+            .dropdown-toggle:focus-visible {
+              outline: 3px solid ${theme.pink};
+              outline-offset: 2px;
+            }
+
+            .dropdown-value.placeholder {
+              color: ${theme.inkSoft};
+            }
+
+            .dropdown-chevron {
+              flex-shrink: 0;
+              color: ${theme.inkSoft};
+              transition: transform .2s ease;
+            }
+
+            .dropdown.open .dropdown-chevron {
+              transform: rotate(180deg);
+            }
+
+            .dropdown-menu {
+              position: absolute;
+              top: calc(100% + 8px);
+              left: 0;
+              right: 0;
+              z-index: 30;
+              background: #fff;
+              border: 1px solid ${theme.line};
+              border-radius: 18px;
+              box-shadow: 0 18px 44px rgba(16,20,38,.16);
+              padding: 6px;
+            }
+
+            .dropdown-option {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              gap: 12px;
+              width: 100%;
+              padding: 12px 16px;
+              border: 0;
+              border-radius: 12px;
+              background: transparent;
+              color: ${theme.ink};
+              font-family: var(--font-body), sans-serif;
+              font-size: 14px;
+              font-weight: 700;
+              text-align: left;
+              cursor: pointer;
+              transition: background .15s ease, color .15s ease;
+            }
+
+            .dropdown-option:hover {
+              background: ${theme.bgSoft};
+            }
+
+            .dropdown-option.selected {
+              color: var(--accent);
+            }
+
+            .dropdown-check {
+              width: 20px;
+              height: 20px;
+              flex-shrink: 0;
+              border-radius: 50%;
+              border: 2px solid ${theme.line};
+              display: grid;
+              place-items: center;
+              transition: background .15s ease, border-color .15s ease;
+            }
+
+            .dropdown-option.selected .dropdown-check {
+              background: var(--accent);
+              border-color: var(--accent);
+            }
+
+            /* ---- Contact panel ---- */
+
             .contact-panel {
+              position: relative;
               display: flex;
               flex-direction: column;
               align-items: center;
@@ -356,47 +473,45 @@ export default async function Home() {
               color: ${theme.ink};
             }
 
-            
             .selector-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 18px;
-}
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+              gap: 18px;
+            }
 
-.selector-select {
-  appearance: none;
-  -webkit-appearance: none;
-  font-family: var(--font-body), sans-serif;
-  padding: 13px 46px 13px 20px;
-  min-width: 250px;
-  border-radius: 100px;
-  border: 1.5px solid ${theme.line};
-  background-color: #fff;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%235A6472' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 18px center;
-  background-size: 13px;
-  color: ${theme.ink};
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: border-color .2s ease, box-shadow .2s ease;
-}
+            .selector-select {
+              appearance: none;
+              -webkit-appearance: none;
+              font-family: var(--font-body), sans-serif;
+              padding: 13px 46px 13px 20px;
+              min-width: 250px;
+              border-radius: 100px;
+              border: 1.5px solid ${theme.line};
+              background-color: #fff;
+              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%235A6472' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+              background-repeat: no-repeat;
+              background-position: right 18px center;
+              background-size: 13px;
+              color: ${theme.ink};
+              font-size: 14px;
+              font-weight: 700;
+              cursor: pointer;
+              transition: border-color .2s ease, box-shadow .2s ease;
+            }
 
-.selector-select:hover {
-  border-color: ${theme.inkSoft};
-}
+            .selector-select:hover {
+              border-color: ${theme.inkSoft};
+            }
 
-.selector-select:focus-visible {
-  outline: 3px solid ${theme.pink};
-  outline-offset: 2px;
-}
+            .selector-select:focus-visible {
+              outline: 3px solid ${theme.pink};
+              outline-offset: 2px;
+            }
 
-.selector-select option {
-  color: ${theme.ink};
-}
-
+            .selector-select option {
+              color: ${theme.ink};
+            }
 
             .flow-hint {
               margin: 0;
@@ -426,7 +541,7 @@ export default async function Home() {
               display: flex;
               justify-content: center;
               align-items: center;
-              flex-wrap: wrap;
+              flex-wrap: nowrap;
               gap: 12px;
               margin: 0;
             }
@@ -489,14 +604,17 @@ export default async function Home() {
             }
 
             .contact-close {
+              position: absolute;
+              top: -8px;
+              right: -8px;
               flex-shrink: 0;
-              width: 42px;
-              height: 42px;
+              width: 36px;
+              height: 36px;
               border-radius: 50%;
               border: 1px solid ${theme.line};
               background: #fff;
               color: ${theme.inkSoft};
-              font-size: 20px;
+              font-size: 17px;
               line-height: 1;
               cursor: pointer;
               transition:
@@ -789,8 +907,6 @@ export default async function Home() {
               color: #fff;
             }
 
-            
-
             .cta .contact-pill.whatsapp {
               background: #fff;
               color: ${theme.whatsapp};
@@ -825,13 +941,13 @@ export default async function Home() {
               color: #fff;
               background: rgba(255,255,255,.24);
             }
-            .cta .selector-select {
-  background-color: rgba(255,255,255,.12);
-  border-color: rgba(255,255,255,.45);
-  color: #fff;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%23FFFFFF' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
 
+            .cta .selector-select {
+              background-color: rgba(255,255,255,.12);
+              border-color: rgba(255,255,255,.45);
+              color: #fff;
+              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%23FFFFFF' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            }
 
             footer {
               padding: 42px 22px;
@@ -885,16 +1001,51 @@ export default async function Home() {
                 gap: 18px;
               }
 
-              
-
               .contact-pill {
-                padding: 11px 18px 11px 12px;
-                font-size: 14px;
+                padding: 11px 15px 11px 11px;
+                font-size: 13.5px;
+                gap: 9px;
               }
 
               .contact-close {
-                width: 38px;
-                height: 38px;
+                width: 36px;
+                height: 36px;
+                font-size: 17px;
+              }
+
+              .contact-pills {
+                gap: 8px;
+              }
+
+              .pill-icon-wrap {
+                width: 30px;
+                height: 30px;
+                border-radius: 10px;
+              }
+
+              .pill-glyph {
+                width: 16px;
+                height: 16px;
+              }
+
+              .pill-arrow {
+                display: none;
+              }
+
+              .dropdown-toggle {
+                min-width: 0;
+                width: min(100%, 320px);
+              }
+
+              .selector-row {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+              }
+
+              .selector-select {
+                width: min(100%, 320px);
+                min-width: 0;
               }
 
               .pillars {
@@ -926,16 +1077,6 @@ export default async function Home() {
                 padding: 72px 20px;
               }
             }
-.selector-row {
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-
-.selector-select {
-  width: min(100%, 320px);
-  min-width: 0;
-}
 
             @media (prefers-reduced-motion: no-preference) {
               .fade-up {
