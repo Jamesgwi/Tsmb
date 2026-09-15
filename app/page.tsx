@@ -1172,8 +1172,8 @@ export default async function Home() {
 
             <h1>
               Grow in wealth.
-              <br />
-              <em className="accent-pink">Retire in freedom.</em>
+              
+              <em className="accent-pink"> Retire in freedom.</em>
             </h1>
 
             <p>
