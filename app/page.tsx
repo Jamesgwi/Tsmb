@@ -654,7 +654,7 @@ export default async function Home() {
               max-width: 660px;
               color: ${theme.ink};
               font-family: var(--font-display), sans-serif;
-              font-size: clamp(19px, 4vw, 30px);
+              font-size: clamp(14px, 4vw, 30px);
               line-height: 1.05;
               font-weight: 600;
               text-transform: uppercase;
