@@ -15,7 +15,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.Connectwrfnteam.com"),
+  metadataBase: new URL("https://www.connectwrfnteam.com"),
   title: "Wealth Rise & Freedom Network WRFN Team — Build Wealth. Retire Wisely. Live Free.",
   description:
     "Join Wealth Rise & Freedom Network to explore strategies, ideas, and tips for your financial journey — retiring wisely, building a prosperous future, and achieving early retirement.",
@@ -32,16 +32,19 @@ export const metadata: Metadata = {
     "prosperous future",
   ],
   authors: [{ name: "Wealth Rise & Freedom Network" }],
+  other: {
+    "fb:app_id": "YOUR_APP_ID_HERE",
+  },
   openGraph: {
-  title: "Wealth Rise & Freedom Network WRFN Team",
+    title: "Wealth Rise & Freedom Network WRFN Team",
     description:
       "Join us to explore strategies, ideas, and tips for your financial journey — retiring wisely, building a prosperous future, and achieving early retirement.",
-    url: "https://www.Connectwrfnteam.com",
+    url: "https://www.connectwrfnteam.com",
     siteName: "Wealth Rise & Freedom Network",
     type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://www.connectwrfnteam.com/og-image.png",
         width: 1200,
         height: 630,
         alt: "Wealth Rise & Freedom Network — Strategies, Ideas & Tips for Your Financial Journey",
@@ -50,10 +53,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Wealth Rise & Freedom Network WRFN Team ",
+    title: "Wealth Rise & Freedom Network WRFN Team",
     description:
       "Join us to explore strategies, ideas, and tips for your financial journey — retiring wisely, building a prosperous future, and achieving early retirement.",
-    images: ["/og-image.png"],
+    images: ["https://www.connectwrfnteam.com/og-image.png"],
   },
 };
 
