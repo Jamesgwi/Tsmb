@@ -388,17 +388,19 @@ export default async function Home() {
             }
 
             .dropdown-menu {
-              position: absolute;
-              top: calc(100% + 8px);
-              left: 0;
-              right: 0;
-              z-index: 30;
-              background: #fff;
-              border: 1px solid ${theme.line};
-              border-radius: 18px;
-              box-shadow: 0 18px 44px rgba(16,20,38,.16);
-              padding: 6px;
-            }
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: min(100vw - 40px, 340px);
+  z-index: 30;
+  background: #fff;
+  border: 1px solid ${theme.line};
+  border-radius: 18px;
+  box-shadow: 0 18px 44px rgba(16,20,38,.16);
+  padding: 6px;
+}
 
             .dropdown-option {
               display: flex;
