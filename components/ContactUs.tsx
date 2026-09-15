@@ -168,7 +168,7 @@ export default function ContactUs({
   const [open, setOpen] = useState(false);
   const [experience, setExperience] = useState("");
   const [market, setMarket] = useState("");
-  const id = useId(); // two instances on the page — keeps ids unique
+  const id = useId();
 
   if (!open) {
     return (
@@ -199,37 +199,11 @@ export default function ContactUs({
   return (
     <div className="contact-flow">
       <div className="contact-panel revealed">
-        <button
-          type="button"
-          className="contact-close"
-          aria-label="Close contact options"
-          onClick={() => {
-            setOpen(false);
-            setExperience("");
-            setMarket("");
-          }}
-        >
-          &times;
-        </button>
-
         <div className="selector-row">
-          <div className="selector-block">
-            <span className="selector-title" id={`${id}-exp-label`}>
-              <strong></strong> What&apos;s your experience level?
-            </span>
-            <Dropdown
-              id={`${id}-exp`}
-              label="Select your experience level"
-              value={experience}
-              options={EXPERIENCES}
-              accent="exp"
-              onChange={setExperience}
-            />
-          </div>
-
+          {/* Market is now Step 1 */}
           <div className="selector-block">
             <span className="selector-title" id={`${id}-mkt-label`}>
-              <strong> </strong> Which market interests you?
+              <strong>Step 1</strong> — Which market interests you?
             </span>
             <Dropdown
               id={`${id}-mkt`}
@@ -240,21 +214,34 @@ export default function ContactUs({
               onChange={setMarket}
             />
           </div>
+
+          {/* Experience is now Step 2 */}
+          <div className="selector-block">
+            <span className="selector-title" id={`${id}-exp-label`}>
+              <strong>Step 2</strong> — What&apos;s your experience level?
+            </span>
+            <Dropdown
+              id={`${id}-exp`}
+              label="Select your experience level"
+              value={experience}
+              options={EXPERIENCES}
+              accent="exp"
+              onChange={setExperience}
+            />
+          </div>
         </div>
 
         <div className="channels">
           <span className="flow-summary">
             {ready ? (
               <>
-                <b>
-                  {EXPERIENCES.find((e) => e.value === experience)?.label}
-                </b>{" "}
-                &middot;{" "}
-                <b>{MARKETS.find((m) => m.value === market)?.label}</b> 
+                <b>{MARKETS.find((m) => m.value === market)?.label}</b>
+                {" "}&middot;{" "}
+                <b>{EXPERIENCES.find((e) => e.value === experience)?.label}</b> —
                 reach the team on:
               </>
             ) : (
-              " personalize your inquiries ."
+              "Optional — your picks personalize the chat link."
             )}
           </span>
           <div className="contact-pills">
@@ -284,6 +271,20 @@ export default function ContactUs({
             </a>
           </div>
         </div>
+
+        {/* Close button moved to the bottom */}
+        <button
+          type="button"
+          className="contact-close"
+          aria-label="Close contact options"
+          onClick={() => {
+            setOpen(false);
+            setExperience("");
+            setMarket("");
+          }}
+        >
+          &times;
+        </button>
       </div>
     </div>
   );
