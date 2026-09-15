@@ -209,7 +209,7 @@ export default async function Home() {
               font-weight: 700;
               letter-spacing: 2.4px;
               text-transform: uppercase;
-              color: ${theme.inkSoft};
+              color: ${theme.ink};
               line-height: 1.2;
             }
 
