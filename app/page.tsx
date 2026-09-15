@@ -142,7 +142,7 @@ export default async function Home() {
             .ticker-track {
               display: flex;
               width: max-content;
-              animation: tickerScroll 22s linear infinite;
+              animation: tickerScroll 45s linear infinite;
             }
 
             .ticker-group {
