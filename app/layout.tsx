@@ -15,42 +15,44 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.Connectteamchrm.com"),
-  title: "The Compounding Hub | Retirement Mastermind — Build Wealth. Retire Strong. Gain Freedom.",
+  metadataBase: new URL("https://www.Connectwrfnteam.com"),
+  title: "Wealth Rise & Freedom Network (WRFN) — Build Wealth. Retire Wisely. Live Free.",
   description:
-    "A private community of serious wealth-builders focused on compound growth, disciplined investing, and a retirement built on strength and clarity. Join the mastermind.",
+    "Join Wealth Rise & Freedom Network to explore strategies, ideas, and tips for your financial journey — retiring wisely, building a prosperous future, and achieving early retirement.",
   keywords: [
-    "The Compounding Hub",
-    "Retirement Mastermind",
+    "Wealth Rise & Freedom Network",
+    "WRFN",
+    "financial freedom",
+    "early retirement",
     "wealth building",
     "compound growth",
     "retirement planning",
     "investment strategies",
-    "financial freedom",
-    "trading community",
+    "financial journey",
+    "prosperous future",
   ],
-  authors: [{ name: "The Compounding Hub" }],
+  authors: [{ name: "Wealth Rise & Freedom Network" }],
   openGraph: {
-    title: "The Compounding Hub | Retirement Mastermind",
+    title: "Wealth Rise & Freedom Network (WRFN)",
     description:
-      "A private community of serious wealth-builders focused on compound growth, disciplined investing, and a retirement built on strength and clarity.",
-    url: "https://www.Connectteamchrm.com",
-    siteName: "The Compounding Hub",
+      "Join us to explore strategies, ideas, and tips for your financial journey — retiring wisely, building a prosperous future, and achieving early retirement.",
+    url: "https://www.Connectwrfnteam.com",
+    siteName: "Wealth Rise & Freedom Network",
     type: "website",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "The Compounding Hub — Retirement Mastermind",
+        alt: "Wealth Rise & Freedom Network — Strategies, Ideas & Tips for Your Financial Journey",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Compounding Hub | Retirement Mastermind",
+    title: "Wealth Rise & Freedom Network (WRFN)",
     description:
-      "A private community of serious wealth-builders focused on compound growth, disciplined investing, and a retirement built on strength and clarity.",
+      "Join us to explore strategies, ideas, and tips for your financial journey — retiring wisely, building a prosperous future, and achieving early retirement.",
     images: ["/og-image.png"],
   },
 };
@@ -60,7 +62,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: "#080c14",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
@@ -69,9 +71,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-[#080c14] overflow-x-hidden">
+    <html lang="en" className="bg-white overflow-x-hidden">
       <body
-        className={`${inter.variable} ${outfit.variable} font-sans antialiased bg-[#080c14] text-gray-100 min-h-screen m-0 p-0 overflow-x-hidden`}
+        className={`${inter.variable} ${outfit.variable} font-sans antialiased bg-white text-slate-900 min-h-screen m-0 p-0 overflow-x-hidden`}
       >
         {children}
       </body>
