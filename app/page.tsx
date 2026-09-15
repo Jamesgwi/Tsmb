@@ -480,39 +480,6 @@ export default async function Home() {
               gap: 18px;
             }
 
-            .selector-select {
-              appearance: none;
-              -webkit-appearance: none;
-              font-family: var(--font-body), sans-serif;
-              padding: 13px 46px 13px 20px;
-              min-width: 250px;
-              border-radius: 100px;
-              border: 1.5px solid ${theme.line};
-              background-color: #fff;
-              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%235A6472' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-              background-repeat: no-repeat;
-              background-position: right 18px center;
-              background-size: 13px;
-              color: ${theme.ink};
-              font-size: 14px;
-              font-weight: 700;
-              cursor: pointer;
-              transition: border-color .2s ease, box-shadow .2s ease;
-            }
-
-            .selector-select:hover {
-              border-color: ${theme.inkSoft};
-            }
-
-            .selector-select:focus-visible {
-              outline: 3px solid ${theme.pink};
-              outline-offset: 2px;
-            }
-
-            .selector-select option {
-              color: ${theme.ink};
-            }
-
             .flow-hint {
               margin: 0;
               font-size: 12.5px;
@@ -942,11 +909,18 @@ export default async function Home() {
               background: rgba(255,255,255,.24);
             }
 
-            .cta .selector-select {
-              background-color: rgba(255,255,255,.12);
+            .cta .dropdown-toggle {
+              background: rgba(255,255,255,.12);
               border-color: rgba(255,255,255,.45);
               color: #fff;
-              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%23FFFFFF' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            }
+
+            .cta .dropdown-value.placeholder {
+              color: rgba(255,255,255,.75);
+            }
+
+            .cta .dropdown-chevron {
+              color: rgba(255,255,255,.85);
             }
 
             footer {
@@ -1041,11 +1015,6 @@ export default async function Home() {
                 flex-direction: column;
                 align-items: center;
                 gap: 16px;
-              }
-
-              .selector-select {
-                width: min(100%, 320px);
-                min-width: 0;
               }
 
               .pillars {
