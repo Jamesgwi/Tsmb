@@ -203,7 +203,7 @@ export default function ContactUs({
           {/* Market is now Step 1 */}
           <div className="selector-block">
             <span className="selector-title" id={`${id}-mkt-label`}>
-              <strong>Step 1</strong> — Which market interests you?
+              <strong></strong> — Which market interests you?
             </span>
             <Dropdown
               id={`${id}-mkt`}
@@ -218,7 +218,7 @@ export default function ContactUs({
           {/* Experience is now Step 2 */}
           <div className="selector-block">
             <span className="selector-title" id={`${id}-exp-label`}>
-              <strong>Step 2</strong> — What&apos;s your experience level?
+              <strong></strong> — What&apos;s your experience level?
             </span>
             <Dropdown
               id={`${id}-exp`}
@@ -241,7 +241,7 @@ export default function ContactUs({
                 reach the team on:
               </>
             ) : (
-              "Optional — your picks personalize the chat link."
+              "Your picks personalize the chat link."
             )}
           </span>
           <div className="contact-pills">
