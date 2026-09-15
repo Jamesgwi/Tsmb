@@ -324,7 +324,7 @@ export default async function Home() {
               max-width: 720px;
               color: ${theme.ink};
               font-family: var(--font-display), sans-serif;
-              font-size: clamp(17px, 4.2vw, 35px);
+              font-size: clamp(17px, 4vw, 32px);
               line-height: 1.02;
               font-weight: 800;
               text-transform: uppercase;
@@ -650,13 +650,13 @@ export default async function Home() {
             }
 
             .pillars-title {
-              margin: 14px 0 42px;
+              margin: 12px 0 33px;
               max-width: 660px;
               color: ${theme.ink};
               font-family: var(--font-display), sans-serif;
               font-size: clamp(19px, 4vw, 30px);
               line-height: 1.05;
-              font-weight: 700;
+              font-weight: 600;
               text-transform: uppercase;
               letter-spacing: -0.5px;
             }
@@ -773,9 +773,9 @@ export default async function Home() {
               margin: 14px 0 0;
               color: ${theme.ink};
               font-family: var(--font-display), sans-serif;
-              font-size: clamp(19px, 4vw, 30px);
+              font-size: clamp(14px, 4vw, 30px);
               line-height: 1.02;
-              font-weight: 700;
+              font-weight: 600;
               text-transform: uppercase;
               letter-spacing: -0.5px;
             }
@@ -787,7 +787,7 @@ export default async function Home() {
             .philosophy-copy {
               margin: 0 0 27px;
               color: ${theme.inkSoft};
-              font-size: 14.5px;
+              font-size: 13px;
               line-height: 1.9;
               font-weight: 500;
             }
@@ -978,7 +978,7 @@ export default async function Home() {
               color: #fff;
               font-family: var(--font-display), sans-serif;
               font-size: 20px;
-              font-weight: 900;
+              font-weight: 700;
               text-transform: uppercase;
               letter-spacing: 2px;
             }
