@@ -356,50 +356,47 @@ export default async function Home() {
               color: ${theme.ink};
             }
 
-            .option-chips {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              flex-wrap: wrap;
-              gap: 10px;
-            }
+            
+            .selector-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
 
-            .option-chip {
-              font-family: var(--font-body), sans-serif;
-              padding: 12px 24px;
-              border-radius: 100px;
-              border: 1.5px solid ${theme.line};
-              background: #fff;
-              color: ${theme.ink};
-              font-size: 14px;
-              font-weight: 700;
-              cursor: pointer;
-              transition:
-                transform .2s ease,
-                border-color .2s ease,
-                background .2s ease,
-                color .2s ease,
-                box-shadow .2s ease;
-            }
+.selector-select {
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: var(--font-body), sans-serif;
+  padding: 13px 46px 13px 20px;
+  min-width: 250px;
+  border-radius: 100px;
+  border: 1.5px solid ${theme.line};
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%235A6472' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  background-size: 13px;
+  color: ${theme.ink};
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
 
-            .option-chip:hover {
-              transform: translateY(-2px);
-              border-color: ${theme.inkSoft};
-            }
+.selector-select:hover {
+  border-color: ${theme.inkSoft};
+}
 
-            .option-chip.selected.exp {
-              background: ${theme.orange};
-              border-color: ${theme.orange};
-              color: #fff;
-              box-shadow: 0 8px 20px rgba(255,122,0,.28);
-            }
+.selector-select:focus-visible {
+  outline: 3px solid ${theme.pink};
+  outline-offset: 2px;
+}
 
-            .option-chip.selected.mkt {
-              background: ${theme.pink};
-              border-color: ${theme.pink};
-              color: #fff;
-              box-shadow: 0 8px 20px rgba(255,31,107,.28);
-            }
+.selector-select option {
+  color: ${theme.ink};
+}
+
 
             .flow-hint {
               margin: 0;
@@ -792,29 +789,7 @@ export default async function Home() {
               color: #fff;
             }
 
-            .cta .option-chip {
-              background: rgba(255,255,255,.12);
-              border-color: rgba(255,255,255,.45);
-              color: #fff;
-            }
-
-            .cta .option-chip:hover {
-              border-color: #fff;
-            }
-
-            .cta .option-chip.selected.exp {
-              background: #fff;
-              border-color: #fff;
-              color: ${theme.orange};
-              box-shadow: 0 8px 20px rgba(0,0,0,.20);
-            }
-
-            .cta .option-chip.selected.mkt {
-              background: #fff;
-              border-color: #fff;
-              color: ${theme.pink};
-              box-shadow: 0 8px 20px rgba(0,0,0,.20);
-            }
+            
 
             .cta .contact-pill.whatsapp {
               background: #fff;
@@ -850,6 +825,13 @@ export default async function Home() {
               color: #fff;
               background: rgba(255,255,255,.24);
             }
+            .cta .selector-select {
+  background-color: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.45);
+  color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%23FFFFFF' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
 
             footer {
               padding: 42px 22px;
@@ -903,10 +885,7 @@ export default async function Home() {
                 gap: 18px;
               }
 
-              .option-chip {
-                padding: 10px 18px;
-                font-size: 13px;
-              }
+              
 
               .contact-pill {
                 padding: 11px 18px 11px 12px;
@@ -947,6 +926,16 @@ export default async function Home() {
                 padding: 72px 20px;
               }
             }
+.selector-row {
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.selector-select {
+  width: min(100%, 320px);
+  min-width: 0;
+}
 
             @media (prefers-reduced-motion: no-preference) {
               .fade-up {
