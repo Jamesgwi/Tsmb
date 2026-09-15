@@ -13,9 +13,8 @@ const EXPERIENCES = [
 const MARKETS = [
   { value: "", label: "Select your market" },
   { value: "stocks", label: "Stocks" },
-  { value: "forex", label: "Forex" },
-  { value: "binary", label: "Binary" },
-  { value: "crypto", label: "Crypto" },
+  { value: "retirement", label: "Retirement" },
+  { value: "investment", label: "Investment" },
 ];
 
 function buildUrl(base: string, experience: string, market: string) {
@@ -178,7 +177,7 @@ export default function ContactUs({
           className="contact-us-btn"
           onClick={() => setOpen(true)}
         >
-          Contact Us
+          Contact WRFN Team
           <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
             <path
               d="M5 12h14M13 6l6 6-6 6"
@@ -200,7 +199,7 @@ export default function ContactUs({
     <div className="contact-flow">
       <div className="contact-panel revealed">
         <div className="selector-row">
-          {/* Market is now Step 1 */}
+          {/* Market is Step 1 */}
           <div className="selector-block">
             <span className="selector-title" id={`${id}-mkt-label`}>
               <strong></strong> — Which market interests you?
@@ -215,7 +214,7 @@ export default function ContactUs({
             />
           </div>
 
-          {/* Experience is now Step 2 */}
+          {/* Experience is Step 2 */}
           <div className="selector-block">
             <span className="selector-title" id={`${id}-exp-label`}>
               <strong></strong> — What&apos;s your experience level?
@@ -272,7 +271,7 @@ export default function ContactUs({
           </div>
         </div>
 
-        {/* Close button moved to the bottom */}
+        {/* Close button at the bottom */}
         <button
           type="button"
           className="contact-close"
