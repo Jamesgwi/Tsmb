@@ -116,7 +116,6 @@ export default async function Home() {
               scroll-margin-top: 76px;
             }
 
-            /* Accent system — replaces gradient text (orange / pink alternating) */
             .accent-orange {
               color: ${theme.orange};
             }
@@ -130,6 +129,53 @@ export default async function Home() {
               min-height: 100vh;
               overflow-x: hidden;
               background: ${theme.bg};
+            }
+
+            /* ---- Announcement ticker ---- */
+            .ticker {
+              overflow: hidden;
+              background: var(--grad);
+              color: #fff;
+              padding: 9px 0;
+            }
+
+            .ticker-track {
+              display: flex;
+              width: max-content;
+              animation: tickerScroll 22s linear infinite;
+            }
+
+            .ticker-group {
+              display: flex;
+              align-items: center;
+              white-space: nowrap;
+            }
+
+            .ticker-item {
+              display: inline-flex;
+              align-items: center;
+              gap: 28px;
+              padding-right: 28px;
+              font-family: var(--font-body), sans-serif;
+              font-size: 11px;
+              font-weight: 800;
+              letter-spacing: 2.6px;
+              text-transform: uppercase;
+            }
+
+            .ticker-item::after {
+              content: "✦";
+              font-size: 9px;
+              opacity: .8;
+            }
+
+            @keyframes tickerScroll {
+              from { transform: translateX(-50%); }
+              to   { transform: translateX(0); }
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+              .ticker-track { animation: none; }
             }
 
             .brand-bar {
@@ -183,54 +229,6 @@ export default async function Home() {
             .brand-link:hover {
               text-decoration-color: ${theme.pink};
             }
-            /* ---- Announcement ticker ---- */
-
-.ticker {
-  overflow: hidden;
-  background: var(--grad);
-  color: #fff;
-  padding: 9px 0;
-}
-
-.ticker-track {
-  display: flex;
-  width: max-content;
-  animation: tickerScroll 22s linear infinite;
-}
-
-.ticker-group {
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-}
-
-.ticker-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 28px;
-  padding-right: 28px;
-  font-family: var(--font-body), sans-serif;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 2.6px;
-  text-transform: uppercase;
-}
-
-.ticker-item::after {
-  content: "✦";
-  font-size: 9px;
-  opacity: .8;
-}
-
-/* -50% → 0 with two identical groups = seamless loop moving LEFT → RIGHT */
-@keyframes tickerScroll {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ticker-track { animation: none; }
-}
 
             .hero {
               position: relative;
@@ -344,8 +342,6 @@ export default async function Home() {
               font-weight: 500;
             }
 
-            /* ---- Contact flow ---- */
-
             .contact-flow {
               display: flex;
               justify-content: center;
@@ -377,8 +373,6 @@ export default async function Home() {
               box-shadow: 0 14px 32px rgba(255,122,0,.38);
             }
 
-            /* ---- Custom dropdown ---- */
-
             .dropdown {
               position: relative;
             }
@@ -399,13 +393,13 @@ export default async function Home() {
               gap: 14px;
               width: 100%;
               font-family: var(--font-body), sans-serif;
-              padding: 13px 20px;
-              min-width: 250px;
+              padding: 15px 24px;
+              min-width: 280px;
               border-radius: 100px;
               border: 1.5px solid ${theme.line};
               background: #fff;
               color: ${theme.ink};
-              font-size: 14px;
+              font-size: 15px;
               font-weight: 700;
               cursor: pointer;
               text-align: left;
@@ -436,19 +430,19 @@ export default async function Home() {
             }
 
             .dropdown-menu {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 50%;
-  right: auto;
-  transform: translateX(-50%);
-  width: min(100vw - 40px, 340px);
-  z-index: 30;
-  background: #fff;
-  border: 1px solid ${theme.line};
-  border-radius: 18px;
-  box-shadow: 0 18px 44px rgba(16,20,38,.16);
-  padding: 6px;
-}
+              position: absolute;
+              top: calc(100% + 8px);
+              left: 50%;
+              right: auto;
+              transform: translateX(-50%);
+              width: min(100vw - 40px, 340px);
+              z-index: 30;
+              background: #fff;
+              border: 1px solid ${theme.line};
+              border-radius: 20px;
+              box-shadow: 0 18px 44px rgba(16,20,38,.16);
+              padding: 8px;
+            }
 
             .dropdown-option {
               display: flex;
@@ -456,13 +450,13 @@ export default async function Home() {
               justify-content: space-between;
               gap: 12px;
               width: 100%;
-              padding: 12px 16px;
+              padding: 15px 18px;
               border: 0;
-              border-radius: 12px;
+              border-radius: 14px;
               background: transparent;
               color: ${theme.ink};
               font-family: var(--font-body), sans-serif;
-              font-size: 14px;
+              font-size: 15.5px;
               font-weight: 700;
               text-align: left;
               cursor: pointer;
@@ -478,8 +472,8 @@ export default async function Home() {
             }
 
             .dropdown-check {
-              width: 20px;
-              height: 20px;
+              width: 24px;
+              height: 24px;
               flex-shrink: 0;
               border-radius: 50%;
               border: 2px solid ${theme.line};
@@ -492,8 +486,6 @@ export default async function Home() {
               background: var(--accent);
               border-color: var(--accent);
             }
-
-            /* ---- Contact panel ---- */
 
             .contact-panel {
               position: relative;
@@ -974,7 +966,7 @@ export default async function Home() {
 
             footer {
               padding: 42px 22px;
-              background: ${theme.bgSoft};
+              background: ${theme.pink};
               text-align: center;
               color: #fff;
             }
@@ -1057,7 +1049,8 @@ export default async function Home() {
 
               .dropdown-toggle {
                 min-width: 0;
-                width: min(100%, 320px);
+                width: 100%;
+                max-width: 360px;
               }
 
               .selector-row {
@@ -1135,6 +1128,20 @@ export default async function Home() {
       />
 
       <div className="page">
+        <div className="ticker" role="status" aria-label="WRFN is now accepting new members">
+          <div className="ticker-track">
+            {[0, 1].map((copy) => (
+              <div className="ticker-group" key={copy} aria-hidden={copy === 1}>
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <span className="ticker-item" key={i}>
+                    WRFN now accepting new members
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
         <header className="brand-bar">
           <div className="brand-bar-inner">
             <Link href="/" className="brand">
@@ -1182,31 +1189,16 @@ export default async function Home() {
             <p>
               Practical strategies for wealth accumulation, retirement
               planning, and financial independence
-            
-            
-            Tap below to reach the WRFN team for 
+            </p>
+
+            <p>
+              Tap below to reach the WRFN team for 
               personalized guidance and trade support.
             </p>
 
             <ContactUs whatsappUrl={WHATSAPP_URL} telegramUrl={TELEGRAM_URL} />
           </div>
         </section>
-        <div className="page">
-  <div className="ticker" role="status" aria-label="WRFN is now accepting new members">
-    <div className="ticker-track">
-      {[0, 1].map((copy) => (
-        <div className="ticker-group" key={copy} aria-hidden={copy === 1}>
-          {Array.from({ length: 8 }).map((_, i) => (
-            <span className="ticker-item" key={i}>
-              WRFN now accepting new members
-            </span>
-          ))}
-        </div>
-      ))}
-    </div>
-  </div>
-
-  <
 
         <section className="pillars">
           <div className="section-width">
