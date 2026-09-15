@@ -1,93 +1,203 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 
-function WhatsAppIcon({ size = 20 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M20.5 3.5A11.9 11.9 0 0 0 12.04 0C5.47 0 .13 5.34.13 11.91c0 2.1.55 4.15 1.6 5.96L.04 24l6.28-1.65a11.88 11.88 0 0 0 5.71 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.18-3.44-8.41ZM12.04 21.8h-.01a9.88 9.88 0 0 1-5.04-1.38l-.36-.21-3.73.98 1-3.64-.24-.37a9.88 9.88 0 0 1-1.52-5.28C2.14 6.43 6.57 2 12.04 2c2.65 0 5.14 1.03 7.01 2.9a9.86 9.86 0 0 1 2.9 7c0 5.47-4.44 9.9-9.91 9.9Z" />
-      <path d="M17.55 14.52c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.74-1.64-2.04-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.21 5.09 4.5.71.31 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z" />
-    </svg>
-  );
+type Experience = "beginner" | "intermediate" | "experienced";
+type Market = "stocks" | "forex" | "binary" | "crypto";
+
+const EXPERIENCES: { id: Experience; label: string }[] = [
+  { id: "beginner", label: "Beginner" },
+  { id: "intermediate", label: "Intermediate" },
+  { id: "experienced", label: "Experienced" },
+];
+
+const MARKETS: { id: Market; label: string }[] = [
+  { id: "stocks", label: "Stocks" },
+  { id: "forex", label: "Forex" },
+  { id: "binary", label: "Binary" },
+  { id: "crypto", label: "Crypto" },
+];
+
+function buildUrl(
+  base: string,
+  experience: Experience | null,
+  market: Market | null
+) {
+  if (!experience && !market) return base;
+  try {
+    const url = new URL(base);
+    if (experience) url.searchParams.set("experience", experience);
+    if (market) url.searchParams.set("market", market);
+    return url.toString();
+  } catch {
+    return base; // stored link isn't a valid absolute URL — use as-is
+  }
 }
 
-function TelegramIcon({ size = 20 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M21.9 3.2 18.5 20c-.26 1.19-.97 1.48-1.97.92l-5.43-4-2.62 2.52c-.29.29-.53.53-1.09.53l.39-5.52 10.05-9.08c.44-.39-.1-.61-.68-.22L4.73 12.2l-5.38-1.68c-1.17-.37-1.19-1.17.24-1.73L20.62.81c.98-.36 1.84.24 1.28 2.39Z" />
-    </svg>
-  );
-}
+const WhatsAppGlyph = () => (
+  <svg viewBox="0 0 24 24" className="pill-glyph" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+  </svg>
+);
 
-type ContactUsProps = {
+const TelegramGlyph = () => (
+  <svg viewBox="0 0 24 24" className="pill-glyph" aria-hidden="true">
+    <path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+  </svg>
+);
+
+const PillArrow = () => (
+  <svg viewBox="0 0 24 24" className="pill-arrow" aria-hidden="true">
+    <path
+      d="M9 6l6 6-6 6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export default function ContactUs({
+  whatsappUrl,
+  telegramUrl,
+}: {
   whatsappUrl: string;
   telegramUrl: string;
-};
-
-export default function ContactUs({ whatsappUrl, telegramUrl }: ContactUsProps) {
+}) {
   const [open, setOpen] = useState(false);
+  const [experience, setExperience] = useState<Experience | null>(null);
+  const [market, setMarket] = useState<Market | null>(null);
 
-  return (
-    <div className="contact-reveal">
-      {open ? (
-        <div className="contact-pills revealed">
-          <Link
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="contact-pill whatsapp"
-            aria-label="Chat with WRFN on WhatsApp"
-          >
-            <span className="pill-icon">
-              <WhatsAppIcon />
-            </span>
-            <span className="pill-label">WhatsApp</span>
-          </Link>
+  const ready = Boolean(experience && market);
+  const experienceLabel =
+    EXPERIENCES.find((e) => e.id === experience)?.label ?? "";
+  const marketLabel = MARKETS.find((m) => m.id === market)?.label ?? "";
 
-          <Link
-            href={telegramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="contact-pill telegram"
-            aria-label="Chat with WRFN on Telegram"
-          >
-            <span className="pill-icon">
-              <TelegramIcon />
-            </span>
-            <span className="pill-label">Telegram</span>
-          </Link>
-
-          <button
-            type="button"
-            className="contact-close"
-            onClick={() => setOpen(false)}
-            aria-label="Hide contact options"
-          >
-            ×
-          </button>
-        </div>
-      ) : (
+  if (!open) {
+    return (
+      <div className="contact-flow">
         <button
           type="button"
           className="contact-us-btn"
           onClick={() => setOpen(true)}
         >
           Contact Us
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+            <path
+              d="M5 12h14M13 6l6 6-6 6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="contact-flow">
+      <div className="contact-panel revealed">
+        {/* Step 1 — experience selector */}
+        <div className="selector-block">
+          <div className="selector-title">
+            <strong>Step 1</strong> — What&apos;s your experience level?
+          </div>
+          <div className="option-chips">
+            {EXPERIENCES.map((e) => (
+              <button
+                key={e.id}
+                type="button"
+                aria-pressed={experience === e.id}
+                className={`option-chip${
+                  experience === e.id ? " selected exp" : ""
+                }`}
+                onClick={() => setExperience(e.id)}
+              >
+                {e.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Step 2 — market selector */}
+        <div className="selector-block">
+          <div className="selector-title">
+            <strong>Step 2</strong> — Which market interests you?
+          </div>
+          <div className="option-chips">
+            {MARKETS.map((m) => (
+              <button
+                key={m.id}
+                type="button"
+                aria-pressed={market === m.id}
+                className={`option-chip${
+                  market === m.id ? " selected mkt" : ""
+                }`}
+                onClick={() => setMarket(m.id)}
+              >
+                {m.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Channels — revealed once both are chosen */}
+        {ready ? (
+          <div className="channels revealed">
+            <span className="flow-summary">
+              <b>{experienceLabel}</b> &middot; <b>{marketLabel}</b> — reach
+              the team on:
+            </span>
+            <div className="contact-pills">
+              <a
+                className="contact-pill whatsapp"
+                href={buildUrl(whatsappUrl, experience, market)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="pill-icon-wrap">
+                  <WhatsAppGlyph />
+                </span>
+                <span className="pill-label">WhatsApp</span>
+                <PillArrow />
+              </a>
+              <a
+                className="contact-pill telegram"
+                href={buildUrl(telegramUrl, experience, market)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="pill-icon-wrap">
+                  <TelegramGlyph />
+                </span>
+                <span className="pill-label">Telegram</span>
+                <PillArrow />
+              </a>
+              <button
+                type="button"
+                className="contact-close"
+                aria-label="Close contact options"
+                onClick={() => {
+                  setOpen(false);
+                  setExperience(null);
+                  setMarket(null);
+                }}
+              >
+                &times;
+              </button>
+            </div>
+          </div>
+        ) : (
+          <p className="flow-hint">
+            Select your experience and market to reveal the channels.
+          </p>
+        )}
+      </div>
     </div>
   );
 }
