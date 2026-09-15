@@ -183,6 +183,54 @@ export default async function Home() {
             .brand-link:hover {
               text-decoration-color: ${theme.pink};
             }
+            /* ---- Announcement ticker ---- */
+
+.ticker {
+  overflow: hidden;
+  background: var(--grad);
+  color: #fff;
+  padding: 9px 0;
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: tickerScroll 22s linear infinite;
+}
+
+.ticker-group {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  padding-right: 28px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2.6px;
+  text-transform: uppercase;
+}
+
+.ticker-item::after {
+  content: "✦";
+  font-size: 9px;
+  opacity: .8;
+}
+
+/* -50% → 0 with two identical groups = seamless loop moving LEFT → RIGHT */
+@keyframes tickerScroll {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+}
 
             .hero {
               position: relative;
@@ -1143,6 +1191,22 @@ export default async function Home() {
             <ContactUs whatsappUrl={WHATSAPP_URL} telegramUrl={TELEGRAM_URL} />
           </div>
         </section>
+        <div className="page">
+  <div className="ticker" role="status" aria-label="WRFN is now accepting new members">
+    <div className="ticker-track">
+      {[0, 1].map((copy) => (
+        <div className="ticker-group" key={copy} aria-hidden={copy === 1}>
+          {Array.from({ length: 8 }).map((_, i) => (
+            <span className="ticker-item" key={i}>
+              WRFN now accepting new members
+            </span>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <
 
         <section className="pillars">
           <div className="section-width">
