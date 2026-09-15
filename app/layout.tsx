@@ -16,7 +16,7 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.Connectwrfnteam.com"),
-  title: "Wealth Rise & Freedom Network WRFN Team — Build Wealth. Retire Wisely. Live Free.",
+  title: "Wealth Rise & Freedom Network (WRFN) — Build Wealth. Retire Wisely. Live Free.",
   description:
     "Join Wealth Rise & Freedom Network to explore strategies, ideas, and tips for your financial journey — retiring wisely, building a prosperous future, and achieving early retirement.",
   keywords: [
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Wealth Rise & Freedom Network" }],
   openGraph: {
-    title: "Wealth Rise & Freedom Network WRFN Team" ,
+    title: "Wealth Rise & Freedom Network (WRFN)",
     description:
       "Join us to explore strategies, ideas, and tips for your financial journey — retiring wisely, building a prosperous future, and achieving early retirement.",
     url: "https://www.Connectwrfnteam.com",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Wealth Rise & Freedom Network" ,
+    title: "Wealth Rise & Freedom Network (WRFN)",
     description:
       "Join us to explore strategies, ideas, and tips for your financial journey — retiring wisely, building a prosperous future, and achieving early retirement.",
     images: ["/og-image.png"],
