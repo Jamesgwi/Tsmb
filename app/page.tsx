@@ -3,7 +3,7 @@ import Link from "next/link";
 import { neon } from "@neondatabase/serverless";
 import { Montserrat, Quicksand } from "next/font/google";
 import Logo from "../components/Logo";
-import FloatingChat from "../components/FloatingChat";
+import ContactUs from "../components/ContactUs";
 
 const display = Montserrat({
   subsets: ["latin"],
@@ -59,46 +59,14 @@ const theme = {
   line: "rgba(16,20,38,0.08)",
   orange: "#FF7A00",
   pink: "#FF1F6B",
-  magenta: "#C81EE0",
+  magenta: "#E0509E",
   white: "#FFFFFF",
   whatsapp: "#25D366",
   telegram: "#229ED9",
 };
 
-function WhatsAppIcon({ size = 16 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M20.5 3.5A11.9 11.9 0 0 0 12.04 0C5.47 0 .13 5.34.13 11.91c0 2.1.55 4.15 1.6 5.96L.04 24l6.28-1.65a11.88 11.88 0 0 0 5.71 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.18-3.44-8.41ZM12.04 21.8h-.01a9.88 9.88 0 0 1-5.04-1.38l-.36-.21-3.73.98 1-3.64-.24-.37a9.88 9.88 0 0 1-1.52-5.28C2.14 6.43 6.57 2 12.04 2c2.65 0 5.14 1.03 7.01 2.9a9.86 9.86 0 0 1 2.9 7c0 5.47-4.44 9.9-9.91 9.9Z" />
-      <path d="M17.55 14.52c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.74-1.64-2.04-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.21 5.09 4.5.71.31 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z" />
-    </svg>
-  );
-}
-
-function TelegramIcon({ size = 16 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M21.9 3.2 18.5 20c-.26 1.19-.97 1.48-1.97.92l-5.43-4-2.62 2.52c-.29.29-.53.53-1.09.53l.39-5.52 10.05-9.08c.44-.39-.1-.61-.68-.22L4.73 12.2l-5.38-1.68c-1.17-.37-1.19-1.17.24-1.73L20.62.81c.98-.36 1.84.24 1.28 2.39Z" />
-    </svg>
-  );
-}
-
 export default async function Home() {
-  const {
-    whatsapp: WHATSAPP_URL,
-    telegram: TELEGRAM_URL,
-  } = await getLinks();
+  const { whatsapp: WHATSAPP_URL, telegram: TELEGRAM_URL } = await getLinks();
 
   return (
     <main className={`${display.variable} ${body.variable}`}>
@@ -138,9 +106,14 @@ export default async function Home() {
               color: inherit;
             }
 
-            a:focus-visible {
+            a:focus-visible,
+            button:focus-visible {
               outline: 3px solid ${theme.pink};
               outline-offset: 3px;
+            }
+
+            section[id] {
+              scroll-margin-top: 76px;
             }
 
             .grad-text {
@@ -199,6 +172,14 @@ export default async function Home() {
               font-weight: 800;
               letter-spacing: 1.5px;
               text-transform: uppercase;
+              text-decoration: underline;
+              text-decoration-color: transparent;
+              text-underline-offset: 4px;
+              transition: text-decoration-color .2s ease;
+            }
+
+            .brand-link:hover {
+              text-decoration-color: ${theme.pink};
             }
 
             .hero {
@@ -265,7 +246,7 @@ export default async function Home() {
             }
 
             .intro .blob {
-              opacity: .09;
+              opacity: .07;
             }
 
             .content-width {
@@ -307,12 +288,45 @@ export default async function Home() {
               line-height: 1.9;
               font-weight: 500;
             }
-           
+
+            .contact-reveal {
+              display: flex;
+              justify-content: center;
+              margin-top: 34px;
+            }
+
+            .contact-us-btn {
+              display: inline-flex;
+              align-items: center;
+              gap: 10px;
+              padding: 16px 40px;
+              border: 0;
+              border-radius: 100px;
+              background: var(--grad);
+              color: #fff;
+              font-family: var(--font-body), sans-serif;
+              font-size: 15px;
+              font-weight: 700;
+              letter-spacing: .3px;
+              cursor: pointer;
+              box-shadow: 0 10px 26px rgba(255,31,107,.26);
+              transition:
+                transform .2s ease,
+                box-shadow .2s ease;
+            }
+
+            .contact-us-btn:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 14px 32px rgba(255,31,107,.34);
+            }
+
             .contact-pills {
               display: flex;
               justify-content: center;
+              align-items: center;
+              flex-wrap: wrap;
               gap: 12px;
-              margin-top: 34px;
+              margin: 0;
             }
 
             .contact-pill {
@@ -354,6 +368,27 @@ export default async function Home() {
               white-space: nowrap;
             }
 
+            .contact-close {
+              flex-shrink: 0;
+              width: 42px;
+              height: 42px;
+              border-radius: 50%;
+              border: 1px solid ${theme.line};
+              background: #fff;
+              color: ${theme.inkSoft};
+              font-size: 20px;
+              line-height: 1;
+              cursor: pointer;
+              transition:
+                transform .25s ease,
+                color .2s ease;
+            }
+
+            .contact-close:hover {
+              transform: rotate(90deg);
+              color: ${theme.ink};
+            }
+
             .pillars {
               background: ${theme.bgSoft};
               padding: 80px 22px;
@@ -392,6 +427,14 @@ export default async function Home() {
               border-radius: 22px;
               padding: 30px 26px;
               box-shadow: 0 14px 34px rgba(16,20,38,.06);
+              transition:
+                transform .25s ease,
+                box-shadow .25s ease;
+            }
+
+            .pillar:hover {
+              transform: translateY(-4px);
+              box-shadow: 0 20px 44px rgba(16,20,38,.10);
             }
 
             .pillar::before {
@@ -446,7 +489,7 @@ export default async function Home() {
             }
 
             .philosophy .blob {
-              opacity: .07;
+              opacity: .06;
             }
 
             .philosophy-art {
@@ -456,7 +499,7 @@ export default async function Home() {
               width: min(520px, 58%);
               pointer-events: none;
               mix-blend-mode: multiply;
-              opacity: .10;
+              opacity: .22;
               z-index: 0;
             }
 
@@ -551,9 +594,9 @@ export default async function Home() {
               inset: 0;
               background: linear-gradient(
                 120deg,
-                rgba(255,122,0,.93) 0%,
-                rgba(255,31,107,.91) 48%,
-                rgba(200,30,224,.93) 80%
+                rgba(255,122,0,.86) 0%,
+                rgba(255,31,107,.84) 48%,
+                rgba(224,80,158,.87) 80%
               );
             }
 
@@ -594,7 +637,7 @@ export default async function Home() {
               font-weight: 600;
             }
 
-            .cta .contact-pills {
+            .cta .contact-reveal {
               margin-top: 30px;
             }
 
@@ -608,6 +651,17 @@ export default async function Home() {
               background: #fff;
               color: ${theme.telegram};
               box-shadow: 0 12px 30px rgba(0,0,0,.20);
+            }
+
+            .cta .contact-close {
+              background: rgba(255,255,255,.14);
+              border-color: rgba(255,255,255,.45);
+              color: #fff;
+            }
+
+            .cta .contact-close:hover {
+              color: #fff;
+              background: rgba(255,255,255,.24);
             }
 
             footer {
@@ -654,15 +708,22 @@ export default async function Home() {
                 padding: 48px 20px 56px;
               }
 
+              .contact-reveal {
+                margin-top: 28px;
+              }
+
               .contact-pills {
-                flex-direction: row;
-                justify-content: center;
                 gap: 10px;
               }
 
               .contact-pill {
                 padding: 14px 24px;
                 font-size: 14px;
+              }
+
+              .contact-close {
+                width: 38px;
+                height: 38px;
               }
 
               .pillars {
@@ -700,10 +761,26 @@ export default async function Home() {
                 animation: fadeUp .7s cubic-bezier(.22,1,.36,1) both;
               }
 
+              .contact-pills.revealed {
+                animation: pillIn .35s cubic-bezier(.22,1,.36,1) both;
+              }
+
               @keyframes fadeUp {
                 from {
                   opacity: 0;
                   transform: translateY(14px);
+                }
+
+                to {
+                  opacity: 1;
+                  transform: none;
+                }
+              }
+
+              @keyframes pillIn {
+                from {
+                  opacity: 0;
+                  transform: translateY(10px) scale(.96);
                 }
 
                 to {
@@ -761,50 +838,26 @@ export default async function Home() {
               <em className="grad-text">Retire in freedom.</em>
             </h1>
 
-            <p>Explore strategies for wealth accumulation, retirement planning, and financial independence.</p>
+            <p>
+              Practical strategies for wealth accumulation, retirement
+              planning, and financial independence — without the jargon.
+            </p>
 
+            <p>
+              Tap below to reach the WRFN team on Telegram or WhatsApp for
+              personalized guidance and trade support.
+            </p>
 
-
-<p>Reach the WRFN team on Telegram or WhatsApp for personalized guidance and trade support.</p>
-
-            <div className="contact-pills">
-              <Link
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact-pill whatsapp"
-              >
-                <span className="pill-icon">
-                  <WhatsAppIcon size={20} />
-                </span>
-                <span className="pill-label">WhatsApp</span>
-              </Link>
-
-              <Link
-                href={TELEGRAM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact-pill telegram"
-              >
-                <span className="pill-icon">
-                  <TelegramIcon size={20} />
-                </span>
-                <span className="pill-label">Telegram</span>
-              </Link>
-            </div>
+            <ContactUs whatsappUrl={WHATSAPP_URL} telegramUrl={TELEGRAM_URL} />
           </div>
         </section>
-
-        <FloatingChat whatsappUrl={WHATSAPP_URL} telegramUrl={TELEGRAM_URL} />
 
         <section className="pillars">
           <div className="section-width">
             <div className="eyebrow grad-text">The WRFN Goal</div>
 
             <h2 className="pillars-title">
-               
-              <br />
-             Success Every step of the way
+              Success every step of the way
             </h2>
 
             <div className="pillar-grid">
@@ -814,9 +867,8 @@ export default async function Home() {
                   <h2>Explore</h2>
                 </div>
                 <p>
-                  Explore strategies, ideas, and tips that make money simple
-                  and gain
-                  the confidence in your financial journey.
+                  Explore strategies, ideas, and tips that make money simple —
+                  and gain real confidence in your financial journey.
                 </p>
               </article>
 
@@ -826,10 +878,8 @@ export default async function Home() {
                   <h2>Grow</h2>
                 </div>
                 <p>
-                  Grow wealth 
-                  step by step and explore opportunities.
-                  
-      
+                  Grow wealth step by step with clear habits, steady
+                  contributions, and opportunities that fit your goals.
                 </p>
               </article>
 
@@ -839,9 +889,9 @@ export default async function Home() {
                   <h2>Retire</h2>
                 </div>
                 <p>
-                  Today&apos;s discipline is tomorrow&apos;s freedom.
-                  Retire wisely  and early with a plan that
-                  compound wealth and gives you freedom.
+                  Today&apos;s discipline is tomorrow&apos;s freedom. Retire
+                  wisely — and early — with a plan that compounds wealth and
+                  buys back your time.
                 </p>
               </article>
             </div>
@@ -858,34 +908,31 @@ export default async function Home() {
               alt=""
               width={1152}
               height={672}
+              loading="lazy"
+              sizes="(max-width: 650px) 0px, 520px"
             />
           </div>
 
           <div className="philosophy-grid">
             <div>
-              <div className="eyebrow grad-text"> The Goal</div>
+              <div className="eyebrow grad-text">Our Philosophy</div>
 
               <h2>
-                Explore
+                Explore.
                 <br />
-                Build <em className="grad-text">Grow </em>
+                Build. <em className="grad-text">Grow.</em>
               </h2>
             </div>
 
             <div className="philosophy-copy-wrap">
               <p className="philosophy-copy">
-                 WRFN brings the
-                conversation to what matters, your goals,
-                your habits, your time horizon and the community you rise
-                with.
+                WRFN brings the conversation to what matters: your goals, your
+                habits, your time horizon — and the community you rise with.
               </p>
 
               <div className="principle">
                 <div className="check">✓</div>
-                <span>
-                  Start with a plan tailored to your goals 
-                  
-                </span>
+                <span>Start with a plan tailored to your goals.</span>
               </div>
 
               <div className="principle">
@@ -897,17 +944,13 @@ export default async function Home() {
 
               <div className="principle">
                 <div className="check">✓</div>
-                <span>
-                  Build the prosperous future you actually
-                  want.
-                </span>
+                <span>Build the prosperous future you actually want.</span>
               </div>
 
               <div className="principle">
                 <div className="check">✓</div>
                 <span>
-                  Attain freedom. Early retirement starts with a plan
-                  
+                  Attain freedom — early retirement starts with a plan.
                 </span>
               </div>
             </div>
@@ -920,6 +963,8 @@ export default async function Home() {
             alt=""
             width={1200}
             height={1707}
+            loading="lazy"
+            sizes="100vw"
             className="cta-bg"
             aria-hidden="true"
           />
@@ -934,34 +979,10 @@ export default async function Home() {
 
             <p className="cta-copy">
               Connect with the WRFN team for step-by-step guidance and trade
-              support. 
+              support. One message is all it takes to start.
             </p>
 
-            <div className="contact-pills">
-              <Link
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact-pill whatsapp"
-              >
-                <span className="pill-icon">
-                  <WhatsAppIcon size={20} />
-                </span>
-                <span className="pill-label">WhatsApp</span>
-              </Link>
-
-              <Link
-                href={TELEGRAM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact-pill telegram"
-              >
-                <span className="pill-icon">
-                  <TelegramIcon size={20} />
-                </span>
-                <span className="pill-label">Telegram</span>
-              </Link>
-            </div>
+            <ContactUs whatsappUrl={WHATSAPP_URL} telegramUrl={TELEGRAM_URL} />
           </div>
         </section>
 
