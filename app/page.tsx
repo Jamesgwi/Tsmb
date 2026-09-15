@@ -198,11 +198,12 @@ export default async function Home() {
             }
 
             .brand {
-              display: flex;
-              align-items: center;
-              gap: 12px;
-              text-decoration: none;
-            }
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* or flex-start to left-align */
+  gap: 12px;
+  text-decoration: none;
+}
 
             .brand-name-sub {
               font-size: 10px;
